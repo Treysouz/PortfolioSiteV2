@@ -1,33 +1,30 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
+test-results
 node_modules
-dist
-dist-ssr
-*.local
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+
+# OS
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
 
-# Scaffolding Text
-SCAFFOLD.md
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
 
-# Claude
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+#Claude
 .claude/
 
-#VS Code
+#VSCode
 .vscode/
