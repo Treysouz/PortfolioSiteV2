@@ -23,8 +23,11 @@ Thumbs.db
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-#Claude
+# Claude
 .claude/
 
-#VSCode
+# VSCode
 .vscode/
+
+# Personal Documentation
+SCAFFOLD.md

@@ -36,3 +36,21 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+## Design Notes
+
+Accessibility: https://www.learnui.design/tools/accessible-color-generator.html
+Complimentary: https://www.canva.com/colors/color-wheel/
+
+Main Color: #910a4c
+Success: #0A914F
+Error: #910C0A
+Link:
+
+- New: #b37cff
+- Visited: #dc6ad8
+  Text: #FFFFFF
+  Emphasized: #ff5e7b
+
+Coding Animation Font: Courier New
+General Text Font: Verdana
