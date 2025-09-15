@@ -1,2 +1,17 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
+
+.main-bg {
+	background: #3c0753;
+	background: linear-gradient(180deg, #3c0753 0%, #720455 95%, #910a67 100%);
+}
+
+@theme {
+	--font-display: 'Courier New', sans-serif;
+	--color-primary: #720455;
+	--color-secondary: #a3067a;
+	--color-success: #3c9844;
+	--color-error: #ff2d15;
+	--color-link: #9864ff;
+	--color-link-visited: #b565ce;
+}
