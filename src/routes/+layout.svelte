@@ -1,5 +1,6 @@
 <script lang="ts">
-	import '../app.css';
+	import '../styles.scss';
+	import '../tailwind.css';
 	import { favicon } from '$lib/assets';
 
 	import { tsParticles } from '@tsparticles/engine';
