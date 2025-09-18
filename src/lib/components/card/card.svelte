@@ -4,6 +4,9 @@
 	//Add Inline Documentation
 </script>
 
-<div class="h-min w-min rounded-lg bg-black/50 p-4 shadow-md {className}">
+<div
+	class="rounded-lg bg-black/15 p-4 shadow-md backdrop-blur-sm
+ {className}"
+>
 	{@render children?.()}
 </div>

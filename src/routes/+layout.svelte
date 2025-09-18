@@ -27,6 +27,9 @@
 
 <!--Nav Here-->
 
-<main class="main-bg h-screen w-screen p-4 font-mono text-white" id="particles">
+<!--Animated Background-->
+<div id="particles"></div>
+
+<main class="main-bg h-screen w-screen p-4 font-mono text-white">
 	{@render children?.()}
 </main>
