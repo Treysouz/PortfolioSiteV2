@@ -18,7 +18,8 @@ export default defineConfig({
 						enabled: true,
 						provider: 'playwright',
 						instances: [{ browser: 'chromium' }],
-						headless: true
+						headless: true,
+						screenshotFailures: false
 					},
 					include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
 					exclude: ['src/lib/server/**'],
