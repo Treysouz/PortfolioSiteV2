@@ -5,7 +5,7 @@
 	import { tsParticles } from '@tsparticles/engine';
 	import { loadSlim } from '@tsparticles/slim';
 	import { onMount } from 'svelte';
-	import { particlesConfig } from '$lib/components/particles/particles.config';
+	import { particlesConfig } from '$lib/assets';
 
 	let { children } = $props();
 
@@ -22,6 +22,7 @@
 </script>
 
 <svelte:head>
+	<title>Tremayne Souza | Front-End Developer</title>
 	<link rel="icon" type="image/png" sizes="32x32" href={favicon} />
 </svelte:head>
 

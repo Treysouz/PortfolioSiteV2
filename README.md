@@ -38,3 +38,9 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+## Things to consider for proper README
+
+### Why Node 22?
+
+- At the time of development, Vercel only supports up to Node 22.

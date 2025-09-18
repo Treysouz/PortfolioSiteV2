@@ -1,5 +1,16 @@
 import type { IOptions } from '@tsparticles/engine';
 
+/**
+ * TSParticles configuration for animated background effect
+ *
+ * Creates a subtle particle animation with:
+ * - 15 large, slow-moving circular particles
+ * - Purple gradient color scheme (#060B67, #5E0B82, #A3067A, #C10D89)
+ * - Opacity animation for smooth fade in/out effects
+ * - Size animation for dynamic scaling
+ * - Particle collisions enabled with bounce behavior
+ * - Full-screen coverage with responsive density
+ */
 export const particlesConfig: IOptions = {
 	autoPlay: true,
 	background: {

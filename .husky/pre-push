@@ -1,0 +1,8 @@
+# Run linting checks
+npm run lint
+
+# Run unit tests
+npm run test:unit
+
+# Run e2e tests
+npm run test:e2e

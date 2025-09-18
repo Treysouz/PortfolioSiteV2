@@ -1,0 +1,21 @@
+# JIRA commit message validation
+# Expected format: [JIRA-TAG] - Message
+# Example: [TSPS-12] - Add new feature
+
+commit_msg_file=$1
+commit_msg=$(cat $commit_msg_file)
+
+# Regex pattern for JIRA tag format: [LETTERS-NUMBERS] - Message
+jira_pattern="^\[[A-Z]+-[0-9]+\]\s*-\s*.+"
+
+if ! echo "$commit_msg" | grep -qE "$jira_pattern"; then
+    echo "❌ Commit message validation failed!"
+    echo ""
+    echo "Expected format: [JIRA-TAG] - Your commit message"
+    echo "Example: [TSPS-12] - Add new authentication feature"
+    echo ""
+    echo "Your message: $commit_msg"
+    echo ""
+    echo "Please follow the JIRA commit message format."
+    exit 1
+fi
