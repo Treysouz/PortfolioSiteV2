@@ -42,5 +42,9 @@
 		"vite": "^7.0.4",
 		"vitest": "^3.2.3",
 		"vitest-browser-svelte": "^0.1.0"
+	},
+	"dependencies": {
+		"@tsparticles/engine": "^3.9.1",
+		"@tsparticles/slim": "^3.9.1"
 	}
 }
