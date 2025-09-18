@@ -36,7 +36,7 @@ describe('Card component', () => {
 
 		expect(card?.className).toContain('rounded-lg');
 		expect(card?.className).toContain('bg-black/15');
-		expect(card?.className).toContain('p-4');
+		expect(card?.className).toContain('p-8');
 		expect(card?.className).toContain('shadow-md');
 		expect(card?.className).toContain('backdrop-blur-lg');
 	});
