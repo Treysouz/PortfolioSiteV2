@@ -14,5 +14,7 @@
 </script>
 
 <div class="inline-block {className}">
+	<!-- Safe to ignore this error since we are not injecting dynamic, user-inputter content-->
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	{@html svgs[svg]}
 </div>
