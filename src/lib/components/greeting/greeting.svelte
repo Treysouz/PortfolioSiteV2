@@ -1,0 +1,20 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import { generateGreeting, getHourOfDay } from './greeting.util';
+
+	/**
+	 * A text component that renders a greeting based on the user's current time.
+	 */
+
+	let greeting: string = $state('');
+
+	onMount(() => {
+		// Get the current hour of the day to use as parameter for generateGreeting()
+		const currentHour = getHourOfDay();
+
+		// Set greeting to the return value of generateGreeting()
+		greeting = generateGreeting(currentHour);
+	});
+</script>
+
+{greeting}
