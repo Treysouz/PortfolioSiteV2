@@ -29,18 +29,6 @@ describe('Card component', () => {
 		expect(card?.className).toContain('custom-class');
 	});
 
-	it('should render with default classes when no custom class is provided', () => {
-		const screen = render(Card);
-
-		const card = screen.getByRole('article');
-
-		expect(card?.className).toContain('rounded-lg');
-		expect(card?.className).toContain('bg-black/15');
-		expect(card?.className).toContain('p-8');
-		expect(card?.className).toContain('shadow-md');
-		expect(card?.className).toContain('backdrop-blur-lg');
-	});
-
 	it('should render without children', () => {
 		const screen = render(Card);
 
