@@ -15,7 +15,6 @@
 <article
 	class="rounded-lg bg-black/15 p-8 shadow-md backdrop-blur-lg
  {className}"
-	id="card-component"
->
+	id="card-component">
 	{@render children?.()}
 </article>
