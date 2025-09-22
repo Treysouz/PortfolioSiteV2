@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { WelcomeSection, NavBar } from '$lib/sections';
+	import { WelcomeSection } from '$lib/sections';
 </script>
 
 <WelcomeSection></WelcomeSection>
