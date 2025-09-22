@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+
+@theme {
+	--font-display: 'Courier New', sans-serif;
+	--color-primary: #720455;
+	--color-secondary: #a3067a;
+	--color-success: #3c9844;
+	--color-error: #ff2d15;
+	--color-link: #9864ff;
+	--color-link-visited: #b565ce;
+	--color-emphasis: #9579e6;
+
+	--animate-slide-up: slide-up 0.6s ease-out forwards;
+	--animate-bounce-in: bounce-in 2.5s ease-out forwards;
+}
+
+@keyframes slide-up {
+	from {
+		transform: translateY(100px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes bounce-in {
+	0% {
+		transform: scale(0) translateY(0);
+		opacity: 0;
+	}
+	15% {
+		transform: scale(0.3) translateY(-20px);
+		opacity: 1;
+	}
+	30% {
+		transform: scale(0.6) translateY(0);
+	}
+	45% {
+		transform: scale(0.8) translateY(-15px);
+	}
+	60% {
+		transform: scale(1) translateY(0);
+	}
+	70% {
+		transform: scale(1) translateY(-10px);
+	}
+	80% {
+		transform: scale(1) translateY(0);
+	}
+	85% {
+		transform: scale(1) translateY(-5px);
+	}
+	90% {
+		transform: scale(1) translateY(0);
+	}
+	95% {
+		transform: scale(1) translateY(-2px);
+	}
+	100% {
+		transform: scale(1) translateY(0);
+	}
+}

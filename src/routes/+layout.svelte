@@ -1,11 +1,13 @@
 <script lang="ts">
-	import '../app.css';
+	import '../styles.scss';
+	import '../tailwind.css';
 	import { favicon } from '$lib/assets';
 
 	import { tsParticles } from '@tsparticles/engine';
 	import { loadSlim } from '@tsparticles/slim';
 	import { onMount } from 'svelte';
 	import { particlesConfig } from '$lib/assets';
+	import { NavBar } from '$lib/sections';
 
 	let { children } = $props();
 
@@ -26,11 +28,13 @@
 	<link rel="icon" type="image/png" sizes="32x32" href={favicon} />
 </svelte:head>
 
-<!--Nav Here-->
-
 <!--Animated Background-->
 <div id="particles"></div>
 
-<main class="main-bg h-screen w-screen p-4 font-mono text-white">
-	{@render children?.()}
-</main>
+<div class="main-bg flex h-screen w-screen font-mono">
+	<NavBar></NavBar>
+
+	<main class=" h-full w-full text-white">
+		{@render children?.()}
+	</main>
+</div>
