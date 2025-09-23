@@ -13,36 +13,25 @@ export default defineConfig({
 	},
 	test: {
 		expect: { requireAssertions: true },
-		projects: [
-			{
-				extends: './vite.config.ts',
-				test: {
-					name: 'client',
-					environment: 'browser',
-					browser: {
-						enabled: true,
-						provider: 'playwright',
-						instances: [{ browser: 'chromium' }],
-						headless: true,
-						screenshotFailures: false
-					},
-					include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
-					exclude: ['src/lib/server/**'],
-					setupFiles: ['./vitest-setup-client.ts']
-				},
-				resolve: {
-					conditions: ['browser']
-				}
-			},
-			{
-				extends: './vite.config.ts',
-				test: {
-					name: 'server',
-					environment: 'node',
-					include: ['src/**/*.{test,spec}.{js,ts}'],
-					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}']
-				}
-			}
-		]
+		coverage: {
+			provider: 'v8',
+			reporter: ['text', 'json', 'json-summary', 'html'],
+			exclude: [
+				'coverage/**',
+				'dist/**',
+				'**/node_modules/**',
+				'**/test/**',
+				'**/*.{test,spec}.{js,ts,svelte}',
+				'**/vitest.config.*',
+				'**/vite.config.*',
+				'**/.{eslint,prettier}rc*',
+				'**/tailwind.config.*',
+				'**/svelte.config.*',
+				'**/playwright.config.*'
+			]
+		},
+		environment: 'jsdom',
+		include: ['src/**/*.{test,spec}.{js,ts}'],
+		exclude: ['src/lib/server/**']
 	}
 });

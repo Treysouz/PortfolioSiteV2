@@ -1,0 +1,72 @@
+name: 🚢 Deploy Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy (leave empty for current branch)'
+        required: false
+        default: ''
+        type: string
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  test:
+    name: Run Tests
+    uses: ./.github/workflows/testing.yml
+    with:
+      branch: ${{ inputs.branch || github.ref }}
+
+  version-check:
+    name: Check Version
+    uses: ./.github/workflows/version-check.yml
+    with:
+      environment: 'Production'
+
+  release:
+    name: Create Release
+    needs: [test, version-check]
+    if: needs.version-check.outputs.should-deploy == 'true'
+    uses: ./.github/workflows/release.yml
+    secrets: inherit
+
+  deploy:
+    name: Deploy Production
+    needs: [test, version-check, release]
+    if: |
+      always() &&
+      needs.test.outputs.tests-passed == 'true' &&
+      needs.version-check.outputs.should-deploy == 'true' &&
+      needs.release.result == 'success'
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: 'Production'
+      production: true
+      branch: ${{ inputs.branch }}
+    secrets: inherit
+
+  summary:
+    name: Production Summary
+    runs-on: ubuntu-latest
+    needs: [version-check, release, deploy]
+    if: needs.deploy.result == 'success'
+    steps:
+      - name: Production Deployment Summary
+        run: |
+          # Create GitHub workflow summary
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          ## 🚢 Production Deployment Successful!
+
+          | Item | Details |
+          |------|---------|
+          | 🔗 **Deployment URL** | [${{ needs.deploy.outputs.deployment-url }}](${{ needs.deploy.outputs.deployment-url }}) |
+          | 🏷️ **Version** | \`${{ needs.version-check.outputs.current-version }}\` |
+          | 📋 **Release** | [${{ needs.release.outputs.release-url }}](${{ needs.release.outputs.release-url }}) |
+          | 🔀 **Branch** | \`${{ inputs.branch || github.ref }}\` |
+
+          EOF

@@ -1,0 +1,85 @@
+name: 🏷️ Release
+
+on:
+  workflow_call:
+    inputs:
+      dry-run:
+        description: 'Run in dry-run mode (no actual release)'
+        required: false
+        default: false
+        type: boolean
+    outputs:
+      released:
+        description: 'Whether a new release was created'
+        value: ${{ jobs.release.outputs.released }}
+      version:
+        description: 'The version that was released'
+        value: ${{ jobs.release.outputs.version }}
+      release-url:
+        description: 'URL of the GitHub release'
+        value: ${{ jobs.release.outputs.release-url }}
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    outputs:
+      released: ${{ steps.release.outputs.released }}
+      version: ${{ steps.release.outputs.version }}
+      release-url: ${{ steps.release.outputs.release-url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run Semantic Release
+        id: release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ inputs.dry-run }}" = "true" ]; then
+            echo "🧪 Running semantic-release in dry-run mode..."
+            npx semantic-release@latest --dry-run
+            echo "released=false" >> $GITHUB_OUTPUT
+            echo "version=dry-run" >> $GITHUB_OUTPUT
+            echo "release-url=" >> $GITHUB_OUTPUT
+          else
+            echo "🚀 Running semantic-release..."
+            OUTPUT=$(npx semantic-release@latest --no-ci 2>&1)
+            echo "$OUTPUT"
+
+            # Check if a release was created
+            if echo "$OUTPUT" | grep -q "Published release"; then
+              VERSION=$(node -p "require('./package.json').version")
+              echo "released=true" >> $GITHUB_OUTPUT
+              echo "version=$VERSION" >> $GITHUB_OUTPUT
+              echo "release-url=https://github.com/${{ github.repository }}/releases/tag/v$VERSION" >> $GITHUB_OUTPUT
+              echo "✅ Released version $VERSION"
+            else
+              echo "released=false" >> $GITHUB_OUTPUT
+              echo "version=" >> $GITHUB_OUTPUT
+              echo "release-url=" >> $GITHUB_OUTPUT
+              echo "ℹ️ No release created (no releasable changes)"
+            fi
+          fi
+
+      - name: Release Summary
+        if: always()
+        run: |
+          echo "🏷️ Released: ${{ steps.release.outputs.released }}"
+          echo "📦 Version: ${{ steps.release.outputs.version }}"
+          echo "🔗 Release URL: ${{ steps.release.outputs.release-url }}"
+          echo "🧪 Dry Run: ${{ inputs.dry-run }}"

@@ -1,0 +1,101 @@
+name: 🚀 Deploy
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: 'Environment to deploy to (Preview/Production)'
+        required: true
+        type: string
+      production:
+        description: 'Deploy to production (adds --prod flag)'
+        required: false
+        default: false
+        type: boolean
+      branch:
+        description: 'Branch to deploy'
+        required: false
+        default: ''
+        type: string
+    outputs:
+      deployment-url:
+        description: 'Deployment URL'
+        value: ${{ jobs.deploy.outputs.deployment-url }}
+      tests-passed:
+        description: 'Whether all tests passed'
+        value: ${{ jobs.test.outputs.tests-passed }}
+      coverage-summary:
+        description: 'Test coverage summary'
+        value: ${{ jobs.test.outputs.coverage-summary }}
+
+jobs:
+  test:
+    name: Run Tests
+    uses: ./.github/workflows/testing.yml
+    with:
+      branch: ${{ inputs.branch || github.ref }}
+
+  deploy:
+    name: Deploy to ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    needs: test
+    if: needs.test.outputs.tests-passed == 'true'
+    environment:
+      name: ${{ inputs.environment }}
+      url: ${{ steps.set-url.outputs.deployment-url }}
+    outputs:
+      deployment-url: ${{ steps.set-url.outputs.deployment-url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch || github.ref }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Cache node_modules
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          if [ ! -d ".vercel/output" ]; then
+            echo "❌ .vercel/output directory not found!"
+            exit 1
+          fi
+          echo "✅ Build output verified:"
+          ls -la .vercel/output/
+          echo "📦 Build artifacts ready for deployment"
+
+      - name: Deploy to Vercel
+        id: deploy
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: ${{ inputs.production && '--prod --prebuilt' || '--prebuilt' }}
+          working-directory: ./
+
+      - name: Set deployment URL
+        id: set-url
+        run: |
+          # The Vercel action always outputs to preview-url, even for production
+          echo "deployment-url=${{ steps.deploy.outputs.preview-url }}" >> $GITHUB_OUTPUT
