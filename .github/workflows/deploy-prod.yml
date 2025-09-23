@@ -59,8 +59,16 @@ jobs:
       - name: Production Deployment Summary
         run: |
           echo "✅ Production deployment completed!"
-          echo "-----------------------------------"
-          echo "🔗 URL: ${{ needs.deploy.outputs.deployment-url }}"
-          echo "🔀 Branch: ${{ inputs.branch || github.ref }}"
-          echo "🏷️ Version: ${{ needs.version-check.outputs.current-version }}"
-          echo "📋 Release: ${{ needs.release.outputs.release-url }}"
+
+          # Create GitHub workflow summary
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          ## 🚢 Production Deployment Successful!
+
+          | Item | Details |
+          |------|---------|
+          | 🔗 **Deployment URL** | [${{ needs.deploy.outputs.deployment-url }}](${{ needs.deploy.outputs.deployment-url }}) |
+          | 🏷️ **Version** | \`${{ needs.version-check.outputs.current-version }}\` |
+          | 📋 **Release** | [${{ needs.release.outputs.release-url }}](${{ needs.release.outputs.release-url }}) |
+          | 🔀 **Branch** | \`${{ inputs.branch || github.ref }}\` |
+
+          EOF
