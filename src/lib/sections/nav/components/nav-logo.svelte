@@ -1,3 +1,5 @@
+<!--Navigation component logo-->
+
 <a
 	href="#welcome"
 	class="text-gradient animate-gradient-move text-xl font-bold md:text-2xl lg:text-3xl 2xl:text-5xl"

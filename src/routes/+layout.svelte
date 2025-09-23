@@ -35,11 +35,12 @@
 <!--Animated Background-->
 <div id="particles"></div>
 
-<div class="bg-theme flex h-screen w-full flex-col-reverse font-mono lg:flex-row">
+<div class="bg-theme flex h-screen w-full flex-col font-mono lg:flex-row">
 	{#if particlesLoaded}
 		<NavBar></NavBar>
 
-		<main class="lg-pb-0 h-screen w-full overflow-auto pb-6 text-white">
+		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+		<main tabindex="0" class="lg-pb-0 h-screen w-full overflow-auto pb-6 text-white">
 			{@render children?.()}
 		</main>
 	{/if}

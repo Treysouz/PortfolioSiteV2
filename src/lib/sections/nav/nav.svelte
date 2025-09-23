@@ -1,41 +1,37 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	import MobileNav from './mobile/mobile-nav.svelte';
-	import DesktopNav from './desktop/desktop-nav.svelte';
+	import DesktopNav from './components/desktop-nav.svelte';
+	import MobileNav from './components/mobile-nav.svelte';
 
-	//Navigation bar component.
+	//Navigation component.
 
-	let activeSection = $state('welcome');
+	// Whether to render the mobile nav component.
+	let renderMobileNav: boolean = $state(false);
+
+	/**
+	 * Checks whether to render the mobile nav component based on if window width is less than or equal to 1024px.
+	 */
+	const handleResize = () => {
+		renderMobileNav = window.innerWidth <= 1024;
+	};
 
 	onMount(() => {
-		// Get all the sections.
-		const sections = document.querySelectorAll('section[id]');
+		// Call handleResize() on mount to handle the current window width.
+		handleResize();
 
-		// Define oberserver options.
-		const observerOptions = {
-			threshold: 0.5,
-			rootMargin: '-20% 0px -20% 0px'
-		};
-
-		// Initiate observer.
-		const observer = new IntersectionObserver((elements) => {
-			elements.forEach((element) => {
-				if (element.isIntersecting) {
-					activeSection = element.target.id;
-				}
-			});
-		}, observerOptions);
-
-		// Observe each section to detect when they are in view.
-		sections.forEach((section) => observer.observe(section));
+		// Call handleResize() on each resize event.
+		window.addEventListener('resize', handleResize);
 
 		return () => {
-			// Stop observering if component unmounts.
-			sections.forEach((section) => observer.unobserve(section));
+			// Stop listening for resize event if component unmounts.
+			window.removeEventListener('resize', handleResize);
 		};
 	});
 </script>
 
-<DesktopNav></DesktopNav>
-<MobileNav></MobileNav>
+{#if renderMobileNav}
+	<MobileNav></MobileNav>
+{:else}
+	<DesktopNav></DesktopNav>
+{/if}
