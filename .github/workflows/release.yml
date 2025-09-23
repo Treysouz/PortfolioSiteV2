@@ -43,6 +43,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: 'npm'
+
+      - name: Cache node_modules
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
 
       - name: Configure Git
         run: |
@@ -56,7 +70,7 @@ jobs:
         run: |
           if [ "${{ inputs.dry-run }}" = "true" ]; then
             echo "🧪 Running semantic-release in dry-run mode..."
-            npx semantic-release@latest --dry-run
+            ./node_modules/.bin/semantic-release --dry-run
             echo "released=false" >> $GITHUB_OUTPUT
             echo "version=dry-run" >> $GITHUB_OUTPUT
             echo "release-url=" >> $GITHUB_OUTPUT
@@ -65,7 +79,7 @@ jobs:
 
             # Run semantic-release with better error handling
             set +e  # Don't exit on error immediately
-            OUTPUT=$(npx semantic-release@latest --no-ci 2>&1)
+            OUTPUT=$(./node_modules/.bin/semantic-release --no-ci 2>&1)
             EXIT_CODE=$?
             set -e  # Re-enable exit on error
 
