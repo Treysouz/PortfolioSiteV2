@@ -42,9 +42,9 @@ jobs:
     if: needs.test.outputs.tests-passed == 'true'
     environment:
       name: ${{ inputs.environment }}
-      url: ${{ steps.deploy.outputs.deployment-url }}
+      url: ${{ steps.set-url.outputs.deployment-url }}
     outputs:
-      deployment-url: ${{ steps.deploy.outputs.deployment-url }}
+      deployment-url: ${{ steps.set-url.outputs.deployment-url }}
 
     steps:
       - name: Checkout
