@@ -35,29 +35,11 @@ jobs:
     with:
       branch: ${{ inputs.branch || github.ref }}
 
-  version-check:
-    name: Check Version
-    if: ${{ inputs.production == true }}
-    uses: ./.github/workflows/version-check.yml
-    with:
-      environment: ${{ inputs.environment }}
-
-  release:
-    name: Create Release
-    if: ${{ inputs.production == true && needs.version-check.outputs.should-deploy == 'true' }}
-    needs: [test, version-check]
-    uses: ./.github/workflows/release.yml
-    secrets: inherit
-
   deploy:
     name: Deploy to ${{ inputs.environment }}
     runs-on: ubuntu-latest
-    needs: [test, version-check, release]
-    if: |
-      always() &&
-      needs.test.outputs.tests-passed == 'true' &&
-      (inputs.production != true ||
-       (needs.version-check.result == 'success' && needs.version-check.outputs.should-deploy == 'true' && needs.release.result == 'success'))
+    needs: test
+    if: needs.test.outputs.tests-passed == 'true'
     environment:
       name: ${{ inputs.environment }}
       url: ${{ steps.deploy.outputs.deployment-url }}
@@ -117,14 +99,3 @@ jobs:
         run: |
           # The Vercel action always outputs to preview-url, even for production
           echo "deployment-url=${{ steps.deploy.outputs.preview-url }}" >> $GITHUB_OUTPUT
-
-      - name: Deployment Summary
-        run: |
-          echo "✅ ${{ inputs.environment }} deployment completed!"
-          echo "🔗 URL: ${{ steps.set-url.outputs.deployment-url }}"
-          echo "🔀 Branch: ${{ inputs.branch || github.ref }}"
-          echo "🏠 Environment: ${{ inputs.environment }}"
-          if [ "${{ inputs.production }}" = "true" ]; then
-            echo "🏷️ Version: ${{ needs.version-check.outputs.current-version || 'N/A' }}"
-            echo "📋 Release: ${{ needs.release.outputs.release-url || 'N/A' }}"
-          fi

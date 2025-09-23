@@ -1,4 +1,4 @@
-name: 🟡 Deploy Preview
+name: 👀 Deploy Preview
 
 on:
   pull_request:
@@ -11,6 +11,11 @@ on:
         required: false
         default: ''
         type: string
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
 
 concurrency:
   group: preview-${{ github.ref }}
@@ -26,6 +31,19 @@ jobs:
       branch: ${{ inputs.branch }}
     secrets: inherit
 
+  summary:
+    name: Preview Summary
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: always()
+    steps:
+      - name: Preview Deployment Summary
+        run: |
+          echo "✅ Preview deployment completed!"
+          echo "--------------------------------"
+          echo "🔗 URL: ${{ needs.deploy.outputs.deployment-url }}"
+          echo "🔀 Branch: ${{ inputs.branch || github.head_ref || github.ref }}"
+
   comment-coverage:
     name: Comment Coverage Results
     runs-on: ubuntu-latest
@@ -37,23 +55,10 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const deployResult = '${{ needs.deploy.result }}';
-            const previewUrl = '${{ needs.deploy.outputs.deployment-url }}';
             const testsPassed = '${{ needs.deploy.outputs.tests-passed }}' === 'true';
             const coverageSummary = `${{ needs.deploy.outputs.coverage-summary }}`;
 
-            let comment = `## 🚀 Deployment & Test Results\n\n`;
-
-            // Test and deployment results
-            if (deployResult === 'success') {
-              comment += `✅ **All tests passed and preview deployed!**\n\n`;
-              comment += `🌐 **Preview Deployment**: [View Preview](${previewUrl})\n\n`;
-            } else if (deployResult === 'failure') {
-              comment += `❌ **Tests failed or deployment failed.** Please check the workflow logs.\n\n`;
-              comment += `🚫 **Preview Deployment**: Skipped due to failures\n\n`;
-            } else {
-              comment += `⏳ **Deployment in progress...**\n\n`;
-            }
+            let comment = `## 🚀 Test Results\n\n`;
 
             // Coverage report
             if (testsPassed && coverageSummary && coverageSummary !== 'No coverage data available') {
