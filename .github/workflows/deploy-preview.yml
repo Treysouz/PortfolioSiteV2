@@ -1,0 +1,70 @@
+name: 🟡 Deploy Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy (leave empty for current branch)'
+        required: false
+        default: ''
+        type: string
+
+concurrency:
+  group: preview-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy Preview
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: 'Preview'
+      production: false
+      branch: ${{ inputs.branch }}
+    secrets: inherit
+
+  comment-coverage:
+    name: Comment Coverage Results
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: always() && github.event_name == 'pull_request'
+
+    steps:
+      - name: Comment PR with Coverage
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const deployResult = '${{ needs.deploy.result }}';
+            const previewUrl = '${{ needs.deploy.outputs.deployment-url }}';
+            const testsPassed = '${{ needs.deploy.outputs.tests-passed }}' === 'true';
+            const coverageSummary = `${{ needs.deploy.outputs.coverage-summary }}`;
+
+            let comment = `## 🚀 Deployment & Test Results\n\n`;
+
+            // Test and deployment results
+            if (deployResult === 'success') {
+              comment += `✅ **All tests passed and preview deployed!**\n\n`;
+              comment += `🌐 **Preview Deployment**: [View Preview](${previewUrl})\n\n`;
+            } else if (deployResult === 'failure') {
+              comment += `❌ **Tests failed or deployment failed.** Please check the workflow logs.\n\n`;
+              comment += `🚫 **Preview Deployment**: Skipped due to failures\n\n`;
+            } else {
+              comment += `⏳ **Deployment in progress...**\n\n`;
+            }
+
+            // Coverage report
+            if (testsPassed && coverageSummary && coverageSummary !== 'No coverage data available') {
+              comment += `${coverageSummary}\n\n`;
+            } else if (testsPassed) {
+              comment += `📊 **Test Coverage**: Coverage report not available\n\n`;
+            }
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

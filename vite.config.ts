@@ -13,6 +13,23 @@ export default defineConfig({
 	},
 	test: {
 		expect: { requireAssertions: true },
+		coverage: {
+			provider: 'v8',
+			reporter: ['text', 'json', 'json-summary', 'html'],
+			exclude: [
+				'coverage/**',
+				'dist/**',
+				'**/node_modules/**',
+				'**/test/**',
+				'**/*.{test,spec}.{js,ts,svelte}',
+				'**/vitest.config.*',
+				'**/vite.config.*',
+				'**/.{eslint,prettier}rc*',
+				'**/tailwind.config.*',
+				'**/svelte.config.*',
+				'**/playwright.config.*'
+			]
+		},
 		projects: [
 			{
 				extends: './vite.config.ts',

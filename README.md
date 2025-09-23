@@ -44,3 +44,51 @@ You can preview the production build with `npm run preview`.
 ### Why Node 22?
 
 - At the time of development, Vercel only supports up to Node 22.
+
+## 🔍 Workflow Details
+
+### Testing Workflow (Reusable)
+
+**Purpose**: Shared testing logic used by all deployment workflows
+
+**What it does**:
+
+- Runs linting, unit tests, and e2e tests concurrently
+- Generates test coverage reports
+- Only callable by other workflows (no manual trigger)
+
+### Deploy Workflow (Reusable)
+
+**Purpose**: Shared deployment logic for both preview and production
+
+**What it does**:
+
+- Calls testing.yml workflow first
+- Deploys to Vercel (preview or production based on parameters)
+- Only deploys if tests pass
+- Returns deployment URL for use by calling workflows
+
+### Deploy Preview Workflow
+
+**Triggers**:
+
+- PR opened, updated, or reopened on `main` branch (automatic)
+- Manual trigger via workflow_dispatch (manual)
+
+**Flow**:
+
+1. **deploy**: Calls deploy.yml workflow (which calls testing.yml first)
+2. **ai-code-review**: Provides AI review (only on PR creation)
+3. **comment-results**: Posts summary on PR
+
+### Deploy Production Workflow
+
+**Triggers**:
+
+- Push to `main` branch (automatic)
+- Manual trigger via workflow_dispatch (manual)
+
+**Flow**:
+
+1. **deploy**: Calls deploy.yml workflow (which calls testing.yml first)
+2. **notify-completion**: Sends success/failure notifications
