@@ -23,14 +23,6 @@ jobs:
       github.event_name == 'workflow_dispatch'
 
     steps:
-      - name: Set branch name
-        id: branch
-        run: |
-          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            echo "name=${{ inputs.branch }}" >> $GITHUB_OUTPUT
-          else
-            echo "name=${{ github.head_ref }}" >> $GITHUB_OUTPUT
-          fi
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -54,7 +46,13 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          BRANCH_NAME="${{ steps.branch.outputs.name }}"
+          # Determine branch name based on trigger
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            BRANCH_NAME="${{ inputs.branch }}"
+          else
+            BRANCH_NAME="${{ github.head_ref }}"
+          fi
+
           echo "🔍 Looking for preview deployments for branch: $BRANCH_NAME"
 
           # Get deployments for this project (use project ID to be specific)
@@ -85,10 +83,11 @@ jobs:
         run: |
           echo "🧹 Cleanup completed!"
           echo "---------------------"
-          echo "🔀 Branch: ${{ steps.branch.outputs.name }}"
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "🔀 Branch: ${{ inputs.branch }}"
+            echo "🔧 Manual cleanup triggered"
+          else
+            echo "🔀 Branch: ${{ github.head_ref }}"
             echo "📋 PR #${{ github.event.pull_request.number }}"
             echo "✅ Status: ${{ github.event.pull_request.merged && 'Merged' || 'Closed' }}"
-          else
-            echo "🔧 Manual cleanup triggered"
           fi
