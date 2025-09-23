@@ -28,10 +28,10 @@
 	<a
 		{onclick}
 		{href}
-		class="hover:lg:bg-primary lg:w-54 2xl:w-75 flex items-center gap-x-4 py-2 text-sm text-white md:text-lg lg:rounded-lg lg:text-xl 2xl:text-3xl {isActive
+		class="hover:lg:bg-primary w-54 flex items-center gap-x-4 py-2 text-sm text-white md:text-lg lg:rounded-lg lg:text-xl {isActive
 			? 'bg-primary/50 border-primary border-l-4 pl-3 pr-4'
 			: 'px-4'}">
-		<Icon {svg} class="group inline-block size-6 md:size-8 lg:size-10 2xl:size-12"></Icon>
-		<span class="inline-block whitespace-nowrap pt-1.5">{text}</span>
+		<Icon {svg} class="group inline-block size-6 md:size-8 lg:size-10"></Icon>
+		<span class="inline-block whitespace-nowrap pt-1">{text}</span>
 	</a>
 </li>

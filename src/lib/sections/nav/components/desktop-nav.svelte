@@ -10,5 +10,5 @@
 	<div class="py-15">
 		<NavLogo></NavLogo>
 	</div>
-	<NavMenu class="flex flex-col items-center space-y-8 px-4"></NavMenu>
+	<NavMenu class="flex flex-col items-center space-y-8 px-8"></NavMenu>
 </nav>
