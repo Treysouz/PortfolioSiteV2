@@ -83,8 +83,8 @@ jobs:
       - name: Cleanup Summary
         run: |
           echo "🧹 Cleanup completed!"
+          echo "---------------------"
           echo "🔀 Branch: ${{ steps.branch.outputs.name }}"
-          echo "🎯 Trigger: ${{ github.event_name }}"
           if [ "${{ github.event_name }}" == "pull_request" ]; then
             echo "📋 PR #${{ github.event.pull_request.number }}"
             echo "✅ Status: ${{ github.event.pull_request.merged && 'Merged' || 'Closed' }}"
