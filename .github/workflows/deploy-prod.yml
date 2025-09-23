@@ -54,12 +54,10 @@ jobs:
     name: Production Summary
     runs-on: ubuntu-latest
     needs: [version-check, release, deploy]
-    if: always()
+    if: needs.deploy.result == 'success'
     steps:
       - name: Production Deployment Summary
         run: |
-          echo "✅ Production deployment completed!"
-
           # Create GitHub workflow summary
           cat >> $GITHUB_STEP_SUMMARY << EOF
           ## 🚢 Production Deployment Successful!
