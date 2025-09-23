@@ -9,12 +9,6 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch to deploy (leave empty for current branch)'
-        required: false
-        default: ''
-        type: string
 
 concurrency:
   group: production-deploy
@@ -54,7 +48,6 @@ jobs:
     with:
       environment: 'Production'
       production: true
-      branch: ${{ inputs.branch || github.ref }}
     secrets: inherit
 
   summary:
@@ -74,6 +67,6 @@ jobs:
           | 🔗 **Deployment URL** | [${{ needs.deploy.outputs.deployment-url }}](${{ needs.deploy.outputs.deployment-url }}) |
           | 🏷️ **Version** | \`${{ needs.version-check.outputs.current-version }}\` |
           | 📋 **Release** | [${{ needs.release.outputs.release-url }}](${{ needs.release.outputs.release-url }}) |
-          | 🔀 **Branch** | \`${{ inputs.branch || github.ref }}\` |
+          | 🔀 **Branch** | \`${{ github.ref }}\` |
 
           EOF

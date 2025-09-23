@@ -4,11 +4,6 @@ on:
   pull_request:
     types: [closed]
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch name to clean up preview deployments for'
-        required: true
-        type: string
 
 permissions:
   contents: read
@@ -40,12 +35,8 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          # Determine branch name based on trigger
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            BRANCH_NAME="${{ inputs.branch }}"
-          else
-            BRANCH_NAME="${{ github.head_ref }}"
-          fi
+          # Use head_ref for PR events, ref for manual dispatch
+          BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
 
           echo "🔍 Looking for preview deployments for branch: $BRANCH_NAME"
 
@@ -77,11 +68,10 @@ jobs:
         run: |
           echo "🧹 Cleanup completed!"
           echo "---------------------"
+          echo "🔀 Branch: ${{ github.head_ref || github.ref_name }}"
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "🔀 Branch: ${{ inputs.branch }}"
             echo "🔧 Manual cleanup triggered"
           else
-            echo "🔀 Branch: ${{ github.head_ref }}"
             echo "📋 PR #${{ github.event.pull_request.number }}"
             echo "✅ Status: ${{ github.event.pull_request.merged && 'Merged' || 'Closed' }}"
           fi

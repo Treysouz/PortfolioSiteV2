@@ -5,12 +5,6 @@ on:
     types: [opened, synchronize, reopened]
     branches: [main]
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch to deploy (leave empty for current branch)'
-        required: false
-        default: ''
-        type: string
 
 permissions:
   contents: read
@@ -34,7 +28,6 @@ jobs:
     with:
       environment: 'Preview'
       production: false
-      branch: ${{ inputs.branch }}
     secrets: inherit
 
   comment-coverage:
@@ -84,6 +77,6 @@ jobs:
           | Item | Details |
           |------|---------|
           | 🔗 **Preview URL** | [${{ needs.deploy.outputs.deployment-url }}](${{ needs.deploy.outputs.deployment-url }}) |
-          | 🔀 **Branch** | \`${{ inputs.branch || github.head_ref || github.ref }}\` |
+          | 🔀 **Branch** | \`${{ github.head_ref || github.ref }}\` |
 
           EOF
