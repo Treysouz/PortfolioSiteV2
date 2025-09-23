@@ -1,5 +1,10 @@
 name: 🚢 Deploy Production
 
+permissions:
+  contents: write
+  issues: read
+  pull-requests: write
+
 on:
   push:
     branches: [main]
