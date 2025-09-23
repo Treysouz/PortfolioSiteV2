@@ -34,12 +34,6 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
 
-      - name: Login to Vercel
-        run: |
-          echo "Authenticating with Vercel..."
-          # Don't use --scope in login, just authenticate
-          vercel --token ${{ secrets.VERCEL_TOKEN }}
-
       - name: List and Remove Preview Deployments
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
