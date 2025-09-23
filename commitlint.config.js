@@ -9,6 +9,10 @@ export default {
 		'type-empty': [2, 'never'],
 		'subject-empty': [2, 'never'],
 
+		// Allow full stops.
+		'subject-full-stop': [0, 'always'],
+		'body-full-stop': [0, 'always'],
+
 		// Standard conventional commit types
 		'type-enum': [
 			2,

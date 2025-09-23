@@ -58,7 +58,7 @@ jobs:
     steps:
       - name: Production Deployment Summary
         run: |
-          echo "✅ Production dDployment completed!"
+          echo "✅ Production deployment completed!"
           echo "-----------------------------------"
           echo "🔗 URL: ${{ needs.deploy.outputs.deployment-url }}"
           echo "🔀 Branch: ${{ inputs.branch || github.ref }}"

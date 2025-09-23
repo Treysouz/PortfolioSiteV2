@@ -1,0 +1,93 @@
+name: 🧹 Clean Up Preview Deployments
+
+on:
+  pull_request:
+    types: [closed]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch name to clean up preview deployments for'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  cleanup-previews:
+    name: Remove Preview Deployments
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) ||
+      github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Set branch name
+        id: branch
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "name=${{ inputs.branch }}" >> $GITHUB_OUTPUT
+          else
+            echo "name=${{ github.head_ref }}" >> $GITHUB_OUTPUT
+          fi
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Login to Vercel
+        run: |
+          echo "Authenticating with Vercel..."
+          vercel --token ${{ secrets.VERCEL_TOKEN }} --scope ${{ secrets.VERCEL_ORG_ID }}
+
+      - name: List and Remove Preview Deployments
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          BRANCH_NAME="${{ steps.branch.outputs.name }}"
+          echo "🔍 Looking for preview deployments for branch: $BRANCH_NAME"
+
+          # Get deployments for this project
+          DEPLOYMENTS=$(vercel ls --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID | grep "$BRANCH_NAME" || true)
+
+          if [ -z "$DEPLOYMENTS" ]; then
+            echo "ℹ️ No preview deployments found for branch $BRANCH_NAME"
+            exit 0
+          fi
+
+          echo "📋 Found preview deployments:"
+          echo "$DEPLOYMENTS"
+
+          # Extract deployment URLs and remove them
+          echo "$DEPLOYMENTS" | while read -r line; do
+            # Extract the deployment URL (first column)
+            DEPLOYMENT_URL=$(echo "$line" | awk '{print $1}')
+
+            if [ ! -z "$DEPLOYMENT_URL" ] && [[ "$DEPLOYMENT_URL" == *"vercel.app"* ]]; then
+              echo "🗑️ Removing deployment: $DEPLOYMENT_URL"
+              vercel rm "$DEPLOYMENT_URL" --yes --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID || echo "⚠️ Failed to remove $DEPLOYMENT_URL"
+            fi
+          done
+
+          echo "✅ Preview cleanup completed for branch $BRANCH_NAME"
+
+      - name: Cleanup Summary
+        run: |
+          echo "🧹 Cleanup completed!"
+          echo "🔀 Branch: ${{ steps.branch.outputs.name }}"
+          echo "🎯 Trigger: ${{ github.event_name }}"
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "📋 PR #${{ github.event.pull_request.number }}"
+            echo "✅ Status: ${{ github.event.pull_request.merged && 'Merged' || 'Closed' }}"
+          else
+            echo "🔧 Manual cleanup triggered"
+          fi
