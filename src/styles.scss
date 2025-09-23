@@ -1,3 +1,12 @@
-.main-bg {
+.bg-theme {
 	background: linear-gradient(180deg, #3c0753 0%, #720455 95%, #910a67 100%);
+}
+
+.text-gradient {
+	background: linear-gradient(45deg, #de6bed 20%, #9579e6 50%, #de6bed 90%);
+	background-size: 200% 100%;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	display: inline-block;
 }

@@ -6,6 +6,11 @@ import { svelteTesting } from '@testing-library/svelte/vite';
 
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit(), devtoolsJson(), svelteTesting()],
+	server: {
+		hmr: {
+			overlay: true
+		}
+	},
 	test: {
 		expect: { requireAssertions: true },
 		projects: [

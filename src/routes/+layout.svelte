@@ -11,6 +11,9 @@
 
 	let { children } = $props();
 
+	//Whehter the animated background has loaded.
+	let particlesLoaded: boolean = $state(false);
+
 	onMount(async () => {
 		// Initialize the tsParticles engine with slim bundle
 		await loadSlim(tsParticles);
@@ -20,6 +23,7 @@
 			id: 'particles',
 			options: particlesConfig
 		});
+		particlesLoaded = true;
 	});
 </script>
 
@@ -31,10 +35,13 @@
 <!--Animated Background-->
 <div id="particles"></div>
 
-<div class="main-bg flex h-screen w-screen font-mono">
-	<NavBar></NavBar>
+<div class="bg-theme flex h-screen w-full flex-col font-mono lg:flex-row">
+	{#if particlesLoaded}
+		<NavBar></NavBar>
 
-	<main class=" h-full w-full text-white">
-		{@render children?.()}
-	</main>
+		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+		<main tabindex="0" class="lg-pb-0 h-screen w-full overflow-auto pb-6 text-white">
+			{@render children?.()}
+		</main>
+	{/if}
 </div>
