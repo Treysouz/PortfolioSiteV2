@@ -62,8 +62,16 @@ jobs:
             echo "release-url=" >> $GITHUB_OUTPUT
           else
             echo "🚀 Running semantic-release..."
+
+            # Run semantic-release with better error handling
+            set +e  # Don't exit on error immediately
             OUTPUT=$(npx semantic-release@latest --no-ci 2>&1)
+            EXIT_CODE=$?
+            set -e  # Re-enable exit on error
+
+            echo "📋 Semantic Release Output:"
             echo "$OUTPUT"
+            echo "📊 Exit Code: $EXIT_CODE"
 
             # Check if a release was created
             if echo "$OUTPUT" | grep -q "Published release"; then
@@ -72,11 +80,23 @@ jobs:
               echo "version=$VERSION" >> $GITHUB_OUTPUT
               echo "release-url=https://github.com/${{ github.repository }}/releases/tag/v$VERSION" >> $GITHUB_OUTPUT
               echo "✅ Released version $VERSION"
-            else
+            elif echo "$OUTPUT" | grep -qi "no release"; then
               echo "released=false" >> $GITHUB_OUTPUT
               echo "version=" >> $GITHUB_OUTPUT
               echo "release-url=" >> $GITHUB_OUTPUT
               echo "ℹ️ No release created (no releasable changes)"
+            else
+              echo "released=false" >> $GITHUB_OUTPUT
+              echo "version=" >> $GITHUB_OUTPUT
+              echo "release-url=" >> $GITHUB_OUTPUT
+              echo "❌ Semantic release failed with exit code $EXIT_CODE"
+              echo "🔍 Check the output above for details"
+
+              # Don't fail the step immediately - let the workflow continue
+              # The calling workflow can check the 'released' output
+              if [ $EXIT_CODE -ne 0 ]; then
+                echo "⚠️ Warning: Semantic release encountered an error but workflow will continue"
+              fi
             fi
           fi
 

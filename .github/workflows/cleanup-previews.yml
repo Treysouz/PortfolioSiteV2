@@ -45,7 +45,8 @@ jobs:
       - name: Login to Vercel
         run: |
           echo "Authenticating with Vercel..."
-          vercel --token ${{ secrets.VERCEL_TOKEN }} --scope ${{ secrets.VERCEL_ORG_ID }}
+          # Don't use --scope in login, just authenticate
+          vercel --token ${{ secrets.VERCEL_TOKEN }}
 
       - name: List and Remove Preview Deployments
         env:
@@ -56,8 +57,8 @@ jobs:
           BRANCH_NAME="${{ steps.branch.outputs.name }}"
           echo "🔍 Looking for preview deployments for branch: $BRANCH_NAME"
 
-          # Get deployments for this project
-          DEPLOYMENTS=$(vercel ls --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID | grep "$BRANCH_NAME" || true)
+          # Get deployments for this project (use project ID to be specific)
+          DEPLOYMENTS=$(vercel ls $VERCEL_PROJECT_ID --token $VERCEL_TOKEN | grep "$BRANCH_NAME" || true)
 
           if [ -z "$DEPLOYMENTS" ]; then
             echo "ℹ️ No preview deployments found for branch $BRANCH_NAME"
@@ -74,7 +75,7 @@ jobs:
 
             if [ ! -z "$DEPLOYMENT_URL" ] && [[ "$DEPLOYMENT_URL" == *"vercel.app"* ]]; then
               echo "🗑️ Removing deployment: $DEPLOYMENT_URL"
-              vercel rm "$DEPLOYMENT_URL" --yes --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID || echo "⚠️ Failed to remove $DEPLOYMENT_URL"
+              vercel rm "$DEPLOYMENT_URL" --yes --token $VERCEL_TOKEN || echo "⚠️ Failed to remove $DEPLOYMENT_URL"
             fi
           done
 
