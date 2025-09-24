@@ -27,11 +27,15 @@ export default defineConfig({
 				'**/.{eslint,prettier}rc*',
 				'**/tailwind.config.*',
 				'**/svelte.config.*',
-				'**/playwright.config.*'
-			]
+				'**/playwright.config.*',
+				'**/mocks/**',
+				'**/assets/**'
+			],
+			include: ['src/**/*']
 		},
 		environment: 'jsdom',
 		include: ['src/**/*.{test,spec}.{js,ts}'],
-		exclude: ['src/lib/server/**']
+		exclude: ['src/lib/server/**'],
+		setupFiles: ['./vitest-setup.js']
 	}
 });

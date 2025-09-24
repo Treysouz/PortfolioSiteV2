@@ -15,15 +15,19 @@
 	let particlesLoaded: boolean = $state(false);
 
 	onMount(async () => {
-		// Initialize the tsParticles engine with slim bundle
-		await loadSlim(tsParticles);
+		try {
+			// Initialize the tsParticles engine with slim bundle
+			await loadSlim(tsParticles);
 
-		// Load particles configuration
-		await tsParticles.load({
-			id: 'particles',
-			options: particlesConfig
-		});
-		particlesLoaded = true;
+			// Load particles configuration
+			await tsParticles.load({
+				id: 'particles',
+				options: particlesConfig
+			});
+			particlesLoaded = true;
+		} catch (e) {
+			console.error(e);
+		}
 	});
 </script>
 

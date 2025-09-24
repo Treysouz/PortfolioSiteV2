@@ -31,3 +31,6 @@ vite.config.ts.timestamp-*
 
 # Personal Documentation
 SCAFFOLD.md
+
+# Coverage
+coverage

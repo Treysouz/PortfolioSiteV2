@@ -44,7 +44,7 @@
 	});
 </script>
 
-<ul class={className}>
+<ul class={className} role="menu">
 	<NavItem
 		onclick={onItemClick}
 		svg="book"
