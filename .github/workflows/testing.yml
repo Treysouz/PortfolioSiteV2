@@ -57,7 +57,7 @@ jobs:
       - name: Run unit tests with coverage
         run: |
           echo "🧪 Running unit tests with coverage..."
-          npm run test:unit -- --coverage
+          npm run test:unit-coverage
 
       - name: Cache Playwright browsers
         id: playwright-cache

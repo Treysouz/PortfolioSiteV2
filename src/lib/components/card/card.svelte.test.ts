@@ -4,7 +4,7 @@ import Card from './card.svelte';
 import { createRawSnippet } from 'svelte';
 
 // Mock text content to render as the child for the Card component.
-const mockTextContent = 'Test content';
+const mockTextContent = '<p>Mock content<p>';
 const mockSnippet = createRawSnippet(() => {
 	return { render: () => mockTextContent };
 });

@@ -53,6 +53,7 @@
 </script>
 
 <nav
+	data-testid="mobile-nav"
 	bind:this={navElement}
 	class="z-5 animate-slide-down flex h-min w-screen items-center justify-between bg-black/15 px-8 py-4 shadow-md backdrop-blur-lg">
 	<NavLogo></NavLogo>
