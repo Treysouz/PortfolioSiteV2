@@ -2,14 +2,6 @@ import type { IOptions } from '@tsparticles/engine';
 
 /**
  * TSParticles configuration for animated background effect
- *
- * Creates a subtle particle animation with:
- * - 15 large, slow-moving circular particles
- * - Purple gradient color scheme (#060B67, #5E0B82, #A3067A, #C10D89)
- * - Opacity animation for smooth fade in/out effects
- * - Size animation for dynamic scaling
- * - Particle collisions enabled with bounce behavior
- * - Full-screen coverage with responsive density
  */
 export const particlesConfig: IOptions = {
 	autoPlay: true,
@@ -42,7 +34,7 @@ export const particlesConfig: IOptions = {
 	},
 	detectRetina: true,
 	duration: 0,
-	fpsLimit: 120,
+	fpsLimit: 10,
 	interactivity: {
 		detectsOn: 'window',
 		events: {
@@ -102,7 +94,7 @@ export const particlesConfig: IOptions = {
 							max: 5
 						},
 						animation: {
-							enable: true,
+							enable: false,
 							speed: 5,
 							sync: true,
 							startValue: 'min',
@@ -258,7 +250,7 @@ export const particlesConfig: IOptions = {
 			},
 			random: false,
 			size: false,
-			speed: 0.5,
+			speed: 0.2,
 			spin: {
 				acceleration: 0,
 				enable: false
@@ -282,7 +274,7 @@ export const particlesConfig: IOptions = {
 				mode: 'delete',
 				value: 0
 			},
-			value: 15
+			value: 8
 		},
 		opacity: {
 			value: {
@@ -320,7 +312,10 @@ export const particlesConfig: IOptions = {
 			type: 'circle'
 		},
 		size: {
-			value: 250,
+			value: {
+				min: 250,
+				max: 400
+			},
 			animation: {
 				count: 0,
 				enable: true,
@@ -486,7 +481,7 @@ export const particlesConfig: IOptions = {
 	motion: {
 		disable: false,
 		reduce: {
-			factor: 4,
+			factor: 6,
 			value: true
 		}
 	}
