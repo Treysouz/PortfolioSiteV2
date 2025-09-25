@@ -16,7 +16,7 @@ export const particlesConfig: IOptions = {
 		opacity: 0
 	},
 	backgroundMask: {
-		composite: 'destination-out',
+		composite: 'source-over',
 		cover: {
 			opacity: 1,
 			color: {

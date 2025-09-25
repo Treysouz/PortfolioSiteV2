@@ -8,7 +8,7 @@
 <nav
 	data-testid="desktop-nav"
 	class="animate-slide-right flex h-full flex-col items-center bg-black/15 pt-8 shadow-md backdrop-blur-lg">
-	<div class="py-15">
+	<div class="pb-16 pt-8">
 		<NavLogo></NavLogo>
 	</div>
 	<NavMenu class="flex flex-col items-center space-y-8 px-8"></NavMenu>

@@ -1,2 +1,2 @@
 export { default as WelcomeSection } from './welcome/welcome.svelte';
-export { default as NavBar } from './nav/nav.svelte';
+export { default as AboutSection } from './about/about.svelte';

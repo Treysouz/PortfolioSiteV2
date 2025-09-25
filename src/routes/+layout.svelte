@@ -7,7 +7,7 @@
 	import { loadSlim } from '@tsparticles/slim';
 	import { onMount } from 'svelte';
 	import { particlesConfig } from '$lib/assets';
-	import { NavBar } from '$lib/sections';
+	import { NavBar } from '$lib/components';
 
 	let { children } = $props();
 
@@ -18,7 +18,6 @@
 		try {
 			// Initialize the tsParticles engine with slim bundle
 			await loadSlim(tsParticles);
-
 			// Load particles configuration
 			await tsParticles.load({
 				id: 'particles',
@@ -39,13 +38,15 @@
 <!--Animated Background-->
 <div id="particles"></div>
 
-<div class="bg-theme flex h-screen w-full flex-col font-mono lg:flex-row">
+<div class="bg-theme z-10 flex h-screen w-full flex-col font-mono lg:flex-row">
 	{#if particlesLoaded}
 		<NavBar></NavBar>
 
 		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-		<main tabindex="0" class="lg-pb-0 h-screen w-full overflow-auto pb-6 text-white">
-			{@render children?.()}
+		<main tabindex="0" class=" w-full overflow-auto pb-6 text-white">
+			<div>
+				{@render children?.()}
+			</div>
 		</main>
 	{/if}
 </div>
