@@ -1,19 +1,18 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	import DesktopNav from './components/desktop-nav.svelte';
-	import MobileNav from './components/mobile-nav.svelte';
+	import { DesktopNav, MobileNav } from './components';
 
-	//Navigation component.
+	/** Navigation component. */
 
-	// Whether to render the mobile nav component.
+	/** Whether to render the mobile nav component. */
 	let renderMobileNav: boolean = $state(false);
 
 	/**
-	 * Checks whether to render the mobile nav component based on if window width is less than or equal to 1024px.
+	 * Checks whether to render the mobile nav component based on if window width is less than or equal to 640px.
 	 */
 	const handleResize = () => {
-		renderMobileNav = window.innerWidth <= 1024;
+		renderMobileNav = window.innerWidth <= 640;
 	};
 
 	onMount(() => {

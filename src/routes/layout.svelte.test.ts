@@ -45,7 +45,7 @@ describe('+layout.svelte', () => {
 			expect(mockLoad).toHaveBeenCalled();
 		});
 
-		expect(screen.getByTestId('mobile-nav')).toBeInTheDocument();
+		expect(screen.getByRole('navigation')).toBeInTheDocument();
 		expect(screen.getByRole('main')).toBeInTheDocument();
 	});
 
