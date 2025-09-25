@@ -7,4 +7,9 @@ declare global {
 		unobserve: MockInstance;
 		disconnect: MockInstance;
 	};
+	var mockPage: {
+		route: {
+			id: string;
+		};
+	};
 }

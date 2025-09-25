@@ -23,13 +23,17 @@ describe('NavMenu component', () => {
 		// Reset querySelectorAll mock
 		mockQuerySelectorAll.mockClear();
 		mockQuerySelectorAll.mockReturnValue([]);
+
+		// Reset page mock to default route
+		globalThis.mockPage.route.id = '/';
 	});
 
 	afterEach(() => {
 		vi.restoreAllMocks();
 	});
 
-	test('sets up intersection observer on mount', () => {
+	test('sets up intersection observer with $effect when page loads', () => {
+		// Mock query selector to return mock sleections.
 		const mockSections = [{ id: 'about' }, { id: 'tech' }, { id: 'projects' }, { id: 'contact' }];
 		mockQuerySelectorAll.mockReturnValue(mockSections);
 

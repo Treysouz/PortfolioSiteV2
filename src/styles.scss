@@ -10,3 +10,13 @@
 	color: transparent;
 	display: inline-block;
 }
+
+// Hide arrow glyph for details/summary dropdown.
+nav {
+	details > summary {
+		list-style: none;
+		::-webkit-details-marker {
+			display: none;
+		}
+	}
+}

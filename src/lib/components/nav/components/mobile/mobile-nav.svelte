@@ -1,22 +1,19 @@
 <script lang="ts">
-	import NavLogo from './nav-logo.svelte';
-	import NavMenu from './nav-menu.svelte';
-	import Icon from '$lib/components/icon/icon.svelte';
+	import NavMenu from '../nav-menu/nav-menu.svelte';
+	import { Icon, SVGS } from '$lib/components';
 	import { onMount } from 'svelte';
 
-	//Mobile navigation component.
+	/** Mobile navigation component. */
 
-	// Whether the navigation menu is open.
+	/** Whether the navigation menu is open. */
 	let openMenu: boolean = $state(false);
-	// Reference to navigation element.
+	/** Reference to navigation element. */
 	let navElement: HTMLElement;
 
-	/**
-	 * Toggles the navigation menu.
-	 */
-	const toggleMenu = () => {
-		openMenu = !openMenu;
-	};
+	/** Accessibility label for toggle button */
+	let toggleLabel: string = $derived(openMenu ? 'Close Menu' : 'Open Menu');
+	/** Icon to render for toggleButton */
+	let toggleIcon: keyof typeof SVGS = $derived(openMenu ? 'x-mark' : 'bars-3');
 
 	/**
 	 * Closes the navigation menu.
@@ -53,21 +50,17 @@
 </script>
 
 <nav
+	class="z-5 animate-slide-down fixed flex h-min w-screen items-center justify-between bg-black/15 shadow-md backdrop-blur-lg"
 	data-testid="mobile-nav"
-	bind:this={navElement}
-	class="z-5 animate-slide-down flex h-min w-screen items-center justify-between bg-black/15 px-8 py-4 shadow-md backdrop-blur-lg">
-	<NavLogo></NavLogo>
-	<div class="relative">
-		<button
+	bind:this={navElement}>
+	<details class="w-full" bind:open={openMenu}>
+		<summary
 			aria-expanded={openMenu}
-			class="text-white {openMenu ? 'opacity-50' : ''}"
-			onclick={toggleMenu}>
-			<Icon svg="bars-3" class="size-10"></Icon>
-		</button>
-		<NavMenu
-			onItemClick={closeMenu}
-			class="w-50 animate-fade-in absolute right-1 overflow-hidden rounded-lg bg-black/90 backdrop-blur-lg {openMenu
-				? 'visible'
-				: 'hidden'}"></NavMenu>
-	</div>
+			class="my-4 ml-8 w-min text-white"
+			aria-label={toggleLabel}
+			title={toggleLabel}>
+			<Icon svg={toggleIcon} class="size-10"></Icon>
+		</summary>
+		<NavMenu class="w-full" varient="mobile" onItemClick={closeMenu}></NavMenu>
+	</details>
 </nav>

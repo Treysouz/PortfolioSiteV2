@@ -11,7 +11,7 @@
 
 	let { children } = $props();
 
-	//Whehter the animated background has loaded.
+	/** Whether the animated background has loaded. */
 	let particlesLoaded: boolean = $state(false);
 
 	onMount(async () => {
@@ -35,18 +35,18 @@
 	<link rel="icon" type="image/png" sizes="32x32" href={favicon} />
 </svelte:head>
 
-<!--Animated Background-->
 <div id="particles"></div>
 
-<div class="bg-theme z-10 flex h-screen w-full flex-col font-mono lg:flex-row">
+<div
+	class="bg-theme flex min-h-[420px] w-full flex-col items-center font-mono sm:flex-col-reverse lg:flex-row">
 	{#if particlesLoaded}
 		<NavBar></NavBar>
 
 		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-		<main tabindex="0" class=" w-full overflow-auto pb-6 text-white">
-			<div>
-				{@render children?.()}
-			</div>
+		<main
+			tabindex="0"
+			class="animate-fade-in lg-pb-0 mt-20 h-screen w-full overflow-auto pb-6 text-white sm:mt-0">
+			{@render children?.()}
 		</main>
 	{/if}
 </div>
