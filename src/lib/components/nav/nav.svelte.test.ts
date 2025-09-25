@@ -23,7 +23,7 @@ describe('Nav component', () => {
 		vi.restoreAllMocks();
 	});
 
-	test('renders desktop nav when window width is greater than 1024px', () => {
+	test('renders desktop nav when window width is greater than 640px', () => {
 		// Mock window width for desktop
 		Object.defineProperty(window, 'innerWidth', {
 			writable: true,
@@ -38,12 +38,12 @@ describe('Nav component', () => {
 		expect(desktopNav).toBeInTheDocument();
 	});
 
-	test('renders mobile nav when window width is 1024px or less', () => {
+	test('renders mobile nav when window width is 640px or less', () => {
 		// Mock window width for mobile
 		Object.defineProperty(window, 'innerWidth', {
 			writable: true,
 			configurable: true,
-			value: 768
+			value: 620
 		});
 
 		render(Nav);

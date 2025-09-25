@@ -33,21 +33,27 @@ test.describe('Navigation E2E Tests', () => {
 		await page.waitForURL('/#contact');
 		expect(page.url()).toContain('#contact');
 
-		// Test Logo link
-		await page.click('text=<TS/>');
+		// Test Welcome link
+		await page.click('text=Welcome');
 		await page.waitForURL('/#welcome');
 		expect(page.url()).toContain('#welcome');
+
+		// Test Settings link
+		await page.click('text=Settings');
+		await page.waitForURL('/settings');
+		expect(page.url()).toContain('/settings');
 	});
 
 	test('mobile nav links navigate to correct anchors', async ({ page }) => {
 		// Test on mobile viewport
-		await page.setViewportSize({ width: 768, height: 1024 });
+		await page.setViewportSize({ width: 630, height: 1024 });
 
 		// Wait for the mobile nav to load
 		await page.waitForSelector('[data-testid="mobile-nav"]');
 
 		// Open mobile menu
-		await page.click('button[aria-expanded="false"]');
+		const menuButton = page.getByTitle('Open Menu');
+		await menuButton.click();
 		await page.waitForSelector('[role="menu"]', { state: 'visible' });
 
 		// Test About Me link
@@ -56,7 +62,7 @@ test.describe('Navigation E2E Tests', () => {
 		expect(page.url()).toContain('#about');
 
 		// Reopen menu for next test
-		await page.click('button[aria-expanded="false"]');
+		await menuButton.click();
 		await page.waitForSelector('[role="menu"]', { state: 'visible' });
 
 		// Test Tech Stack link
@@ -65,7 +71,7 @@ test.describe('Navigation E2E Tests', () => {
 		expect(page.url()).toContain('#tech');
 
 		// Reopen menu for next test
-		await page.click('button[aria-expanded="false"]');
+		await menuButton.click();
 		await page.waitForSelector('[role="menu"]', { state: 'visible' });
 
 		// Test Projects link
@@ -74,7 +80,7 @@ test.describe('Navigation E2E Tests', () => {
 		expect(page.url()).toContain('#projects');
 
 		// Reopen menu for next test
-		await page.click('button[aria-expanded="false"]');
+		await menuButton.click();
 		await page.waitForSelector('[role="menu"]', { state: 'visible' });
 
 		// Test Contact Me link
@@ -82,9 +88,22 @@ test.describe('Navigation E2E Tests', () => {
 		await page.waitForURL('/#contact');
 		expect(page.url()).toContain('#contact');
 
-		// Test Logo link (always visible)
-		await page.click('text=<TS/>');
+		// Reopen menu for next test
+		await menuButton.click();
+		await page.waitForSelector('[role="menu"]', { state: 'visible' });
+
+		// Test Welcome link
+		await page.click('text=Welcome');
 		await page.waitForURL('/#welcome');
 		expect(page.url()).toContain('#welcome');
+
+		// Reopen menu for next test
+		await menuButton.click();
+		await page.waitForSelector('[role="menu"]', { state: 'visible' });
+
+		// Test Settings link
+		await page.click('text=Settings');
+		await page.waitForURL('/settings');
+		expect(page.url()).toContain('/settings');
 	});
 });
