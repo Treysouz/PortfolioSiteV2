@@ -106,7 +106,7 @@
 </script>
 
 <ul class={className} role="menu">
-	{#each linkConfigs as config}
+	{#each linkConfigs as config (config.sectionId)}
 		<NavItem
 			onclick={onItemClick}
 			svg={config.svg}
