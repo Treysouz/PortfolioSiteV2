@@ -73,8 +73,8 @@
 
 		// Options for observer
 		const observerOptions = {
-			threshold: 0.5,
-			rootMargin: '-20% 0px -20% 0px'
+			threshold: 0.4,
+			rootMargin: '-15% 0px -15% 0px'
 		};
 
 		// Setup observer for current sections.

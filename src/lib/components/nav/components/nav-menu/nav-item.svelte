@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SVGS, Icon } from '$lib/components';
+	import { SVGS, Icon, IconWrapper } from '$lib/components';
 	import type { NavItemOrientation } from '../../nav.types';
 
 	/** Icon link for navigation bar */
@@ -27,18 +27,21 @@
 		orientation = 'vertical'
 	}: Props = $props();
 
-	/** Additional classes to set for anchor element based on orientation value*/
-	let anchorClasses = $derived(
+	/** Additional classes to set for the div wrapper based on orientation value*/
+	let linkWrapperClasses = $derived(
 		orientation === 'vertical'
-			? 'flex-col items-center  space-y-2  text-sm md:text-lg lg:text-xl '
-			: ' flex-row items-center space-x-2'
+			? 'flex-col items-center space-y-2  text-sm md:text-lg lg:text-xl '
+			: ' flex-row items-center space-x-4 justify-start w-40'
 	);
 
 	/** Additional classes to set for Icon component based on nav item orientation and whether it is active*/
 	let iconClasses = $derived(
-		`${isActive ? 'text-emphasis' : ''} ${
-			orientation === 'vertical' ? 'size-6 md:size-8 lg:size-10' : 'size-8'
-		}`
+		` ${isActive ? 'text-primary' : ''} ${orientation === 'vertical' ? 'size-6 md:size-8 lg:size-10' : 'size-8'}`
+	);
+
+	/** Additional classes to set for Icon component's background based on whether it is active*/
+	let iconBgClasses = $derived(
+		isActive ? 'border-2 border-emphasis' : 'border-2 border-transparent'
 	);
 
 	/** Additional classes to set for nav item text based on nav item orientation and whether it is active*/
@@ -53,8 +56,12 @@
 	<a
 		{onclick}
 		{href}
-		class="hover:bg-primary/50 flex w-full justify-center p-4 font-bold text-white {anchorClasses}">
-		<Icon {svg} class="group inline-block shrink-0 {iconClasses}"></Icon>
-		<span class="inline-block whitespace-nowrap {itemTextClasses}">{text}</span>
+		class="hover:bg-primary/50 text-primary flex w-full justify-center p-4 font-bold">
+		<div class="flex items-center {linkWrapperClasses}">
+			<IconWrapper class={iconBgClasses}>
+				<Icon {svg} class="group inline-block shrink-0 {iconClasses}"></Icon>
+			</IconWrapper>
+			<span class="inline-block whitespace-nowrap text-white {itemTextClasses}">{text}</span>
+		</div>
 	</a>
 </li>
