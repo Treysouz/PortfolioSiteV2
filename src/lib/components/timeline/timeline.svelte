@@ -6,7 +6,7 @@
 </script>
 
 <div>
-	{#each history as event}
+	{#each history as event (event.header)}
 		<div class="relative border-l-2 border-white pb-12 pl-12 text-sm last:pb-0">
 			<IconWrapper class="absolute -left-6 -top-3">
 				<Icon svg={event.icon} class="text-primary size-8"></Icon>
