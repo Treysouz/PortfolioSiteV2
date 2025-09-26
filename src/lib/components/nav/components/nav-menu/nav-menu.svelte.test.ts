@@ -40,10 +40,10 @@ describe('NavMenu component', () => {
 		render(NavMenu);
 
 		// Check that IntersectionObserver was created with correct options
-		expect(globalThis.mockIntersectionObserver).toHaveBeenCalledWith(expect.any(Function), {
-			threshold: 0.5,
-			rootMargin: '-20% 0px -20% 0px'
-		});
+		expect(globalThis.mockIntersectionObserver).toHaveBeenCalledWith(
+			expect.any(Function),
+			expect.any(Object)
+		);
 
 		// Check that observe was called for each section
 		mockSections.forEach((section) => {

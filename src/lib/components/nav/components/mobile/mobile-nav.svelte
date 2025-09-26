@@ -50,7 +50,7 @@
 </script>
 
 <nav
-	class="z-5 animate-slide-down fixed flex w-screen items-center justify-between bg-black/15 shadow-md backdrop-blur-lg"
+	class="animate-slide-down fixed z-50 flex w-screen items-center justify-between bg-black/20 shadow-md backdrop-blur-lg will-change-transform"
 	data-testid="mobile-nav"
 	bind:this={navElement}>
 	<details class="w-full" bind:open={openMenu}>

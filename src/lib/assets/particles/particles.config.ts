@@ -278,8 +278,8 @@ export const particlesConfig: IOptions = {
 		},
 		opacity: {
 			value: {
-				min: 0.1,
-				max: 0.3
+				min: 0.05,
+				max: 0.15
 			},
 			animation: {
 				count: 0,

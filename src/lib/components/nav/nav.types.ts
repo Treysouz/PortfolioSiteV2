@@ -15,5 +15,5 @@ export interface NavItemConfig {
 	/**HREF associated with nav item */
 	href: string;
 	/**ID of section associated with nav item */
-	sectionId: string;
+	sectionId?: string;
 }
