@@ -1,3 +1,22 @@
+# [1.1.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.0.1...v1.1.0) (2025-09-26)
+
+
+### Bug Fixes
+
+* [TSPS-22] - Fixed e2e tests failing because it uses the same port as dev server ([7155a98](https://github.com/Treysouz/PortfolioSiteV2/commit/7155a983788e1285e67c27442db0ac18fd4fc68f))
+* [TSPS-22] - Resolved accessibility error for settings page ([2c33c23](https://github.com/Treysouz/PortfolioSiteV2/commit/2c33c2315246de37016ffeb6e4c7a53f77ff96c4))
+
+
+### Features
+
+* [TSPS-22] - Made about me section responsive. ([0ab93b9](https://github.com/Treysouz/PortfolioSiteV2/commit/0ab93b93de08d7cc37c14080524864c2906ce8d8))
+* [TSPS-22] - Started layout for About Me section.  Moved nav to component directory instead of section ([9886fc8](https://github.com/Treysouz/PortfolioSiteV2/commit/9886fc8f4e2cf42a28f22368d872dca922d0f0fa))
+
+
+### Performance Improvements
+
+* [TSPS-22] - added key to timeline component each. ([8778f2c](https://github.com/Treysouz/PortfolioSiteV2/commit/8778f2c5b4846a0ff847564508fff7a4ffef0b38))
+
 ## [1.0.1](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.0.0...v1.0.1) (2025-09-25)
 
 ### Bug Fixes
