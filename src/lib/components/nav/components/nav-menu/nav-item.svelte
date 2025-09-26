@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { SVGS, Icon } from '$lib/components';
+	import { SVGS, Icon, IconWrapper } from '$lib/components';
 	import type { NavItemOrientation } from '../../nav.types';
+	import type { HTMLAnchorAttributes } from 'svelte/elements';
 
 	/** Icon link for navigation bar */
 	interface Props {
@@ -8,37 +9,43 @@
 		text?: string;
 		/** The name of the SVG icon to display (must be a valid key from svgs.ts) */
 		svg?: keyof typeof SVGS;
-		/** Destination URL for link*/
-		href?: string;
+		/** Props for anchor element*/
+		anchorProps?: HTMLAnchorAttributes;
 		/** Whether this nav item is currently active */
 		isActive?: boolean;
 		/** Handler for item click */
 		onclick?: (event: MouseEvent) => unknown;
 		/** Whether to render the icon and text vertically or horizontally */
 		orientation?: NavItemOrientation;
+		/** Additional CSS classes to apply to the component */
+		class?: string;
 	}
 
 	let {
 		text = '',
 		svg = 'home',
-		href = '',
+		anchorProps = undefined,
 		isActive = false,
 		onclick = undefined,
-		orientation = 'vertical'
+		orientation = 'vertical',
+		class: className = ''
 	}: Props = $props();
 
-	/** Additional classes to set for anchor element based on orientation value*/
-	let anchorClasses = $derived(
+	/** Additional classes to set for the div wrapper based on orientation value*/
+	let linkWrapperClasses = $derived(
 		orientation === 'vertical'
-			? 'flex-col items-center  space-y-2  text-sm md:text-lg lg:text-xl '
-			: ' flex-row items-center space-x-2'
+			? 'flex-col items-center space-y-2'
+			: ' flex-row items-center space-x-4 justify-start w-40'
 	);
 
 	/** Additional classes to set for Icon component based on nav item orientation and whether it is active*/
 	let iconClasses = $derived(
-		`${isActive ? 'text-emphasis' : ''} ${
-			orientation === 'vertical' ? 'size-6 md:size-8 lg:size-10' : 'size-8'
-		}`
+		` ${isActive ? 'text-primary' : ''} ${orientation === 'vertical' ? 'size-6 md:size-8 lg:size-10' : 'size-8'}`
+	);
+
+	/** Additional classes to set for Icon component's background based on whether it is active*/
+	let iconBgClasses = $derived(
+		isActive ? 'border-2 border-emphasis' : 'border-2 border-transparent'
 	);
 
 	/** Additional classes to set for nav item text based on nav item orientation and whether it is active*/
@@ -49,12 +56,14 @@
 	);
 </script>
 
-<li role="menuitem" class="w-full">
-	<a
-		{onclick}
-		{href}
-		class="hover:bg-primary/50 flex w-full justify-center p-4 font-bold text-white {anchorClasses}">
-		<Icon {svg} class="group inline-block shrink-0 {iconClasses}"></Icon>
-		<span class="inline-block whitespace-nowrap {itemTextClasses}">{text}</span>
-	</a>
-</li>
+<a
+	{onclick}
+	{...anchorProps}
+	class="hover:bg-secondary/50 flex items-center justify-center font-bold text-white {className}">
+	<div class="flex items-center {linkWrapperClasses}">
+		<IconWrapper class="text-primary {iconBgClasses}">
+			<Icon {svg} class={iconClasses}></Icon>
+		</IconWrapper>
+		<span class="whitespace-nowrap {itemTextClasses}">{text}</span>
+	</div>
+</a>

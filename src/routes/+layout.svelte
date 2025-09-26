@@ -18,7 +18,6 @@
 		try {
 			// Initialize the tsParticles engine with slim bundle
 			await loadSlim(tsParticles);
-
 			// Load particles configuration
 			await tsParticles.load({
 				id: 'particles',
@@ -35,18 +34,17 @@
 	<title>Tremayne Souza | Front-End Developer</title>
 	<link rel="icon" type="image/png" sizes="32x32" href={favicon} />
 </svelte:head>
-
 <div id="particles"></div>
 
 <div
-	class="bg-theme flex min-h-[420px] w-full flex-col items-center font-mono sm:flex-col-reverse lg:flex-row">
+	class="bg-theme flex h-screen min-h-[420px] w-full flex-col items-center font-mono sm:flex-col-reverse lg:flex-row">
 	{#if particlesLoaded}
 		<NavBar></NavBar>
 
 		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 		<main
 			tabindex="0"
-			class="animate-fade-in lg-pb-0 mt-20 h-screen w-full overflow-auto pb-6 text-white sm:mt-0">
+			class="lg-pb-0 z-10 mt-20 h-full w-full grow overflow-auto pb-6 text-white sm:mt-0">
 			{@render children?.()}
 		</main>
 	{/if}

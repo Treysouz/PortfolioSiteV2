@@ -4,8 +4,8 @@
 	/** Section to welcome users to the site introducing name and title of developer. */
 </script>
 
-<section id="welcome" class="z-10 flex h-full min-h-[420px] w-full items-center justify-center p-4">
-	<Card class="p-8 lg:max-w-2xl 2xl:max-w-5xl">
+<section id="welcome" class="z-10 flex h-full min-h-[420px] w-full items-center justify-center p-8">
+	<Card class="animate-fade-in p-8 lg:max-w-2xl 2xl:max-w-5xl">
 		<h1 class="break-keep text-lg md:text-xl lg:text-3xl 2xl:text-5xl">
 			<span class="whitespace-nowrap"><Greeting></Greeting></span><br /><br /> My name is
 			<span class="text-gradient animate-gradient-move whitespace-nowrap font-bold"

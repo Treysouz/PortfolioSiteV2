@@ -73,15 +73,18 @@
 
 		// Options for observer
 		const observerOptions = {
-			threshold: 0.5,
-			rootMargin: '-20% 0px -20% 0px'
+			threshold: 0.4,
+			rootMargin: '-15% 0px -15% 0px'
 		};
 
 		// Setup observer for current sections.
 		const observer = new IntersectionObserver((elements) => {
 			elements.forEach((element) => {
 				if (element.isIntersecting) {
+					// Update actionSection with section in view
 					activeSection = element.target.id;
+					// Update URL hash without triggering navigation
+					history.replaceState(null, '', `#${element.target.id}`);
 				}
 			});
 		}, observerOptions);
@@ -107,12 +110,15 @@
 
 <ul class={className} role="menu">
 	{#each linkConfigs as config (config.sectionId)}
-		<NavItem
-			onclick={onItemClick}
-			svg={config.svg}
-			text={config.text}
-			href={config.href}
-			isActive={activeSection === config.sectionId}
-			{orientation}></NavItem>
+		<li role="menuitem" class="w-full">
+			<NavItem
+				class="w-full p-4 text-sm md:text-lg"
+				onclick={onItemClick}
+				svg={config.svg}
+				text={config.text}
+				anchorProps={{ href: config.href }}
+				isActive={activeSection === config.sectionId}
+				{orientation}></NavItem>
+		</li>
 	{/each}
 </ul>

@@ -1,18 +1,16 @@
 ## [1.0.1](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.0.0...v1.0.1) (2025-09-25)
 
-
 ### Bug Fixes
 
-* [TSPS-20] - Fixed linting error ([c1bc7d6](https://github.com/Treysouz/PortfolioSiteV2/commit/c1bc7d6bed69e52d6ccec2da7528cdf80cc65bdd))
-* [TSPS-20] - Fixed linting error ([4e8fb4c](https://github.com/Treysouz/PortfolioSiteV2/commit/4e8fb4ced697f5163eedcd646393f5af4d575c83))
-* [TSPS-20] - Fixed testing workflow ([eb65d9e](https://github.com/Treysouz/PortfolioSiteV2/commit/eb65d9e62a7a7b5e66af130ac438ab980b42fa96))
-* [TSPS-23] - Fixed linting error ([b058c79](https://github.com/Treysouz/PortfolioSiteV2/commit/b058c79f07c903c2b03c7e39ff5b8e84ad6f307a))
-* [TSPS-23] - Removed unnecessary check-version workflow ([69246de](https://github.com/Treysouz/PortfolioSiteV2/commit/69246dea96592737bb565dac58f29df02352663b))
-
+- [TSPS-20] - Fixed linting error ([c1bc7d6](https://github.com/Treysouz/PortfolioSiteV2/commit/c1bc7d6bed69e52d6ccec2da7528cdf80cc65bdd))
+- [TSPS-20] - Fixed linting error ([4e8fb4c](https://github.com/Treysouz/PortfolioSiteV2/commit/4e8fb4ced697f5163eedcd646393f5af4d575c83))
+- [TSPS-20] - Fixed testing workflow ([eb65d9e](https://github.com/Treysouz/PortfolioSiteV2/commit/eb65d9e62a7a7b5e66af130ac438ab980b42fa96))
+- [TSPS-23] - Fixed linting error ([b058c79](https://github.com/Treysouz/PortfolioSiteV2/commit/b058c79f07c903c2b03c7e39ff5b8e84ad6f307a))
+- [TSPS-23] - Removed unnecessary check-version workflow ([69246de](https://github.com/Treysouz/PortfolioSiteV2/commit/69246dea96592737bb565dac58f29df02352663b))
 
 ### Performance Improvements
 
-* [TSPS-20] - More performance improvements ([0b4728e](https://github.com/Treysouz/PortfolioSiteV2/commit/0b4728e917c174760194c3e43a353a6f9a5a41ab))
+- [TSPS-20] - More performance improvements ([0b4728e](https://github.com/Treysouz/PortfolioSiteV2/commit/0b4728e917c174760194c3e43a353a6f9a5a41ab))
 
 # 1.0.0 (2025-09-23)
 

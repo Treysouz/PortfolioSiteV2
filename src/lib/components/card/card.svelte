@@ -13,8 +13,8 @@
 </script>
 
 <article
-	class="rounded-lg bg-black/15 shadow-md backdrop-blur-lg
- {className}"
+	class="rounded-lg bg-black/20 shadow-md backdrop-blur-lg
+ {className} "
 	id="card-component">
 	{@render children?.()}
 </article>
