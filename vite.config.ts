@@ -7,6 +7,7 @@ import { svelteTesting } from '@testing-library/svelte/vite';
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit(), devtoolsJson(), svelteTesting()],
 	server: {
+		port: 3000,
 		hmr: {
 			overlay: true
 		}
