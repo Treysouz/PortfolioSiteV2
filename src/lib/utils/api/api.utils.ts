@@ -1,12 +1,13 @@
 import { error } from '@sveltejs/kit';
 import type { PostgrestError } from '@supabase/supabase-js';
+import type { ApiError } from './api.types';
 
 /**
  * Maps PostgreSQL error codes to appropriate HTTP status codes
  * @param {string} pgErrorCode - The PostgreSQL error code to map
  * @returns {number} The corresponding HTTP status code
  */
-const getStatusCodeByPGError = (pgErrorCode: string) => {
+const getStatusCodeByPGError = (pgErrorCode: string): number => {
 	switch (pgErrorCode) {
 		case '23505':
 			return 409; // Unique violation
@@ -25,14 +26,14 @@ const getStatusCodeByPGError = (pgErrorCode: string) => {
  * Constructs a SvelteKit error object from a PostgreSQL error
  * @param {string} message - The error message to display to the user
  * @param {PostgrestError} pgError - The PostgreSQL error object from Supabase
- * @returns {never} A SvelteKit error object with appropriate status code and message
+ * @returns {ApiError} Object representing data for an API error
  */
-export const constructError = (message: string, pgError: PostgrestError): never => {
+export const getErrorData = (message: string, pgError: PostgrestError): ApiError => {
 	const isProd = import.meta.env.PROD;
 
-	message = `${message}${isProd ? `:${pgError}` : ''}`;
+	message = `${message}${isProd ? `: ${pgError.message}` : ''}`;
 
 	const status = getStatusCodeByPGError(pgError.code);
 
-	return error(status, message);
+	return { status, message };
 };

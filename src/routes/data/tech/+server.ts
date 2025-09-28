@@ -1,7 +1,6 @@
-import { json } from '@sveltejs/kit';
-import { supabase } from '$lib/utils/supabase/supabase.util.js';
-
-import { constructError } from '$lib/utils/supabase/api.util.js';
+import { json, error } from '@sveltejs/kit';
+import { supabase } from '$lib/utils/supabase';
+import { getErrorData } from '$lib/utils/api';
 
 import type { GetParams, Tech } from './tech.types.js';
 
@@ -22,13 +21,15 @@ export const GET = async (request) => {
 		query = query.order(sort.column || '', { ascending: sort.ascending });
 	}
 
-	const { data, error } = await query;
+	const response = await query;
 
-	if (error) {
-		throw constructError('Failed to load Tech Stack data', error);
+	if (response.error) {
+		const { status, message } = getErrorData('Failed to load Tech Stack data', response.error);
+
+		error(status, message);
 	}
 
-	const formattedData: Tech[] = data?.map((entity) => {
+	const formattedData: Tech[] = response.data?.map((entity) => {
 		const { img_url, name, proficiency, type } = entity;
 		return {
 			imgUrl: img_url,

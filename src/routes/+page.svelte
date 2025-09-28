@@ -2,17 +2,6 @@
 	import { WelcomeSection, AboutSection } from '$lib/sections';
 	import { Card } from '$lib/components';
 	import { onMount } from 'svelte';
-
-	const testApi = async () => {
-		const response = await fetch('/data/tech', {
-			method: 'GET'
-		});
-		console.log(response);
-	};
-
-	onMount(() => {
-		testApi();
-	});
 </script>
 
 <WelcomeSection></WelcomeSection>
