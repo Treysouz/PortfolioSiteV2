@@ -1,4 +1,4 @@
-import type { Database, Tables } from '$lib/utils/supabase/supabase.types.js';
+import type { Database } from '$lib/utils/supabase/supabase.types.js';
 
 /** Type that best categorizes the tech */
 export type TechType = Database['public']['Enums']['Tech Type'];
