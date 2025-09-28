@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, test } from 'vitest';
+import { describe, expect, vi, beforeEach, test } from 'vitest';
 import { getErrorData } from './api.utils.js';
 import type { PostgrestError } from '@supabase/supabase-js';
 

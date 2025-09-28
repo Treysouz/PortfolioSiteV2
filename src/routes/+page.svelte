@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { WelcomeSection, AboutSection } from '$lib/sections';
 	import { Card } from '$lib/components';
-	import { onMount } from 'svelte';
 </script>
 
 <WelcomeSection></WelcomeSection>

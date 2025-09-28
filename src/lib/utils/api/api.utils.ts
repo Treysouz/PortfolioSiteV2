@@ -1,4 +1,3 @@
-import { error } from '@sveltejs/kit';
 import type { PostgrestError } from '@supabase/supabase-js';
 import type { ApiError } from './api.types';
 

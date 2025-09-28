@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { GET } from './+server.js';
-import type { GetParams, Tech } from './tech.types.js';
+import type { GetParams } from './tech.types.js';
 import type { Database } from '$lib/utils/supabase/supabase.types.js';
 
 // Mock data that would come from Supabase
@@ -115,6 +115,34 @@ describe('GET /data/tech', () => {
 
 		expect(result).toStrictEqual(formattedMockTechData);
 		expect(mockEqualQuery).toHaveBeenCalledWith('type', 'Design');
+	});
+
+	it('should apply order filter when sort confiog is provided', async () => {
+		//Mock query resolved value
+		mockOrderQuery.mockResolvedValue({ data: mockTechData, error: null });
+
+		//Mock query return value
+		mockSupabaseQuery.mockReturnValue({
+			order: mockOrderQuery
+		});
+
+		// Mock Request
+		const mockRequest = createMockRequest({
+			sort: {
+				column: 'name',
+				ascending: true
+			}
+		});
+
+		// Response from mock request
+		const response = await GET(mockRequest);
+		// Data from response
+		const result = await response.json();
+
+		expect(result).toStrictEqual(formattedMockTechData);
+		expect(mockOrderQuery).toHaveBeenCalledWith('name', {
+			ascending: true
+		});
 	});
 
 	it('should set proficiency values above 5 to 0', async () => {
