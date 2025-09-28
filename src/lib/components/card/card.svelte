@@ -16,5 +16,7 @@
 	class="rounded-lg bg-black/20 shadow-md backdrop-blur-lg
  {className} "
 	id="card-component">
-	{@render children?.()}
+	{#if children}
+		{@render children()}
+	{/if}
 </article>
