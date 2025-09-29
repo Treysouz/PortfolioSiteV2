@@ -23,7 +23,6 @@ jobs:
     env:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-      VERCEL_PROJECT_ID: ${{secrets.VERCEL_PROJECT_ID}}
     outputs:
       success: ${{ steps.mark-success.outputs.success }}
       coverage-summary: ${{ steps.coverage.outputs.summary }}
@@ -60,7 +59,6 @@ jobs:
 
       - name: Run unit tests with coverage
         run: |
-          echo "Project ID: ${{secrets.VERCEL_PROJECT_ID}}"
           echo "🧪 Running unit tests with coverage..."
           npm run test:unit-coverage
 
@@ -81,8 +79,6 @@ jobs:
 
       - name: Run e2e tests
         run: |
-          echo "Project ID: ${{secrets.VERCEL_PROJECT_ID}}"
-          echo "SUPABASE_URL is: $SUPABASE_URL"
           echo "🖥️ Running e2e tests..."
           npm run test:e2e
 
