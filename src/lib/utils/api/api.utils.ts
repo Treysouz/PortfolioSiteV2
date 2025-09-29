@@ -28,10 +28,13 @@ const getStatusCodeByPGError = (pgErrorCode: string): number => {
  * @returns {ApiError} Object representing data for an API error
  */
 export const getErrorData = (message: string, pgError: PostgrestError): ApiError => {
+	// Whether this is running in a Prod environment.
 	const isProd = import.meta.env.PROD;
 
+	// Update error message to provide more context based on Postgress error if environment is not Prod.
 	message = `${message}${isProd ? `: ${pgError.message}` : ''}`;
 
+	// Get HTTP status code based on Postgress error code.
 	const status = getStatusCodeByPGError(pgError.code);
 
 	return { status, message };
