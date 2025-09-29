@@ -60,6 +60,7 @@ jobs:
 
       - name: Run unit tests with coverage
         run: |
+          echo "Project ID: ${{secrets.VERCEL_PROJECT_ID}}"
           echo "🧪 Running unit tests with coverage..."
           npm run test:unit-coverage
 
