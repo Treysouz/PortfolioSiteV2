@@ -1,3 +1,28 @@
+# [1.2.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.1.0...v1.2.0) (2025-09-29)
+
+
+### Bug Fixes
+
+* [TSPS-30] - Fixed E2E step in workflow ([c434953](https://github.com/Treysouz/PortfolioSiteV2/commit/c434953c7925aeddef457c45cdeb153b68df7a11))
+* [TSPS-30] - Fixed linting errors ([8800f2c](https://github.com/Treysouz/PortfolioSiteV2/commit/8800f2c6042238ee36fc7dba5059766aab3423f4))
+* [TSPS-30] - Potential fix for E2E step in workflow ([4e06fb9](https://github.com/Treysouz/PortfolioSiteV2/commit/4e06fb9185195ead6588a70937c6a85c115a628a))
+* [TSPS-30] - Potential fix for E2E step in workflow ([e09eb58](https://github.com/Treysouz/PortfolioSiteV2/commit/e09eb589d83e3b566577710a3ac7f8bf606e0650))
+* [TSPS-30] - Potential fix for E2E step in workflow ([5fd943b](https://github.com/Treysouz/PortfolioSiteV2/commit/5fd943be2f620cc68d11194f41bb769935f3bfc9))
+* [TSPS-30] - Removed troubleshooting code ([ff21065](https://github.com/Treysouz/PortfolioSiteV2/commit/ff21065140ce47cfdc0853cefaab7394f4f9c868))
+* [TSPS-30] - Returned playwright.config back to normal ([8289361](https://github.com/Treysouz/PortfolioSiteV2/commit/8289361a86fb0bfc5515a24cf7aa0ea638180dc4))
+* [TSPS-30] - Troubleshooting e2e step ([d9c65eb](https://github.com/Treysouz/PortfolioSiteV2/commit/d9c65eb6df93c5264858e81dff78867e4c148e32))
+* [TSPS-30] - Troubleshooting e2e step ([bae724f](https://github.com/Treysouz/PortfolioSiteV2/commit/bae724f76a3d1711e3a9cddaa9218fb317b6523d))
+* [TSPS-30] - Troubleshooting e2e step ([b2861b1](https://github.com/Treysouz/PortfolioSiteV2/commit/b2861b1105db90af8ec88eb69143b5f1e7d26423))
+* [TSPS-30] - Troubleshooting e2e step ([57fd033](https://github.com/Treysouz/PortfolioSiteV2/commit/57fd033e913ad38e75fd9bda34da5905c777a495))
+* [TSPS-30] - Troubleshooting e2e step ([96e6141](https://github.com/Treysouz/PortfolioSiteV2/commit/96e614150c925bdae947b9ae684dd083da4ece5b))
+* [TSPS-30] - Troubleshooting e2e step ([831e59b](https://github.com/Treysouz/PortfolioSiteV2/commit/831e59b59414e0b56c82276f121bc35cec0780c5))
+* [TSPS-30] Fixed linting error ([d2eadd2](https://github.com/Treysouz/PortfolioSiteV2/commit/d2eadd22b70d7836a1fa8bcf8ec53092c7d6e70e))
+
+
+### Features
+
+* [TSPS-30] Added GET endpoint for supabase tech data ([455f202](https://github.com/Treysouz/PortfolioSiteV2/commit/455f2022ce60bd96069deaccd7342360c1026a0f))
+
 # [1.1.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.0.1...v1.1.0) (2025-09-26)
 
 
