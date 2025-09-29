@@ -1,4 +1,4 @@
-import { describe, expect, test, vi, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import Nav from './nav.svelte';
 
@@ -23,7 +23,7 @@ describe('Nav component', () => {
 		vi.restoreAllMocks();
 	});
 
-	test('renders desktop nav when window width is greater than 640px', () => {
+	it('should render desktop nav when window width is greater than 640px', () => {
 		// Mock window width for desktop
 		Object.defineProperty(window, 'innerWidth', {
 			writable: true,
@@ -38,7 +38,7 @@ describe('Nav component', () => {
 		expect(desktopNav).toBeInTheDocument();
 	});
 
-	test('renders mobile nav when window width is 640px or less', () => {
+	it('should render mobile nav when window width is 640px or less', () => {
 		// Mock window width for mobile
 		Object.defineProperty(window, 'innerWidth', {
 			writable: true,
@@ -53,13 +53,13 @@ describe('Nav component', () => {
 		expect(mobileNav).toBeInTheDocument();
 	});
 
-	test('sets up resize event listener on mount', () => {
+	it('should set up resize event listener on mount', () => {
 		render(Nav);
 
 		expect(window.addEventListener).toHaveBeenCalledWith('resize', expect.any(Function));
 	});
 
-	test('cleans up resize event listener on unmount', () => {
+	it('should clean up resize event listener on unmount', () => {
 		const { unmount } = render(Nav);
 
 		unmount();

@@ -46,6 +46,7 @@
 		"globals": "^16.0.0",
 		"husky": "^9.1.7",
 		"jsdom": "^27.0.0",
+		"msw": "^2.11.3",
 		"playwright": "^1.55.0",
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",
@@ -63,6 +64,7 @@
 		"vitest": "^3.2.3"
 	},
 	"dependencies": {
+		"@supabase/supabase-js": "^2.58.0",
 		"@tsparticles/engine": "^3.9.1",
 		"@tsparticles/slim": "^3.9.1"
 	}

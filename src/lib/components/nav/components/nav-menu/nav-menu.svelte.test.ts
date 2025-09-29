@@ -1,4 +1,4 @@
-import { describe, expect, test, vi, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { render } from '@testing-library/svelte';
 import NavMenu from './nav-menu.svelte';
 
@@ -32,7 +32,7 @@ describe('NavMenu component', () => {
 		vi.restoreAllMocks();
 	});
 
-	test('sets up intersection observer with $effect when page loads', () => {
+	it('should set up intersection observer with $effect when page loads', () => {
 		// Mock query selector to return mock sleections.
 		const mockSections = [{ id: 'about' }, { id: 'tech' }, { id: 'projects' }, { id: 'contact' }];
 		mockQuerySelectorAll.mockReturnValue(mockSections);
@@ -51,7 +51,7 @@ describe('NavMenu component', () => {
 		});
 	});
 
-	test('cleans up intersection observer on unmount', () => {
+	it('should clean up intersection observer on unmount', () => {
 		const mockSections = [{ id: 'about' }, { id: 'tech' }];
 		mockQuerySelectorAll.mockReturnValue(mockSections);
 

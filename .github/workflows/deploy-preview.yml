@@ -19,6 +19,7 @@ jobs:
   test:
     name: Run Tests
     uses: ./.github/workflows/testing.yml
+    secrets: inherit
 
   deploy:
     name: Deploy Preview
@@ -51,6 +52,8 @@ jobs:
               comment += `${coverageSummary}\n\n`;
             } else if (testsPassed) {
               comment += `📊 **Test Coverage**: Coverage report not available\n\n`;
+            } else {
+              comment +=  `❌ Test step failed \n\n`
             }
 
             github.rest.issues.createComment({

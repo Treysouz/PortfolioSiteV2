@@ -1,4 +1,4 @@
-import { describe, expect, test, vi, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/svelte';
 import MobileNav from './mobile-nav.svelte';
 
@@ -13,7 +13,7 @@ describe('MobileNav component', () => {
 		vi.restoreAllMocks();
 	});
 
-	test('toggles menu when button is clicked', async () => {
+	it('should toggle menu when button is clicked', async () => {
 		render(MobileNav);
 
 		const menuButton = screen.getByTitle('Open Menu');
@@ -40,13 +40,13 @@ describe('MobileNav component', () => {
 		expect(navMenu).not.toBeVisible();
 	});
 
-	test('sets up click event listener on mount', () => {
+	it('should set up click event listener on mount', () => {
 		render(MobileNav);
 
 		expect(document.addEventListener).toHaveBeenCalledWith('click', expect.any(Function));
 	});
 
-	test('cleans up click event listener on unmount', () => {
+	it('should clean up click event listener on unmount', () => {
 		const { unmount } = render(MobileNav);
 
 		unmount();
@@ -54,7 +54,7 @@ describe('MobileNav component', () => {
 		expect(document.removeEventListener).toHaveBeenCalledWith('click', expect.any(Function));
 	});
 
-	test('closes menu when clicking outside', async () => {
+	it('should close menu when clicking outside', async () => {
 		render(MobileNav);
 
 		const menuButton = screen.getByTitle('Open Menu');

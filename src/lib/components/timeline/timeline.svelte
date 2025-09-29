@@ -7,13 +7,18 @@
 	/** Timeline of professional events*/
 	const history: TimelineEvent[] = [
 		{
-			header: 'Syracuse University',
-			subHeader: 'The College of Arts & Sciences | Bachelors of Arts - Applied Mathematics',
-			endYear: 2017,
-			description: [
-				'Concentration - Probability, Statistics & Complex Analysis',
-				'Minor - Computer Science'
-			],
+			header: 'Fetch Rewards',
+			subHeader: 'Senior Front-End Developer',
+			startYear: 2020,
+			endYear: 2025,
+			description:
+				'Built and enhanced web and mobile applications using React, Svelte, React Native, AWS, and other frameworks and tools.',
+			icon: 'brief-case'
+		},
+		{
+			header: 'Queensborough Community College',
+			subHeader: 'QCC TechWorks | Software Development Program',
+			endYear: 2020,
 			icon: 'academic-cap'
 		},
 		{
@@ -26,19 +31,14 @@
 			icon: 'brief-case'
 		},
 		{
-			header: 'Queensborough Community College',
-			subHeader: 'QCC TechWorks | Software Development Program',
-			endYear: 2020,
+			header: 'Syracuse University',
+			subHeader: 'The College of Arts & Sciences | Bachelors of Arts - Applied Mathematics',
+			endYear: 2017,
+			description: [
+				'Concentration - Probability, Statistics & Complex Analysis',
+				'Minor - Computer Science'
+			],
 			icon: 'academic-cap'
-		},
-		{
-			header: 'Fetch Rewards',
-			subHeader: 'Senior Front-End Developer',
-			startYear: 2020,
-			endYear: 2025,
-			description:
-				'Built and enhanced web and mobile applications using React, Svelte, React Native, AWS, and other frameworks and tools.',
-			icon: 'brief-case'
 		}
 	];
 </script>

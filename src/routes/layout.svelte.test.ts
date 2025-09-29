@@ -1,4 +1,4 @@
-import { describe, expect, test, vi, beforeEach } from 'vitest';
+import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import Layout from './+layout.svelte';
 import { createRawSnippet } from 'svelte';
@@ -33,7 +33,7 @@ describe('+layout.svelte', () => {
 		vi.clearAllMocks();
 	});
 
-	test('renders navbar and main content when particles are loaded', async () => {
+	it('it should render navbar and main content when particles are loaded', async () => {
 		render(Layout, {
 			props: {
 				children: mockSnippet
@@ -49,7 +49,7 @@ describe('+layout.svelte', () => {
 		expect(screen.getByRole('main')).toBeInTheDocument();
 	});
 
-	test('does not render content when particles are not loaded', () => {
+	it('it should not render content when particles are not loaded', () => {
 		// Mock particles failing to load
 		mockLoad.mockRejectedValue('test');
 
