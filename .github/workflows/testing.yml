@@ -79,6 +79,9 @@ jobs:
         run: |
           echo "🖥️ Running e2e tests..."
           npm run test:e2e
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
 
       - name: Generate coverage summary
         id: coverage
