@@ -6,7 +6,7 @@
 
 <Section id="welcome">
 	<div class="flex h-full w-full items-center justify-center">
-		<Card class="animate-fade-in p-8 lg:max-w-2xl 2xl:max-w-5xl">
+		<Card class="animate-fade-in p-4 sm:p-8 lg:max-w-2xl 2xl:max-w-5xl">
 			<h1 class="break-keep text-lg md:text-xl lg:text-3xl 2xl:text-5xl">
 				<span class="whitespace-nowrap"><Greeting></Greeting></span><br /><br /> My name is
 				<span class="text-gradient animate-gradient-move whitespace-nowrap font-bold"

@@ -4,9 +4,10 @@
 
 <Section id="about" header="About Me">
 	<div
-		class="flex h-full w-full grow flex-col justify-between space-x-8 space-y-8 xl:flex-row xl:space-y-0">
-		<Card class="flex w-full grow flex-col justify-between space-y-4  py-8 text-sm md:text-base">
-			<p class="px-8">
+		class="flex h-full w-full grow flex-col justify-between space-x-4 space-y-4 sm:space-x-8 sm:space-y-8 xl:flex-row xl:space-y-0">
+		<Card
+			class="flex w-full grow flex-col justify-between space-y-4 py-4 text-sm sm:py-8 md:text-base">
+			<p class="px-4 sm:px-8">
 				I've been coding in one way or another for over 13 years — from tinkering with Myspace HTML
 				templates and small school projects to building internal tooling for fast-growing companies.
 				For the past 7 years, I've worked as a professional Front-End Developer pushing code for
@@ -46,7 +47,7 @@
 					}}></NavItem>
 			</div>
 		</Card>
-		<Card class="grow p-8 xl:max-w-md 2xl:max-w-2xl">
+		<Card class="grow p-4 sm:p-8 xl:max-w-md 2xl:max-w-2xl">
 			<div class="pl-4 pt-4">
 				<Timeline></Timeline>
 			</div>
