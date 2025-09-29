@@ -8,6 +8,11 @@ on:
         required: false
         default: ''
         type: string
+    secrets:
+      SUPABASE_URL:
+        required: true
+      SUPABASE_KEY:
+        required: true
     outputs:
       tests-passed:
         description: 'Whether all tests passed'
