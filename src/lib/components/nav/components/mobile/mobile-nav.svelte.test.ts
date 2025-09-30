@@ -16,7 +16,7 @@ describe('MobileNav component', () => {
 	it('should toggle menu when button is clicked', async () => {
 		render(MobileNav);
 
-		const menuButton = screen.getByTitle('Open Menu');
+		const menuButton = screen.getByTitle('Open Dropdown');
 
 		expect(menuButton).toHaveAttribute('aria-expanded', 'false');
 
@@ -57,7 +57,7 @@ describe('MobileNav component', () => {
 	it('should close menu when clicking outside', async () => {
 		render(MobileNav);
 
-		const menuButton = screen.getByTitle('Open Menu');
+		const menuButton = screen.getByTitle('Open Dropdown');
 
 		// Open menu
 		await fireEvent.click(menuButton);
