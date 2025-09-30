@@ -33,7 +33,7 @@
 	let detailsElement: HTMLElement;
 
 	/** Accessibility label for toggle button */
-	let toggleLabel: string = $derived(`${open ? 'Close' : 'Open'} Dropdown`);
+	let toggleLabel: string = $derived(`${open ? 'Close' : 'Open'}${label ? ` ${label} ` : ' '}Menu`);
 
 	/**
 	 * Closes the navigation menu.

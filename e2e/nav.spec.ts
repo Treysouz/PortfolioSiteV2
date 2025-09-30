@@ -56,7 +56,7 @@ test.describe('Navigation', () => {
 				await page.waitForSelector('[data-testid="mobile-nav"]');
 
 				// Open mobile menu
-				const menuButton = page.getByTitle('Open Dropdown');
+				const menuButton = page.getByTitle('Open Nav Menu');
 				await menuButton.click();
 				await page.waitForSelector('[role="menu"]', { state: 'visible' });
 

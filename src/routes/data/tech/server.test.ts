@@ -39,8 +39,8 @@ const formattedMockTechData = [
 const mockSupabaseQuery = vi.fn();
 // Mock Test Search Query
 const mockTextSearch = vi.fn();
-// Mock Equal Query
-const mockEqualQuery = vi.fn();
+// Mock Or Query
+const mockOrQuery = vi.fn();
 // Mock Order Query
 const mockOrderQuery = vi.fn();
 
@@ -99,11 +99,11 @@ describe('GET /data/tech', () => {
 
 	it('should apply type filter when type is provided', async () => {
 		//Mock query resolved value
-		mockEqualQuery.mockResolvedValue({ data: mockTechData, error: null });
+		mockOrQuery.mockResolvedValue({ data: mockTechData, error: null });
 
 		//Mock query return value
 		mockSupabaseQuery.mockReturnValue({
-			eq: mockEqualQuery
+			or: mockOrQuery
 		});
 
 		// Mock Request
@@ -114,7 +114,7 @@ describe('GET /data/tech', () => {
 		const result = await response.json();
 
 		expect(result).toStrictEqual(formattedMockTechData);
-		expect(mockEqualQuery).toHaveBeenCalledWith('type', 'Design');
+		expect(mockOrQuery).toHaveBeenCalledWith('type.eq.Design');
 	});
 
 	it('should apply order filter when sort confiog is provided', async () => {
