@@ -17,9 +17,9 @@
 	});
 </script>
 
-<div class="flex w-full flex-row flex-wrap gap-8" role="table">
+<div class="flex w-full flex-row flex-wrap gap-8">
 	{#each table.getRowModel().rows as row (row.id)}
-		<div role="cell" class="shrink-0">
+		<div class="shrink-0">
 			<Card class="size-54 p-4">
 				<figure class="flex h-full w-full flex-col items-center space-y-4">
 					<figcaption class="text-lg font-bold">Test</figcaption>
