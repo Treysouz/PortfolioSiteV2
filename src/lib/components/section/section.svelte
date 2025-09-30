@@ -16,7 +16,7 @@
 	let { children = undefined, class: className = '', header = '', id }: Props = $props();
 </script>
 
-<section {id} class="flex min-h-screen w-full grow items-center p-4 sm:p-8 {className}">
+<section {id} class="flex min-h-full w-full grow items-center p-4 sm:p-8 {className}">
 	<div class="flex h-full w-full flex-col">
 		{#if header}
 			<div class="flex max-w-xl flex-row items-center space-x-4 pb-4 sm:pb-8">

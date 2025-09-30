@@ -107,7 +107,7 @@ describe('GET /data/tech', () => {
 		});
 
 		// Mock Request
-		const mockRequest = createMockRequest({ type: 'Design' });
+		const mockRequest = createMockRequest({ types: ['Design'] });
 		// Response from mock request
 		const response = await GET(mockRequest);
 		// Data from response
@@ -146,13 +146,13 @@ describe('GET /data/tech', () => {
 	});
 
 	it('should set proficiency values above 5 to 0', async () => {
-		const tooHighProficiencyMockEntitiy: Database['public']['Tables']['Tech']['Row'] = {
+		const tooHighProficiencyMockEntity: Database['public']['Tables']['Tech']['Row'] = {
 			...mockTechData[0],
 			proficiency: 7
 		};
 
 		//Mock query resolved value
-		mockSupabaseQuery.mockResolvedValue({ data: [tooHighProficiencyMockEntitiy], error: null });
+		mockSupabaseQuery.mockResolvedValue({ data: [tooHighProficiencyMockEntity], error: null });
 
 		// Mock Request
 		const mockRequest = createMockRequest({});
@@ -165,13 +165,13 @@ describe('GET /data/tech', () => {
 	});
 
 	it('should set proficiency values below 0 to 0', async () => {
-		const tooLowProficiencyMockEntitiy: Database['public']['Tables']['Tech']['Row'] = {
+		const tooLowProficiencyMockEntity: Database['public']['Tables']['Tech']['Row'] = {
 			...mockTechData[0],
 			proficiency: -7
 		};
 
 		//Mock query resolved value
-		mockSupabaseQuery.mockResolvedValue({ data: [tooLowProficiencyMockEntitiy], error: null });
+		mockSupabaseQuery.mockResolvedValue({ data: [tooLowProficiencyMockEntity], error: null });
 
 		// Mock Request
 		const mockRequest = createMockRequest({});

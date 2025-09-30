@@ -22,7 +22,7 @@ export interface SortConfig {
 /** Expected URL params for GET endpoint*/
 export interface GetParams {
 	/** Type of tech to filter by */
-	type?: TechType;
+	types?: TechType[];
 	/** Text to filter data by */
 	value?: string;
 	/** Config for sorting tech*/

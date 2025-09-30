@@ -5,7 +5,7 @@ import { getErrorData } from '$lib/utils/api';
 import type { GetParams, Tech } from './tech.types.js';
 
 export const GET = async (request) => {
-	const { value, type, sort }: GetParams = request.params;
+	const { value, types, sort }: GetParams = request.params;
 
 	let query = supabase.from('Tech').select('*');
 
@@ -13,8 +13,12 @@ export const GET = async (request) => {
 		query = query.textSearch('name', value || '');
 	}
 
-	if (type) {
-		query = query.eq('type', type);
+	if (types) {
+		let orQuery = '';
+		types.forEach((type) => {
+			orQuery += `type.eq.${type}`;
+		});
+		query = query.or(orQuery);
 	}
 
 	if (sort) {

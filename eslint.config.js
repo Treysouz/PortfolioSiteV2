@@ -18,6 +18,9 @@ export default defineConfig(
 	prettier,
 	...svelte.configs.prettier,
 	{
+		ignores: ['src/lib/utils/table/table.utils.svelte.ts']
+	},
+	{
 		languageOptions: {
 			globals: { ...globals.browser, ...globals.node }
 		},

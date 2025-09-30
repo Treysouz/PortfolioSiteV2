@@ -2,6 +2,7 @@
 	import NavItem from './nav-item.svelte';
 	import { page } from '$app/state';
 	import type { NavItemConfig, NavVarient, NavItemOrientation } from '../../nav.types';
+	import { onMount } from 'svelte';
 
 	/** Group of nav item components. */
 	interface Props {
@@ -15,7 +16,7 @@
 	let { onItemClick = undefined, class: className = '', varient = 'desktop' }: Props = $props();
 
 	/** The section of the page currently in view. */
-	let activeSection: string = $state('welcome');
+	let activeSection: string = $state('');
 
 	/** Whether to render the icon and text vertically or horizontally */
 	let orientation: NavItemOrientation = $derived(varient === 'desktop' ? 'vertical' : 'horizontal');
@@ -83,8 +84,6 @@
 				if (element.isIntersecting) {
 					// Update actionSection with section in view
 					activeSection = element.target.id;
-					// Update URL hash without triggering navigation
-					history.replaceState(null, '', `#${element.target.id}`);
 				}
 			});
 		}, observerOptions);
@@ -95,11 +94,23 @@
 		return { observer, pageSections };
 	};
 
+	/** On mount, make sure we scroll to the hash in the url before initiating any observers*/
+	onMount(() => {
+		activeSection = window.location.hash ? window.location.hash.slice(1) : '';
+		if (window?.location.hash) {
+			const targetId = window.location.hash.slice(1);
+			const targetElement = document.getElementById(targetId);
+
+			if (targetElement) {
+				targetElement.scrollIntoView({ behavior: 'smooth' });
+			}
+		}
+	});
+
 	/** When page route updates, initiate a new observer */
 	$effect(() => {
 		if (page.route.id) {
 			const { observer, pageSections } = initiateObserver();
-
 			// Stop observing old sections
 			return () => {
 				pageSections.forEach((section) => observer.unobserve(section));

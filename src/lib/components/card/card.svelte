@@ -13,7 +13,7 @@
 </script>
 
 <article
-	class="rounded-lg bg-black/20 shadow-md backdrop-blur-lg
+	class="animate-fade-in rounded-lg bg-black/20 shadow-md backdrop-blur-lg
  {className} "
 	id="card-component">
 	{#if children}

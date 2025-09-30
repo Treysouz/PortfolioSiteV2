@@ -9,13 +9,3 @@
 	background-clip: text;
 	color: transparent;
 }
-
-// Hide arrow glyph for details/summary dropdown.
-nav {
-	details > summary {
-		list-style: none;
-		::-webkit-details-marker {
-			display: none;
-		}
-	}
-}
