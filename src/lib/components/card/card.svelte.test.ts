@@ -15,7 +15,7 @@ describe('Card component', () => {
 			children: mockSnippet
 		});
 
-		expect(screen.getByRole('article')).toBeDefined();
+		expect(screen.getByTestId('card')).toBeDefined();
 	});
 
 	it("should render with appropriate class when component's class is defined", () => {
@@ -24,7 +24,7 @@ describe('Card component', () => {
 			children: mockSnippet
 		});
 
-		const card = screen.getByRole('article');
+		const card = screen.getByTestId('card');
 
 		expect(card?.className).toContain('custom-class');
 	});
@@ -32,7 +32,7 @@ describe('Card component', () => {
 	it('should render without children', () => {
 		const screen = render(Card);
 
-		const card = screen.getByRole('article');
+		const card = screen.getByTestId('card');
 
 		expect(card?.textContent).toBe('');
 	});
