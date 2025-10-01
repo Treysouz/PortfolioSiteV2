@@ -6,12 +6,13 @@
 	import type { Row } from '@tanstack/table-core';
 
 	interface Props {
+		label: string;
 		data: Entity[];
 		columns: ColumnDef<Entity>[];
 		tableItem: Snippet<[Row<Entity>]>;
 	}
 
-	let { data, columns, tableItem }: Props = $props();
+	let { data, columns, tableItem, label }: Props = $props();
 
 	const table = createSvelteTable({
 		data,
@@ -43,9 +44,17 @@
 				placeholder="Select an order"></Combobox>
 		</div>
 	</div> -->
-	<div class="flex h-full w-full flex-row flex-wrap justify-center gap-4 overflow-auto sm:gap-8">
+
+	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+	<div
+		class="flex h-full w-full flex-row flex-wrap justify-center gap-4 overflow-auto sm:gap-8"
+		role="list"
+		aria-label={label}
+		tabindex="0">
 		{#each table.getRowModel().rows as row (row.id)}
-			{@render tableItem(row)}
+			<div role="listitem">
+				{@render tableItem(row)}
+			</div>
 		{/each}
 	</div>
 </div>

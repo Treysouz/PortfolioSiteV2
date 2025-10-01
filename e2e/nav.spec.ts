@@ -24,10 +24,6 @@ test.describe('Navigation', () => {
 			href: '/#projects'
 		},
 		{
-			text: 'Contact Me',
-			href: '/#contact'
-		},
-		{
 			text: 'Settings',
 			href: '/settings'
 		}
