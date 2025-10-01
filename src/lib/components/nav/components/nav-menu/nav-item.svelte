@@ -51,7 +51,7 @@
 	/** Additional classes to set for nav item text based on nav item orientation and whether it is active*/
 	let itemTextClasses = $derived(
 		`${
-			isActive ? 'text-gradient animate-gradient-move' : ''
+			isActive ? 'text-gradient animate-gradient-move ' : ''
 		} ${orientation === 'vertical' ? '' : 'pt-1'}`
 	);
 </script>
@@ -59,7 +59,7 @@
 <a
 	{onclick}
 	{...anchorProps}
-	class="hover:bg-secondary/50 flex items-center justify-center font-bold text-white {className}">
+	class="hover:bg-secondary/25 flex items-center justify-center font-bold text-white {className}">
 	<div class="flex items-center {linkWrapperClasses}">
 		<IconWrapper class="text-primary {iconBgClasses}">
 			<Icon {svg} class={iconClasses}></Icon>

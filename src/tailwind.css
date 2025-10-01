@@ -16,7 +16,7 @@
 	--animate-slide-right: slide-right 0.6s ease-out forwards;
 	--animate-fade-in: fade-in 0.6s ease-out forwards;
 	--animate-bounce-in: bounce-in 1.5s ease-out forwards;
-	--animate-gradient-move: gradient-move 16s linear infinite;
+	/* --animate-gradient-move: gradient-move 16s linear infinite; */
 	--animate-tile-raise: tile-raise 0.3s ease-out forwards;
 }
 

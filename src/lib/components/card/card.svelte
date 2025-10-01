@@ -12,11 +12,11 @@
 	let { children = undefined, class: className = '' }: Props = $props();
 </script>
 
-<article
-	class="rounded-lg bg-black/20 shadow-md backdrop-blur-lg
- {className} "
-	id="card-component">
+<div
+	data-testid="card"
+	class="animate-fade-in rounded-lg bg-black/25 shadow-md backdrop-blur-lg
+ {className}">
 	{#if children}
 		{@render children()}
 	{/if}
-</article>
+</div>

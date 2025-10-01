@@ -45,6 +45,8 @@
 						target: '_blank',
 						rel: 'noopener'
 					}}></NavItem>
+				<span>Contact</span>
+				<span>Resume</span>
 			</div>
 		</Card>
 		<Card class="grow p-4 sm:p-8 xl:max-w-md 2xl:max-w-2xl">

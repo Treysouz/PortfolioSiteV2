@@ -24,10 +24,6 @@ test.describe('Navigation', () => {
 			href: '/#projects'
 		},
 		{
-			text: 'Contact Me',
-			href: '/#contact'
-		},
-		{
 			text: 'Settings',
 			href: '/settings'
 		}
@@ -56,7 +52,7 @@ test.describe('Navigation', () => {
 				await page.waitForSelector('[data-testid="mobile-nav"]');
 
 				// Open mobile menu
-				const menuButton = page.getByTitle('Open Menu');
+				const menuButton = page.getByTitle('Open Nav Menu');
 				await menuButton.click();
 				await page.waitForSelector('[role="menu"]', { state: 'visible' });
 
