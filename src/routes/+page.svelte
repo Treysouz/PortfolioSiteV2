@@ -3,7 +3,9 @@
 	import { Card } from '$lib/components';
 </script>
 
-<WelcomeSection></WelcomeSection>
+<header class="h-full">
+	<WelcomeSection></WelcomeSection>
+</header>
 
 <AboutSection></AboutSection>
 
@@ -18,11 +20,4 @@
 	</div>
 </section>
 
-<section id="contact" class="z-10 flex h-full w-full grow items-center justify-center px-12 py-8">
-	<div class="flex h-full w-full flex-col space-y-8">
-		<Card class="w-min">
-			<h2 class=" whitespace-nowrap text-3xl font-bold">Contact Me</h2>
-		</Card>
-		<Card class="grow"></Card>
-	</div>
-</section>
+<footer><!--Credits. Built by...icons from..etc.--></footer>

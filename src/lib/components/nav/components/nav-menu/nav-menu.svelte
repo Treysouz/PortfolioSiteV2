@@ -48,12 +48,6 @@
 			sectionId: 'projects'
 		},
 		{
-			svg: 'envelope',
-			text: 'Contact Me',
-			href: '/#contact',
-			sectionId: 'contact'
-		},
-		{
 			svg: 'cog',
 			text: 'Settings',
 			href: '/settings',

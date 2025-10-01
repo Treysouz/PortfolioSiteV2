@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Section, Textbox, Combobox, Table } from '$lib/components';
+	import { Section, Card, Table, Icon } from '$lib/components';
 	import type { ColumnDef } from '@tanstack/table-core';
 
 	/** Section to show tech experience of developer. */
@@ -9,10 +9,7 @@
 		age: number;
 	}
 
-	let data: Person[] = $state([
-		{ name: 'John', age: 30 },
-		{ name: 'Jane', age: 25 }
-	]);
+	let data: Person[] = Array.from({ length: 24 }, (_, i) => ({ name: 'John', age: 30 }));
 
 	const columns: ColumnDef<Person>[] = [
 		{ accessorKey: 'name', header: 'Name' },
@@ -20,27 +17,25 @@
 	];
 </script>
 
-<Section id="tech" header="Tech Stack">
-	<div class="flex h-full w-full flex-col items-center justify-center space-y-8">
-		<div class="flex w-full flex-row space-x-8">
-			<Textbox type="search" class="w-xl bg-black/50" placeholder="Search for tech"></Textbox>
-			<Combobox
-				label="Name"
-				options={data}
-				idKey="name"
-				searchKey="name"
-				class="w-xs h-10"
-				multiple
-				enableSearch
-				placeholder="Select a type"></Combobox>
-			<Combobox
-				label="Name"
-				options={data}
-				idKey="name"
-				searchKey="name"
-				class="w-xs h-10"
-				placeholder="Select an order"></Combobox>
-		</div>
-		<Table {data} {columns}></Table>
-	</div>
+<Section id="tech" header="Tech Stack" class="h-full">
+	<Table {data} {columns}>
+		{#snippet tableItem()}
+			<Card class="size-38 p-2 sm:size-52 sm:p-4">
+				<figure class="flex h-full w-full flex-col items-center space-y-2 sm:space-y-4">
+					<figcaption class="text-lg font-bold">Test</figcaption>
+					<img
+						class="size-16 bg-red-100 object-contain sm:size-20"
+						alt="cat"
+						src="https://png.pngtree.com/png-clipart/20230511/ourmid/pngtree-isolated-cat-on-white-background-png-image_7094927.png" />
+					<div class="flex flex-row">
+						<Icon svg="star-filled" class="size-6"></Icon><Icon svg="star-outline" class="size-6"
+						></Icon
+						><Icon svg="star-outline" class="size-6"></Icon><Icon svg="star-outline" class="size-6"
+						></Icon>
+						<Icon svg="star-outline" class="size-6"></Icon>
+					</div>
+				</figure>
+			</Card>
+		{/snippet}
+	</Table>
 </Section>

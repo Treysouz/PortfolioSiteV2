@@ -141,17 +141,18 @@
 	aria-expanded={open}
 	aria-controls="combobox-menu"
 	aria-haspopup="listbox"
-	aria-label={label}>
+	aria-label={label}
+	class={className}>
 	<Dropdown
 		{label}
 		bind:open
-		class={className}
+		class="h-full w-full"
 		onkeydown={handleKeydown}
 		toggleClass="rounded-lg outline-none focus:ring-emphasis focus:ring-1">
 		{#snippet toggle()}
 			<div
 				data-testid="selected-options"
-				class="flex h-full w-full flex-row items-center justify-between rounded-lg bg-black/50 px-2 py-4 shadow-lg backdrop-blur-lg"
+				class="flex h-full w-full flex-row items-center justify-between rounded-lg bg-black/75 px-2 py-4 shadow-lg backdrop-blur-lg"
 				class:ring-emphasis={open}
 				class:ring-1={open}>
 				{#if Array.isArray(value) && value.length && multiple}
@@ -181,7 +182,7 @@
 		{/snippet}
 		{#snippet menu()}
 			<div class="relative flex h-0 justify-center">
-				<Card class="absolute top-4 w-full overflow-hidden bg-black/50 text-white shadow-lg">
+				<Card class="absolute top-4 z-10 w-full overflow-hidden bg-black/75 text-white shadow-lg">
 					<div class="p-4" class:hidden={!enableSearch}>
 						<Textbox
 							aria-label={`Search ${label}`}
@@ -223,7 +224,7 @@
 										name={optionName}
 										value={option} />
 									<div
-										class="hover:bg-secondary/25 peer-checked:bg-secondary/50 w-full cursor-pointer border-l-4 border-transparent px-4 py-2 peer-checked:border-white">
+										class="hover:bg-secondary/25 peer-checked:bg-secondary/75 w-full cursor-pointer border-l-4 border-transparent px-4 py-2 peer-checked:border-white">
 										{optionName}
 									</div></label>
 							</li>

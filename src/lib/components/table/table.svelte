@@ -1,14 +1,17 @@
 <script lang="ts" generics="Entity">
 	import { createSvelteTable } from '$lib/utils/table/table.utils.svelte';
-	import { Card, Icon } from '$lib/components';
+	// import { Textbox, Combobox } from '$lib/components';
 	import { getCoreRowModel, type ColumnDef } from '@tanstack/table-core';
+	import type { Snippet } from 'svelte';
+	import type { Row } from '@tanstack/table-core';
 
 	interface Props {
 		data: Entity[];
 		columns: ColumnDef<Entity>[];
+		tableItem: Snippet<[Row<Entity>]>;
 	}
 
-	let { data, columns }: Props = $props();
+	let { data, columns, tableItem }: Props = $props();
 
 	const table = createSvelteTable({
 		data,
@@ -17,25 +20,32 @@
 	});
 </script>
 
-<div class="flex w-full flex-row flex-wrap gap-8">
-	{#each table.getRowModel().rows as row (row.id)}
-		<div class="shrink-0">
-			<Card class="size-54 p-4">
-				<figure class="flex h-full w-full flex-col items-center space-y-4">
-					<figcaption class="text-lg font-bold">Test</figcaption>
-					<img
-						class="size-24 bg-red-100 object-contain"
-						alt="cat"
-						src="https://png.pngtree.com/png-clipart/20230511/ourmid/pngtree-isolated-cat-on-white-background-png-image_7094927.png" />
-					<div class="flex flex-row">
-						<Icon svg="star-filled" class="size-6"></Icon><Icon svg="star-outline" class="size-6"
-						></Icon
-						><Icon svg="star-outline" class="size-6"></Icon><Icon svg="star-outline" class="size-6"
-						></Icon>
-						<Icon svg="star-outline" class="size-6"></Icon>
-					</div>
-				</figure>
-			</Card>
+<div class="flex h-full min-h-0 flex-col space-y-4 sm:space-y-8">
+	<!-- <div class="z-10 flex w-full flex-row flex-wrap gap-4 sm:gap-8 xl:flex-nowrap">
+		<Textbox type="search" class="w-full bg-black/75 md:max-w-lg" placeholder="Search for tech"
+		></Textbox>
+		<div class="flex w-full flex-row flex-wrap gap-4 sm:gap-8 md:flex-nowrap">
+			<Combobox
+				label="Name"
+				options={data}
+				idKey="name"
+				searchKey="name"
+				class="md:w-xs h-10 w-full"
+				multiple
+				enableSearch
+				placeholder="Select a type"></Combobox>
+			<Combobox
+				label="Name"
+				options={data}
+				idKey="name"
+				searchKey="name"
+				class="md:w-xs h-10 w-full"
+				placeholder="Select an order"></Combobox>
 		</div>
-	{/each}
+	</div> -->
+	<div class="flex h-full w-full flex-row flex-wrap justify-center gap-4 overflow-auto sm:gap-8">
+		{#each table.getRowModel().rows as row (row.id)}
+			{@render tableItem(row)}
+		{/each}
+	</div>
 </div>

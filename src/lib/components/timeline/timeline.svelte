@@ -55,9 +55,9 @@
 				>{event.startYear ? `${event.startYear} - ` : ''} {event.endYear}</span>
 
 			{#if typeof event.description === 'string'}
-				<p class="text-xs tracking-widest">{event.description}</p>
+				<p>{event.description}</p>
 			{:else if event.description}
-				<ul class="list-disc pl-4 text-xs tracking-widest">
+				<ul class="list-disc pl-4">
 					{#each event.description as item, index (index)}
 						<li>{item}</li>
 					{/each}

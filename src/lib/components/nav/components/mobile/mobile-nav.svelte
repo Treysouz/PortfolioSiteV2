@@ -12,7 +12,7 @@
 </script>
 
 <nav
-	class="animate-slide-down fixed z-50 flex w-screen items-center justify-between bg-black/20 shadow-md backdrop-blur-lg will-change-transform"
+	class="animate-slide-down fixed z-50 flex w-screen items-center justify-between bg-black/25 shadow-md backdrop-blur-lg will-change-transform"
 	data-testid="mobile-nav">
 	<Dropdown label="Nav" class="w-full" bind:open={openMenu}>
 		{#snippet toggle()}
