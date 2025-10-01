@@ -1,3 +1,17 @@
+# [1.3.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.2.0...v1.3.0) (2025-10-01)
+
+
+### Bug Fixes
+
+* [TSPS-33] - Fixed e2e tests ([8eb2b70](https://github.com/Treysouz/PortfolioSiteV2/commit/8eb2b70d0f20948a4de29fe505fb90dd7d260766))
+* [TSPS-33] - Fixed unit tests ([0426527](https://github.com/Treysouz/PortfolioSiteV2/commit/0426527c11fe7ec09c05f370107d3335dfee81cb))
+* [TSPS-33] - Fixed unit tests ([73ca249](https://github.com/Treysouz/PortfolioSiteV2/commit/73ca249f85741eec8917e446515d1d72d6ecee7c))
+
+
+### Features
+
+* [TSPS-33] - Added new Combobo, Textbox, and Dropdown components.  Started table component. ([fe6258d](https://github.com/Treysouz/PortfolioSiteV2/commit/fe6258dfefaef4a7bc8ab76062f62865ef609d65))
+
 # [1.2.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.1.0...v1.2.0) (2025-09-29)
 
 
