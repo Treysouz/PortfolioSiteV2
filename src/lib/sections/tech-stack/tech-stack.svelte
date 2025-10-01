@@ -9,7 +9,7 @@
 		age: number;
 	}
 
-	let data: Person[] = Array.from({ length: 24 }, (_, i) => ({ name: 'John', age: 30 }));
+	let data: Person[] = Array.from({ length: 24 }, () => ({ name: 'John', age: 30 }));
 
 	const columns: ColumnDef<Person>[] = [
 		{ accessorKey: 'name', header: 'Name' },
