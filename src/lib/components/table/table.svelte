@@ -1,26 +1,27 @@
 <script lang="ts" generics="Entity">
 	/** Table Component */
 	import { createSvelteTable } from '$lib/utils/tanstack/table.utils.svelte';
-	import { Textbox, Combobox } from '$lib/components';
+	import { Textbox, Combobox, IconWrapper } from '$lib/components';
 	import NoResults from './components/no-results.svelte';
 	import type { Snippet } from 'svelte';
 	import type { Row, TableOptions, Column } from '@tanstack/table-core';
 	import type { FormEventHandler } from 'svelte/elements';
+	import Card from '../card/card.svelte';
 
 	interface Props {
 		/** Accessible label for the table */
 		label: string;
-		/** Array of data entities to display */
-		data?: Entity[];
-		/** Whether data is currently loading */
-		loading?: boolean;
 		/** TanStack Table configuration options */
 		options: TableOptions<Entity>;
 		/** Snippet for rendering individual table rows */
 		tableItem: Snippet<[Row<Entity>]>;
+		/** Array of data entities to display */
+		data?: Entity[];
+		/** Whether data is currently loading */
+		loading?: boolean;
 	}
 
-	let { data = undefined, options, tableItem, label, loading = false }: Props = $props();
+	let { options, tableItem, label, loading = false, data = undefined }: Props = $props();
 
 	const updateGlobalFilter: FormEventHandler<HTMLInputElement> = (event) => {
 		if (event.target && 'value' in event.target) {
@@ -37,7 +38,7 @@
 </script>
 
 <div class="flex h-full min-h-0 flex-col space-y-4 sm:space-y-8">
-	<div class="z-10 flex w-full flex-row flex-wrap gap-4 sm:gap-8 xl:flex-nowrap">
+	<div class="z-10 flex w-full flex-row flex-wrap items-center gap-4 sm:gap-8 xl:flex-nowrap">
 		<Textbox
 			name={label}
 			type="search"

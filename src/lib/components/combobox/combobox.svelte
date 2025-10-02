@@ -178,9 +178,9 @@
 		bind:open
 		class="h-full w-full"
 		onkeydown={handleKeydown}
-		toggleClass="input bg-black/25 shadow-lg backdrop-blur-lg focus-within:outline-accent focus-within:outline-1 focus-within:outline-offset-0 h-10 {open
+		toggleClass="input bg-black/25 shadow-lg backdrop-blur-lg focus-within:outline-accent outline-1! focus-within:outline-offset-0 h-10 {open
 			? 'outline-accent outline-1'
-			: ''}">
+			: 'outline-black/50'}">
 		{#snippet toggle()}
 			<div
 				data-testid="selected-options"
@@ -212,7 +212,7 @@
 		{/snippet}
 		{#snippet menu()}
 			<div class="relative flex h-0 justify-center">
-				<Card class="absolute top-4 z-10 w-full overflow-hidden bg-black/25 text-white shadow-lg">
+				<Card class="absolute top-4 z-10 w-full overflow-hidden bg-black/50 text-white shadow-lg">
 					<div class="p-4" class:hidden={!enableSearch}>
 						<Textbox
 							name={label}

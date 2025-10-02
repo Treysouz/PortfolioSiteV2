@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { Section, Card, Table, Icon } from '$lib/components';
+	import { Section, Table, Card } from '$lib/components';
 	import { useQueryClient } from '@tanstack/svelte-query';
 	import { queryTechData } from '$lib/utils/tech';
+	import TechCard from './components/tech-card.svelte';
 	import {
 		getCoreRowModel,
 		type ColumnDef,
@@ -52,7 +53,7 @@
 	const queryData = async (searchValue?: string, columnFilters?: ColumnFiltersState) => {
 		loading = true;
 		try {
-			const techTypeFilterState = columnFilterState.find((f) => f.id === 'type');
+			const techTypeFilterState = columnFilters?.find((f) => f.id === 'type');
 
 			const filterValue: TechTypeOption[] | undefined =
 				techTypeFilterState?.value as TechTypeOption[];
@@ -131,24 +132,15 @@
 </script>
 
 <Section id="tech" header="Tech Stack" class="h-full">
-	<Table {data} {options} {loading} label="Tech List">
-		{#snippet tableItem(row)}
-			{@const { name, imgUrl, proficiency } = row.original}
-			<Card class="size-45 flex items-center justify-center p-2 sm:p-4">
-				<div class="flex flex-col items-center justify-around space-y-2 sm:space-y-4">
-					<span class="text-center text-lg font-bold">{name}</span>
-					<div class="flex flex-row">
-						{#each Array(5) as _, index (index)}
-							<Icon
-								svg={index + 1 <= (proficiency || 0) ? 'star-filled' : 'star-outline'}
-								class="size-4"></Icon>
-						{/each}
-					</div>
-					<div>
-						<img class="size-16 object-contain sm:size-16" loading="lazy" alt={name} src={imgUrl} />
-					</div>
-				</div>
-			</Card>
-		{/snippet}
-	</Table>
+	<div class="flex h-full min-h-0 flex-col space-y-4 sm:space-y-8">
+		<p class="text-shadow-lg text-sm md:text-base">
+			A collection of technologies and services I've worked with, with stars showing my level of
+			proficiency.
+		</p>
+		<Table {data} {options} {loading} label="Tech List">
+			{#snippet tableItem(row)}
+				<TechCard tech={row.original}></TechCard>
+			{/snippet}
+		</Table>
+	</div>
 </Section>
