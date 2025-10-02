@@ -41,7 +41,7 @@ describe('Combobox component', () => {
 				options: mockOptions,
 				searchKey: 'name',
 				idKey: 'id',
-				value: mockOptions[0]
+				value: [mockOptions[0]]
 			});
 
 			const selectedOptions = screen.getByTestId('selected-options');
@@ -70,7 +70,7 @@ describe('Combobox component', () => {
 				options: mockOptions,
 				searchKey: 'name',
 				idKey: 'id',
-				value: mockOptions[0]
+				value: [mockOptions[0]]
 			});
 
 			const clearButton = screen.getByLabelText('Clear selection');
@@ -117,7 +117,7 @@ describe('Combobox component', () => {
 				options: mockOptions,
 				searchKey: 'name',
 				idKey: 'id',
-				value: mockOptions[0]
+				value: [mockOptions[0]]
 			});
 
 			const clearButton = screen.getByLabelText('Clear selection');

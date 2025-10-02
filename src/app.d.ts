@@ -11,18 +11,18 @@ declare global {
 }
 
 declare module '@tanstack/table-core' {
-	interface FilterConfig<Entity> {
+	interface FilterConfig<T extends Record<string, unkonwn>> {
 		filterType: 'select' | 'multi-select';
 		label: string;
-		data: Entity[];
-		searchkey: keyof Entity;
-		idKey: keyof Entity;
+		data: T[];
+		searchkey: keyof T;
+		idKey: keyof T;
 		multiple?: boolean;
 		placeholder?: string;
 	}
 
 	interface ColumnMeta {
-		filterConfig?: FilterConfig<Entity>;
+		filterConfig?: FilterConfig<T>;
 	}
 }
 

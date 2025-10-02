@@ -4,7 +4,7 @@
 	import { Textbox, Combobox } from '$lib/components';
 	import NoResults from './components/no-results.svelte';
 	import type { Snippet } from 'svelte';
-	import type { Row, TableOptions } from '@tanstack/table-core';
+	import type { Row, TableOptions, Column } from '@tanstack/table-core';
 	import type { FormEventHandler } from 'svelte/elements';
 
 	interface Props {
@@ -26,6 +26,10 @@
 		if (event.target && 'value' in event.target) {
 			table.setGlobalFilter(event.target?.value);
 		}
+	};
+
+	const updateFilter = <TFilterData,>(column: Column<Entity, unknown>, value?: TFilterData[]) => {
+		column.setFilterValue(value);
 	};
 
 	let table = $derived(createSvelteTable(options));
@@ -54,7 +58,10 @@
 						class="md:w-xs h-10 w-full"
 						multiple={filterConfig.multiple}
 						enableSearch
-						placeholder={filterConfig.placeholder}></Combobox>
+						placeholder={filterConfig.placeholder}
+						onselect={(value) => {
+							updateFilter(column, value);
+						}}></Combobox>
 				{/if}
 			{/each}
 		</div>
