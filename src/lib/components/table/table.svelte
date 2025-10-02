@@ -1,12 +1,11 @@
 <script lang="ts" generics="Entity">
 	/** Table Component */
 	import { createSvelteTable } from '$lib/utils/tanstack/table.utils.svelte';
-	import { Textbox, Combobox, IconWrapper } from '$lib/components';
+	import { Textbox, Combobox } from '$lib/components';
 	import NoResults from './components/no-results.svelte';
 	import type { Snippet } from 'svelte';
 	import type { Row, TableOptions, Column } from '@tanstack/table-core';
 	import type { FormEventHandler } from 'svelte/elements';
-	import Card from '../card/card.svelte';
 
 	interface Props {
 		/** Accessible label for the table */

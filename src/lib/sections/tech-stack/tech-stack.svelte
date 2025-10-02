@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Section, Table, Card } from '$lib/components';
+	import { Section, Table } from '$lib/components';
 	import { useQueryClient } from '@tanstack/svelte-query';
 	import { queryTechData } from '$lib/utils/tech';
 	import TechCard from './components/tech-card.svelte';
