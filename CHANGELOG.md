@@ -1,3 +1,11 @@
+# [1.5.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.4.0...v1.5.0) (2025-10-02)
+
+
+### Features
+
+* [TSPS-35] - Updated Textbox unit tests ([cb70615](https://github.com/Treysouz/PortfolioSiteV2/commit/cb70615b8f7bc92924a7a386c00a30e1e78b5b88))
+* [TSPS-35] Added debounce to textbox component ([f5993d9](https://github.com/Treysouz/PortfolioSiteV2/commit/f5993d966d80f1a2c1d894ab7a041e5b5e4abf8f))
+
 # [1.4.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.3.0...v1.4.0) (2025-10-02)
 
 
