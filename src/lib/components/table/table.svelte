@@ -23,7 +23,9 @@
 	let { data = undefined, options, tableItem, label, loading = false }: Props = $props();
 
 	const updateGlobalFilter: FormEventHandler<HTMLInputElement> = (event) => {
-		table.setGlobalFilter(event.currentTarget.value);
+		if (event.target && 'value' in event.target) {
+			table.setGlobalFilter(event.target?.value);
+		}
 	};
 
 	let table = $derived(createSvelteTable(options));
@@ -37,6 +39,7 @@
 			type="search"
 			class="w-full md:max-w-lg"
 			placeholder="Search for tech"
+			debounce={500}
 			oninput={updateGlobalFilter}></Textbox>
 		<div class="flex w-full flex-row flex-wrap gap-4 sm:gap-8 md:flex-nowrap">
 			{#each columns as column (column.id)}

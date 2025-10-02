@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Icon from '../icon/icon.svelte';
 	import type { Snippet } from 'svelte';
-	import type { HTMLInputAttributes } from 'svelte/elements';
+	import type { FormEventHandler, HTMLInputAttributes } from 'svelte/elements';
 
 	/** Text Box component. */
 	interface Props extends HTMLInputAttributes {
@@ -17,6 +17,8 @@
 		class?: string;
 		/** Text size*/
 		textSize?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl';
+		/** Debounce delay in milliseconds for oninput event */
+		debounce?: number;
 	}
 
 	let {
@@ -27,15 +29,38 @@
 		boxSuffix = undefined,
 		class: className = '',
 		textSize = 'sm',
+		debounce = 0,
+		oninput,
 		...props
 	}: Props = $props();
 
 	/** Reference to input element*/
 	let inputElement: HTMLInputElement;
 
+	/** Timeout ID for debouncing */
+	let debounceTimeout: ReturnType<typeof setTimeout> | undefined;
+
 	/** Focuses input element when called*/
 	export const focusInput = () => {
 		inputElement?.focus();
+	};
+
+	/**
+	 * Handles input events with optional debouncing
+	 * @param event - The input event
+	 */
+	const handleInput: FormEventHandler<HTMLInputElement> = (event) => {
+		if (debounceTimeout) {
+			clearTimeout(debounceTimeout);
+		}
+
+		if (debounce > 0) {
+			debounceTimeout = setTimeout(() => {
+				oninput?.(event);
+			}, debounce);
+		} else {
+			oninput?.(event);
+		}
 	};
 </script>
 
@@ -55,6 +80,7 @@
 		{name}
 		{...props}
 		bind:value
+		oninput={handleInput}
 		class="w-full bg-transparent placeholder-gray-400 ring-0 text-{textSize}"
 		bind:this={inputElement} />
 	{#if boxSuffix}
