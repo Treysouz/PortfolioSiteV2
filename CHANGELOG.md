@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.3.0...v1.4.0) (2025-10-02)
+
+
+### Features
+
+* [TSPS-28] - Added caching to API requests ([c2b679f](https://github.com/Treysouz/PortfolioSiteV2/commit/c2b679f0186753b6b0210be0ea4566f90f42e0e8))
+
 # [1.3.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.2.0...v1.3.0) (2025-10-01)
 
 
