@@ -1,5 +1,5 @@
 import type { PostgrestError } from '@supabase/supabase-js';
-import type { ApiError, QueryOptions } from './api.types';
+import type { ApiError, QueryOptions } from '../../types/api.types';
 
 /**
  * Maps PostgreSQL error codes to appropriate HTTP status codes
