@@ -30,40 +30,27 @@
 		orientation = 'vertical',
 		class: className = ''
 	}: Props = $props();
-
-	/** Additional classes to set for the div wrapper based on orientation value*/
-	let linkWrapperClasses = $derived(
-		orientation === 'vertical'
-			? 'flex-col items-center space-y-2'
-			: ' flex-row items-center space-x-4 justify-start w-40'
-	);
-
-	/** Additional classes to set for Icon component based on nav item orientation and whether it is active*/
-	let iconClasses = $derived(
-		` ${isActive ? 'text-primary' : ''} ${orientation === 'vertical' ? 'size-6 md:size-8 lg:size-10' : 'size-8'}`
-	);
-
-	/** Additional classes to set for Icon component's background based on whether it is active*/
-	let iconBgClasses = $derived(
-		isActive ? 'border-2 border-emphasis' : 'border-2 border-transparent'
-	);
-
-	/** Additional classes to set for nav item text based on nav item orientation and whether it is active*/
-	let itemTextClasses = $derived(
-		`${
-			isActive ? 'text-gradient animate-gradient-move ' : ''
-		} ${orientation === 'vertical' ? '' : 'pt-1'}`
-	);
 </script>
 
 <a
 	{onclick}
 	{...anchorProps}
 	class="hover:bg-secondary/25 flex items-center justify-center font-bold text-white {className}">
-	<div class="flex items-center {linkWrapperClasses}">
-		<IconWrapper class="text-primary {iconBgClasses}">
-			<Icon {svg} class={iconClasses}></Icon>
+	<div
+		class="flex items-center {orientation === 'vertical'
+			? 'flex-col items-center space-y-2'
+			: ' w-40 flex-row items-center justify-start space-x-4'}">
+		<IconWrapper
+			class="text-primary {isActive ? 'border-emphasis border-2' : 'border-2 border-transparent'}">
+			<Icon
+				{svg}
+				class="md:size-8 {isActive ? 'text-primary' : ''} {orientation === 'vertical'
+					? 'size-6 lg:size-10'
+					: 'size-8'}"></Icon>
 		</IconWrapper>
-		<span class="whitespace-nowrap {itemTextClasses}">{text}</span>
+		<span
+			class="whitespace-nowrap {isActive
+				? 'text-gradient animate-gradient-move '
+				: ''} {orientation === 'vertical' ? '' : 'pt-1'}}">{text}</span>
 	</div>
 </a>

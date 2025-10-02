@@ -1,4 +1,4 @@
-import type { Database } from '$lib/utils/supabase/supabase.types.js';
+import type { Database } from '$lib/types/supabase.types.js';
 
 /** Type that best categorizes the tech */
 export type TechType = Database['public']['Enums']['Tech Type'];
@@ -19,8 +19,8 @@ export interface SortConfig {
 	ascending?: boolean;
 }
 
-/** Expected URL params for GET endpoint*/
-export interface GetParams {
+/** Expected paylod from request for POST endpoint*/
+export interface PostPayload {
 	/** Type of tech to filter by */
 	types?: TechType[];
 	/** Text to filter data by */

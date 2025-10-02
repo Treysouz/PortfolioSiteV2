@@ -8,8 +8,12 @@
 	import { onMount } from 'svelte';
 	import { particlesConfig } from '$lib/assets';
 	import { NavBar } from '$lib/components';
+	import { QueryClientProvider } from '@tanstack/svelte-query';
+	import { createQueryClient } from '$lib/utils/tanstack';
 
 	let { children } = $props();
+
+	const queryClient = createQueryClient();
 
 	/** Whether the animated background has loaded. */
 	let particlesLoaded: boolean = $state(false);
@@ -36,14 +40,16 @@
 </svelte:head>
 <div id="particles"></div>
 
-<div
-	class="bg-theme flex h-screen min-h-[420px] w-full flex-col items-center font-mono sm:flex-col-reverse lg:flex-row">
-	{#if particlesLoaded}
-		<NavBar></NavBar>
+<QueryClientProvider client={queryClient}>
+	<div
+		class="bg-theme flex h-screen min-h-[420px] w-full flex-col items-center font-mono sm:flex-col-reverse lg:flex-row">
+		{#if particlesLoaded}
+			<NavBar></NavBar>
 
-		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-		<main tabindex="0" class="mt-18 z-10 h-full w-full grow overflow-auto text-white sm:mt-0">
-			{@render children?.()}
-		</main>
-	{/if}
-</div>
+			<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+			<main tabindex="0" class="mt-18 z-10 h-full w-full grow overflow-auto text-white sm:mt-0">
+				{@render children?.()}
+			</main>
+		{/if}
+	</div>
+</QueryClientProvider>
