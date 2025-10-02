@@ -18,6 +18,8 @@ interface BaseComboboxProps<Entity> {
 	enableSearch?: boolean;
 	/**Placeholder text to show if no selection is made */
 	placeholder?: string;
+	/** Select handler */
+	onselect?: (entity?: Entity | Entity[]) => unknown;
 }
 
 /** Props for single selection mode combobox. */

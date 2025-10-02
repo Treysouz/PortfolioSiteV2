@@ -68,7 +68,7 @@
 
 		// Options for observer
 		const observerOptions = {
-			threshold: 0.4,
+			threshold: 0.2,
 			rootMargin: '-15% 0px -15% 0px'
 		};
 

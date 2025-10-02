@@ -15,15 +15,17 @@
 		enableSearch = false,
 		value = $bindable(undefined),
 		class: className = '',
-		inputTextSize = 'base',
+		inputTextSize = undefined,
 		multiple = false,
-		placeholder = ''
+		placeholder = '',
+		onselect = undefined
 	}: Props = $props();
 
 	/** Reference to the Textbox component*/
 	let textboxComponent: ReturnType<typeof Textbox>;
 	/** Current filtered options based on search box input */
 	let filteredOptions: Entity[] = $state(options);
+
 	/**
 	 * Fuse.js instance for fuzzy search functionality.
 	 * Automatically updates when options or searchKey changes.
@@ -34,12 +36,10 @@
 			threshold: 0.1
 		})
 	);
-
 	/** Set of selected IDs  */
 	let selectedIds = $derived(
 		new Set(Array.isArray(value) ? value.map((option) => option[idKey]) : [value?.[idKey]])
 	);
-
 	/** Index of the currently highlighted option for keyboard navigation */
 	let highlightedIndex: number = $state(-1);
 
@@ -85,6 +85,17 @@
 			value = checked ? option : undefined;
 			open = false;
 		}
+
+		onselect?.(value);
+	};
+
+	/**
+	 * Scrolls the highlighted element into view.
+	 * @param {number} index - The index of the element to scroll to
+	 */
+	const scrollToHighlighted = (index: number) => {
+		const element = document.getElementById(`${label}-option-${index}`);
+		element?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 	};
 
 	/**
@@ -100,10 +111,10 @@
 		if (event.key === 'ArrowDown') {
 			open = true;
 			highlightedIndex = (highlightedIndex + 1) % filteredOptions.length;
-			event.preventDefault(); // Prevent page scroll
+			scrollToHighlighted(highlightedIndex);
 		} else if (event.key === 'ArrowUp') {
 			highlightedIndex = (highlightedIndex - 1 + filteredOptions.length) % filteredOptions.length;
-			event.preventDefault(); // Prevent page scroll
+			scrollToHighlighted(highlightedIndex);
 		} else if (event.key === 'Enter' && highlightedIndex > -1) {
 			const option = filteredOptions[highlightedIndex];
 			handleChange(!selectedIds.has(option[idKey]), option);
@@ -114,10 +125,10 @@
 			open = false;
 		} else if (event.key == 'Home' && open === true) {
 			highlightedIndex = 0;
-			event.preventDefault(); // Prevent page scroll
+			scrollToHighlighted(highlightedIndex);
 		} else if (event.key == 'End' && open === true) {
 			highlightedIndex = filteredOptions.length - 1;
-			event.preventDefault(); // Prevent page scroll
+			scrollToHighlighted(highlightedIndex);
 		}
 	};
 
@@ -148,13 +159,13 @@
 		bind:open
 		class="h-full w-full"
 		onkeydown={handleKeydown}
-		toggleClass="rounded-lg outline-none focus:ring-emphasis focus:ring-1">
+		toggleClass="input bg-black/25 shadow-lg backdrop-blur-lg focus-within:outline-accent focus-within:outline-1 focus-within:outline-offset-0 h-10 {open
+			? 'outline-accent outline-1'
+			: ''}">
 		{#snippet toggle()}
 			<div
 				data-testid="selected-options"
-				class="flex h-full w-full flex-row items-center justify-between rounded-lg bg-black/75 px-2 py-4 shadow-lg backdrop-blur-lg"
-				class:ring-emphasis={open}
-				class:ring-1={open}>
+				class="flex h-full w-full flex-row items-center justify-between">
 				{#if Array.isArray(value) && value.length && multiple}
 					<span class="text-white">
 						{label} ({value.length})
@@ -182,9 +193,10 @@
 		{/snippet}
 		{#snippet menu()}
 			<div class="relative flex h-0 justify-center">
-				<Card class="absolute top-4 z-10 w-full overflow-hidden bg-black/75 text-white shadow-lg">
+				<Card class="absolute top-4 z-10 w-full overflow-hidden bg-black/25 text-white shadow-lg">
 					<div class="p-4" class:hidden={!enableSearch}>
 						<Textbox
+							name={label}
 							aria-label={`Search ${label}`}
 							type="search"
 							bind:this={textboxComponent}
@@ -208,11 +220,8 @@
 							{@const optionName = `${option[searchKey]}`}
 							{@const checked = selectedIds.has(option[idKey])}
 							{@const highlighted = index === highlightedIndex}
-							<li
-								role="option"
-								aria-selected={checked}
-								id={`${label}-option-${index}`}
-								class="outline-none {highlighted ? 'bg-secondary/25' : ''}">
+
+							<li role="option" aria-selected={checked} id={`${label}-option-${index}`}>
 								<label
 									><input
 										type="checkbox"
@@ -224,7 +233,10 @@
 										name={optionName}
 										value={option} />
 									<div
-										class="hover:bg-secondary/25 peer-checked:bg-secondary/75 w-full cursor-pointer border-l-4 border-transparent px-4 py-2 peer-checked:border-white">
+										data-testid="combobox-option-name"
+										class="peer-checked:bg-secondary/75 w-full cursor-pointer border-l-4 border-transparent px-4 py-2 text-sm outline-none peer-checked:border-white {highlighted
+											? 'bg-secondary/25!'
+											: 'hover:bg-secondary/25'}">
 										{optionName}
 									</div></label>
 							</li>

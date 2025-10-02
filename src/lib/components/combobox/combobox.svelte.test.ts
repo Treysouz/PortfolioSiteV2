@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, beforeAll, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/svelte';
 import Combobox from './combobox.svelte';
 
@@ -13,6 +13,11 @@ const mockOptions: TestOption[] = [
 	{ id: '3', name: 'Option 3' },
 	{ id: '4', name: 'Option 4' }
 ];
+
+// Mock scrollIntoView for jsdom
+beforeAll(() => {
+	Element.prototype.scrollIntoView = vi.fn();
+});
 
 describe('Combobox component', () => {
 	describe('Rendering', () => {
@@ -157,7 +162,7 @@ describe('Combobox component', () => {
 			await fireEvent.keyDown(searchbox, { key: 'ArrowDown' });
 
 			// First option should be highlighted
-			const firstOption = screen.getAllByRole('option')[0];
+			const firstOption = screen.getAllByTestId('combobox-option-name')[0];
 			expect(firstOption.className).toContain('bg-secondary/25');
 		});
 
@@ -189,7 +194,7 @@ describe('Combobox component', () => {
 			const searchbox = screen.getByRole('textbox');
 			await fireEvent.keyDown(searchbox, { key: 'Home' });
 
-			const firstOption = screen.getAllByRole('option')[0];
+			const firstOption = screen.getAllByTestId('combobox-option-name')[0];
 			expect(firstOption.className).toContain('bg-secondary/25');
 		});
 
@@ -205,7 +210,7 @@ describe('Combobox component', () => {
 			const searchbox = screen.getByRole('textbox');
 			await fireEvent.keyDown(searchbox, { key: 'End' });
 
-			const lastOption = screen.getAllByRole('option')[3];
+			const lastOption = screen.getAllByTestId('combobox-option-name')[3];
 			expect(lastOption.className).toContain('bg-secondary/25');
 		});
 	});

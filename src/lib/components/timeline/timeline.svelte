@@ -45,13 +45,13 @@
 
 <div>
 	{#each history as event (event.header)}
-		<div class="relative border-l-2 border-white pb-8 pl-12 text-sm last:pb-0">
+		<div class="relative border-l-2 border-white pb-8 pl-12 text-sm tracking-normal last:pb-0">
 			<IconWrapper class="absolute -left-6 -top-3">
 				<Icon svg={event.icon} class="text-primary size-8"></Icon>
 			</IconWrapper>
-			<h3 class="font-bold">{event.header}</h3>
-			<h4 class="text-gray-200">{event.subHeader}</h4>
-			<span class="text-emphasis"
+			<h3 class="font-bold tracking-widest">{event.header}</h3>
+			<h4>{event.subHeader}</h4>
+			<span class="text-accent"
 				>{event.startYear ? `${event.startYear} - ` : ''} {event.endYear}</span>
 
 			{#if typeof event.description === 'string'}

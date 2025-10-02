@@ -4,7 +4,7 @@
 
 <Section id="about" header="About Me">
 	<div
-		class="flex h-full w-full grow flex-col justify-between space-x-4 space-y-4 sm:space-x-8 sm:space-y-8 xl:flex-row xl:space-y-0">
+		class="flex h-full w-full grow flex-col justify-between space-x-4 space-y-4 tracking-wide sm:space-x-8 sm:space-y-8 xl:flex-row xl:space-y-0">
 		<Card
 			class="flex w-full grow flex-col justify-between space-y-4 py-4 text-sm sm:py-8 md:text-base">
 			<p class="px-4 sm:px-8">

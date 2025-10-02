@@ -74,7 +74,7 @@
 		aria-expanded={open}
 		aria-label={toggleLabel}
 		title={toggleLabel}
-		class="h-full {toggleClass}"
+		class="dropdown h-full w-full {toggleClass}"
 		{onkeydown}>
 		{@render toggle()}
 	</summary>

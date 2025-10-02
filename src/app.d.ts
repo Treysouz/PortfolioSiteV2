@@ -10,4 +10,20 @@ declare global {
 	}
 }
 
+declare module '@tanstack/table-core' {
+	interface FilterConfig<Entity> {
+		filterType: 'select' | 'multi-select';
+		label: string;
+		data: Entity[];
+		searchkey: keyof Entity;
+		idKey: keyof Entity;
+		multiple?: boolean;
+		placeholder?: string;
+	}
+
+	interface ColumnMeta {
+		filterConfig?: FilterConfig<Entity>;
+	}
+}
+
 export {};

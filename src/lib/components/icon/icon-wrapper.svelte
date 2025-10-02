@@ -12,6 +12,6 @@
 	let { children = undefined, class: className = '' }: Props = $props();
 </script>
 
-<div class="flex items-center justify-center rounded-full bg-white p-1 {className}">
+<div class="flex items-center justify-center rounded-full bg-white p-1 shadow-lg {className}">
 	{@render children?.()}
 </div>

@@ -14,7 +14,7 @@
 
 <div
 	data-testid="card"
-	class="animate-fade-in rounded-lg bg-black/25 shadow-md backdrop-blur-lg
+	class="animate-fade-in card bg-black/25 shadow-lg backdrop-blur-lg
  {className}">
 	{#if children}
 		{@render children()}

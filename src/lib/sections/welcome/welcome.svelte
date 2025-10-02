@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Greeting, Icon, Section } from '$lib/components';
+	import { Card, Greeting, Icon, Section, IconWrapper } from '$lib/components';
 
 	/** Section to welcome users to the site introducing name and title of developer. */
 </script>
@@ -21,9 +21,9 @@
 			</p>
 			<br />
 			<p class="flex items-center text-sm md:text-base lg:text-xl 2xl:text-3xl">
-				Let's talk code <Icon
-					svg="smile"
-					class="animate-bounce-in ml-2 size-6 text-white md:size-8 lg:size-10  2xl:size-12"></Icon
+				Let's talk code <IconWrapper class="ml-2 size-8 sm:ml-4 md:size-10  2xl:size-12"
+					><Icon svg="smile" class="animate-bounce-in text-primary h-full w-full"></Icon
+					></IconWrapper
 				>.
 			</p>
 		</Card>

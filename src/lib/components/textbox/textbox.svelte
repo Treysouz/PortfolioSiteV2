@@ -5,6 +5,8 @@
 
 	/** Text Box component. */
 	interface Props extends HTMLInputAttributes {
+		/** Name of input*/
+		name: string;
 		/** Text in box*/
 		value?: string | number;
 		/** Content to render before textbox input*/
@@ -18,20 +20,18 @@
 	}
 
 	let {
-		type,
+		name,
+		type = 'text',
 		value = $bindable(undefined),
 		boxPrefix = undefined,
 		boxSuffix = undefined,
 		class: className = '',
-		textSize = 'base',
+		textSize = 'sm',
 		...props
 	}: Props = $props();
 
 	/** Reference to input element*/
 	let inputElement: HTMLInputElement;
-
-	/** Class pertaining to input text size*/
-	let textSizeClass = $derived(`text-${textSize}`);
 
 	/** Focuses input element when called*/
 	export const focusInput = () => {
@@ -39,10 +39,10 @@
 	};
 </script>
 
-<div
-	class="focus-within:ring-emphasis flex h-10 flex-row items-center rounded-lg shadow-lg backdrop-blur-lg focus-within:ring-1 {className}">
+<label
+	class="input focus-within:outline-accent h-10 bg-black/25 shadow-lg backdrop-blur-lg focus-within:outline-1 focus-within:outline-offset-0 {className}">
 	{#if type === 'search'}
-		<div class="&>*]:rounded-l-lg flex h-full items-center justify-center pl-2">
+		<div class="&>*]:rounded-l-lg flex h-full items-center justify-center">
 			<Icon svg="magnifying-glass" class="-mt-0.5 size-5"></Icon>
 		</div>
 	{/if}
@@ -52,16 +52,17 @@
 		</div>
 	{/if}
 	<input
+		{name}
 		{...props}
 		bind:value
-		class="w-full border-none bg-transparent placeholder-gray-400 ring-0 {textSizeClass}"
+		class="w-full bg-transparent placeholder-gray-400 ring-0 text-{textSize}"
 		bind:this={inputElement} />
 	{#if boxSuffix}
 		<div class="h-full [&>*]:rounded-r-lg">
 			{@render boxSuffix()}
 		</div>
 	{/if}
-</div>
+</label>
 
 <style>
 	input[type='search']::-webkit-search-cancel-button {

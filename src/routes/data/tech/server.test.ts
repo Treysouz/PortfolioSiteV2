@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { GET } from './+server.js';
-import type { GetParams } from './tech.types.js';
-import type { Database } from '$lib/utils/supabase/supabase.types.js';
+import { POST } from './+server.js';
+import type { PostPayload } from '$lib/types/tech.types.js';
+import type { Database } from '$lib/types/supabase.types.js';
 
 // Mock data that would come from Supabase
 const mockTechData: Database['public']['Tables']['Tech']['Row'][] = [
@@ -37,20 +37,20 @@ const formattedMockTechData = [
 
 // Mock Supabase Query
 const mockSupabaseQuery = vi.fn();
-// Mock Test Search Query
-const mockTextSearch = vi.fn();
 // Mock Or Query
 const mockOrQuery = vi.fn();
 // Mock Order Query
 const mockOrderQuery = vi.fn();
+// Mock Fuzzy Query
+const mockIlikeQuery = vi.fn();
 
-// Mock Supabase Utils
-vi.mock('$lib/utils/supabase', () => ({
-	supabase: {
+// Mock Supabase client
+vi.mock('@supabase/supabase-js', () => ({
+	createClient: vi.fn(() => ({
 		from: vi.fn(() => ({
 			select: vi.fn(() => mockSupabaseQuery())
 		}))
-	}
+	}))
 }));
 
 beforeEach(() => {
@@ -58,9 +58,9 @@ beforeEach(() => {
 	vi.clearAllMocks();
 });
 
-describe('GET /data/tech', () => {
-	const createMockRequest = (params: GetParams = {}) => ({
-		params
+describe('POST /data/tech', () => {
+	const createMockRequest = (payload: PostPayload = {}) => ({
+		json: async () => payload
 	});
 
 	it('should return formatted tech data when no filters are applied', async () => {
@@ -70,7 +70,7 @@ describe('GET /data/tech', () => {
 		// Mock Request
 		const mockRequest = createMockRequest({});
 		// Response from mock request
-		const response = await GET(mockRequest);
+		const response = await POST({ request: mockRequest });
 		// Data from response
 		const result = await response.json();
 
@@ -78,23 +78,22 @@ describe('GET /data/tech', () => {
 	});
 
 	it('should apply text search when value is provided', async () => {
-		//Mock query resolved value
-		mockTextSearch.mockResolvedValue({ data: mockTechData, error: null });
+		mockIlikeQuery.mockResolvedValue({ data: mockTechData, error: null });
 
 		//Mock query return value
 		mockSupabaseQuery.mockReturnValue({
-			textSearch: mockTextSearch
+			ilike: mockIlikeQuery
 		});
 
 		// Mock Request
 		const mockRequest = createMockRequest({ value: 'React' });
 		// Response from mock request
-		const response = await GET(mockRequest);
+		const response = await POST({ request: mockRequest });
 		// Data from response
 		const result = await response.json();
 
 		expect(result).toStrictEqual(formattedMockTechData);
-		expect(mockTextSearch).toHaveBeenCalledWith('name', 'React');
+		expect(mockIlikeQuery).toHaveBeenCalledWith('name', '%React%');
 	});
 
 	it('should apply type filter when type is provided', async () => {
@@ -109,7 +108,7 @@ describe('GET /data/tech', () => {
 		// Mock Request
 		const mockRequest = createMockRequest({ types: ['Design'] });
 		// Response from mock request
-		const response = await GET(mockRequest);
+		const response = await POST({ request: mockRequest });
 		// Data from response
 		const result = await response.json();
 
@@ -117,7 +116,7 @@ describe('GET /data/tech', () => {
 		expect(mockOrQuery).toHaveBeenCalledWith('type.eq.Design');
 	});
 
-	it('should apply order filter when sort confiog is provided', async () => {
+	it('should apply order filter when sort config is provided', async () => {
 		//Mock query resolved value
 		mockOrderQuery.mockResolvedValue({ data: mockTechData, error: null });
 
@@ -135,7 +134,7 @@ describe('GET /data/tech', () => {
 		});
 
 		// Response from mock request
-		const response = await GET(mockRequest);
+		const response = await POST({ request: mockRequest });
 		// Data from response
 		const result = await response.json();
 
@@ -157,7 +156,7 @@ describe('GET /data/tech', () => {
 		// Mock Request
 		const mockRequest = createMockRequest({});
 		// Response from mock request
-		const response = await GET(mockRequest);
+		const response = await POST({ request: mockRequest });
 		// Data from response
 		const result = await response.json();
 
@@ -176,7 +175,7 @@ describe('GET /data/tech', () => {
 		// Mock Request
 		const mockRequest = createMockRequest({});
 		// Response from mock request
-		const response = await GET(mockRequest);
+		const response = await POST({ request: mockRequest });
 		// Data from response
 		const result = await response.json();
 
@@ -190,6 +189,6 @@ describe('GET /data/tech', () => {
 		// Mock Request
 		const mockRequest = createMockRequest({});
 
-		await expect(GET(mockRequest)).rejects.toThrow();
+		await expect(POST({ request: mockRequest })).rejects.toThrow();
 	});
 });
