@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { POST } from './+server.js';
-import type { PostPayload } from '../../../lib/types/tech.types.js';
+import type { PostPayload } from '$lib/types/tech.types.js';
 import type { Database } from '$lib/types/supabase.types.js';
 
 // Mock data that would come from Supabase

@@ -1,11 +1,10 @@
 import { QueryClient } from '@tanstack/svelte-query';
 
 /**
- * Creates a QueryClient instance with custom default options.
- * - Cache persists during navigation but clears on page refresh
- * - Data never becomes stale to prevent automatic refetching
+ * Creates a QueryClient instance for TanStack Query.
+ * @returns {QueryClient} Configured QueryClient instance
  */
-export const createQueryClient = () => {
+export const createQueryClient = (): QueryClient => {
 	return new QueryClient({
 		defaultOptions: {
 			queries: {

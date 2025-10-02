@@ -1,4 +1,5 @@
 <script lang="ts" generics="Entity">
+	/** Table Component */
 	import { createSvelteTable } from '$lib/utils/tanstack/table.utils.svelte';
 	import { Textbox, Combobox } from '$lib/components';
 	import NoResults from './components/no-results.svelte';
@@ -7,10 +8,15 @@
 	import type { FormEventHandler } from 'svelte/elements';
 
 	interface Props {
+		/** Accessible label for the table */
 		label: string;
+		/** Array of data entities to display */
 		data?: Entity[];
+		/** Whether data is currently loading */
 		loading?: boolean;
+		/** TanStack Table configuration options */
 		options: TableOptions<Entity>;
+		/** Snippet for rendering individual table rows */
 		tableItem: Snippet<[Row<Entity>]>;
 	}
 
@@ -51,14 +57,14 @@
 		</div>
 	</div>
 
-	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 	{#if loading}
 		<div class="flex h-full w-full items-center justify-center">
 			<span class="loading size-12 sm:size-16 lg:size-32"></span>
 		</div>
 	{:else if table && data?.length}
+		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 		<div
-			class="flex w-full flex-row flex-wrap items-start justify-center gap-4 overflow-auto sm:justify-start sm:gap-8"
+			class="flex w-full flex-row flex-wrap items-start justify-center gap-4 overflow-auto border-t pt-4 sm:justify-start sm:gap-8 sm:pt-8"
 			role="list"
 			aria-label={label}
 			tabindex="0">

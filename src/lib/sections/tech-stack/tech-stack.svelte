@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { Section, Card, Table, Icon } from '$lib/components';
-	import { post } from '$lib/utils/api';
 	import { onMount } from 'svelte';
 	import { Constants } from '$lib/types/supabase.types';
+	import { useQueryClient } from '@tanstack/svelte-query';
+	import { queryTechData } from '$lib/utils/tech';
 	import {
 		getCoreRowModel,
 		type ColumnDef,
@@ -10,11 +11,10 @@
 		type OnChangeFn,
 		type TableOptions
 	} from '@tanstack/table-core';
-	import { useQueryClient } from '@tanstack/svelte-query';
-	import type { PostPayload, Tech, TechType, SortConfig } from '../../types/tech.types';
 	import type { TechTypeOption } from './tech-stack.types';
+	import type { Tech } from '$lib/types/tech.types';
 
-	/** Section to show tech experience of developer. */
+	/** Section to show tech experience */
 
 	let data: Tech[] = $state([]);
 	let globalFilterValue: string = $state('');
@@ -27,34 +27,21 @@
 		})
 	);
 
+	const starArray = new Array(5);
+
 	const queryClient = useQueryClient();
 
-	const queryTechData = async (
-		searchValue?: string,
-		types?: TechType[],
-		sortConfig?: SortConfig
-	) => {
-		try {
-			const payload: PostPayload = {
-				value: searchValue,
-				types,
-				sort: sortConfig
-			};
-
-			const cacheKey = ['tech', payload];
-
-			const response: Tech[] = await post<Tech[]>('/data/tech', payload, {
-				queryClient,
-				cacheKey
+	const queryData = async () => {
+		await queryTechData(queryClient, globalFilterValue)
+			.then((response) => {
+				data = response;
+			})
+			.catch((e) => {
+				console.error(e);
+			})
+			.finally(() => {
+				loading = false;
 			});
-
-			data = response;
-
-			loading = false;
-		} catch (e) {
-			console.error(e);
-			loading = false;
-		}
 	};
 
 	const handleGlobalFilterChange: OnChangeFn<string> = (updater) => {
@@ -63,7 +50,10 @@
 		} else {
 			globalFilterValue = updater(globalFilterValue);
 		}
-		queryTechData(globalFilterValue);
+
+		loading = true;
+
+		queryData();
 	};
 
 	const createTableOptions = (data: Tech[]): TableOptions<Tech> => {
@@ -108,10 +98,8 @@
 	});
 
 	onMount(() => {
-		queryTechData();
+		queryData();
 	});
-
-	const starArray = new Array(5);
 </script>
 
 <Section id="tech" header="Tech Stack" class="h-full">

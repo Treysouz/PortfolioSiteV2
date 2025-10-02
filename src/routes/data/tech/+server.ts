@@ -3,7 +3,7 @@ import { getErrorData } from '$lib/utils/api';
 import { createClient } from '@supabase/supabase-js';
 import { SUPABASE_URL, SUPABASE_KEY } from '$env/static/private';
 import type { Database } from '$lib/types/supabase.types.js';
-import type { PostPayload, Tech } from '../../../lib/types/tech.types.js';
+import type { PostPayload, Tech } from '$lib/types/tech.types.js';
 
 /** Supabase URL */
 const supabaseUrl: string = SUPABASE_URL;
