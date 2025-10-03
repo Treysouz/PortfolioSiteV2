@@ -58,8 +58,8 @@
 			const filterValue = techTypeFilterState?.value;
 
 			if (Array.isArray(filterValue)) {
-				const selectedTechTypes: TechType[] = filterValue?.map((option: TechType) => {
-					return option;
+				const selectedTechTypes: TechType[] = filterValue?.map((option: TechTypeOption) => {
+					return option.type;
 				});
 
 				const response = await queryTechData(queryClient, searchValue, selectedTechTypes);
