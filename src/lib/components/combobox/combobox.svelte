@@ -178,9 +178,9 @@
 		bind:open
 		class="h-full w-full"
 		onkeydown={handleKeydown}
-		toggleClass="input bg-black/25 shadow-lg backdrop-blur-lg focus-within:outline-accent outline-1! focus-within:outline-offset-0 h-10 {open
+		toggleClass="input bg-black/25 shadow-lg backdrop-blur-lg focus-within:outline-accent  focus-within:outline-offset-0 h-10 focus-within:outline-1 {open
 			? 'outline-accent outline-1'
-			: 'outline-black/50'}">
+			: ''}">
 		{#snippet toggle()}
 			<div
 				data-testid="selected-options"

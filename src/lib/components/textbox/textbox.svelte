@@ -65,7 +65,7 @@
 </script>
 
 <label
-	class="input focus-within:outline-accent outline-1! h-10 bg-black/25 shadow-lg outline-black/50 backdrop-blur-lg focus-within:outline-offset-0 {className}">
+	class="input focus-within:outline-accent h-10 bg-black/25 shadow-lg backdrop-blur-lg focus-within:outline-offset-0 {className}">
 	{#if type === 'search'}
 		<div class="&>*]:rounded-l-lg flex h-full items-center justify-center">
 			<Icon svg="magnifying-glass" class="-mt-0.5 size-5"></Icon>
