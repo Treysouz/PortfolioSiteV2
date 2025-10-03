@@ -55,14 +55,17 @@
 		try {
 			const techTypeFilterState = columnFilters?.find((f) => f.id === 'type');
 
-			const filterValue: TechTypeOption[] | undefined =
-				techTypeFilterState?.value as TechTypeOption[];
+			const filterValue = techTypeFilterState?.value;
 
-			const selectedTechTypes: TechType[] = filterValue?.map((option) => option.type);
+			if (Array.isArray(filterValue)) {
+				const selectedTechTypes: TechType[] = filterValue?.map((option: TechType) => {
+					return option;
+				});
 
-			const response = await queryTechData(queryClient, searchValue, selectedTechTypes);
+				const response = await queryTechData(queryClient, searchValue, selectedTechTypes);
 
-			data = response;
+				data = response;
+			}
 		} catch (e) {
 			console.error(e);
 		} finally {
