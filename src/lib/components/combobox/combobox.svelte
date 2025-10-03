@@ -1,10 +1,34 @@
 <script lang="ts" generics="Entity">
 	import { Dropdown, Textbox, Icon, Card } from '$lib/components';
 	import Fuse from 'fuse.js';
-	import type { MultipleComboboxProps, SingleComboboxProps } from './combobox.types';
 
 	// Combobox component
-	type Props = SingleComboboxProps<Entity> | MultipleComboboxProps<Entity>;
+	interface Props<T> {
+		/** Display label for the combobox component */
+		label: string;
+		/** Array of selectable options */
+		options: T[];
+		/** Key within Entity to use for displaying and searching options */
+		searchKey: keyof T;
+		/** Key within Entity to use as the unique identifier */
+		idKey: keyof T;
+		/** Whether the combobox dropdown is open */
+		open?: boolean;
+		/** Additional CSS classes to apply to the component */
+		class?: string;
+		/** Text size for the search input field */
+		inputTextSize?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl';
+		/**Whether search box is enabled */
+		enableSearch?: boolean;
+		/**Placeholder text to show if no selection is made */
+		placeholder?: string;
+		/** Select handler */
+		onselect?: (entity?: T[]) => unknown;
+		/** Whether we're in multiple selection mode */
+		multiple?: boolean;
+		/** Array of currently selected entities */
+		value?: T[];
+	}
 
 	let {
 		open = $bindable(false),
@@ -19,7 +43,7 @@
 		multiple = false,
 		placeholder = '',
 		onselect = undefined
-	}: Props = $props();
+	}: Props<Entity> = $props();
 
 	/** Reference to the Textbox component*/
 	let textboxComponent: ReturnType<typeof Textbox>;
@@ -71,19 +95,14 @@
 	 * @param {Entity} option - The entity to select/deselect
 	 */
 	const handleChange = (checked: boolean, option: Entity) => {
-		if (multiple) {
-			if (checked) {
-				value = Array.isArray(value) ? [...value, option] : [option];
-			} else {
-				value = Array.isArray(value)
-					? value.filter((entity) => {
-							return entity[idKey] !== option[idKey];
-						})
-					: undefined;
-			}
+		if (checked) {
+			value = value ? [...value, option] : [option];
 		} else {
-			value = checked ? option : undefined;
-			open = false;
+			value = value
+				? value.filter((entity) => {
+						return entity[idKey] !== option[idKey];
+					})
+				: undefined;
 		}
 
 		onselect?.(value);
@@ -159,20 +178,20 @@
 		bind:open
 		class="h-full w-full"
 		onkeydown={handleKeydown}
-		toggleClass="input bg-black/25 shadow-lg backdrop-blur-lg focus-within:outline-accent focus-within:outline-1 focus-within:outline-offset-0 h-10 {open
+		toggleClass="input bg-black/25 shadow-lg backdrop-blur-lg focus-within:outline-accent  focus-within:outline-offset-0 h-10 focus-within:outline-1 {open
 			? 'outline-accent outline-1'
 			: ''}">
 		{#snippet toggle()}
 			<div
 				data-testid="selected-options"
 				class="flex h-full w-full flex-row items-center justify-between">
-				{#if Array.isArray(value) && value.length && multiple}
+				{#if multiple && value}
 					<span class="text-white">
 						{label} ({value.length})
 					</span>
-				{:else if value && !Array.isArray(value)}
+				{:else if !multiple && value}
 					<span class="text-white">
-						{value[searchKey]}
+						{value[0][searchKey]}
 					</span>
 				{:else}
 					<span class="text-gray-400">{placeholder}</span>
@@ -193,7 +212,7 @@
 		{/snippet}
 		{#snippet menu()}
 			<div class="relative flex h-0 justify-center">
-				<Card class="absolute top-4 z-10 w-full overflow-hidden bg-black/25 text-white shadow-lg">
+				<Card class="absolute top-4 z-10 w-full overflow-hidden bg-black/50 text-white shadow-lg">
 					<div class="p-4" class:hidden={!enableSearch}>
 						<Textbox
 							name={label}

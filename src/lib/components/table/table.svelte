@@ -4,23 +4,23 @@
 	import { Textbox, Combobox } from '$lib/components';
 	import NoResults from './components/no-results.svelte';
 	import type { Snippet } from 'svelte';
-	import type { Row, TableOptions } from '@tanstack/table-core';
+	import type { Row, TableOptions, Column } from '@tanstack/table-core';
 	import type { FormEventHandler } from 'svelte/elements';
 
 	interface Props {
 		/** Accessible label for the table */
 		label: string;
-		/** Array of data entities to display */
-		data?: Entity[];
-		/** Whether data is currently loading */
-		loading?: boolean;
 		/** TanStack Table configuration options */
 		options: TableOptions<Entity>;
 		/** Snippet for rendering individual table rows */
 		tableItem: Snippet<[Row<Entity>]>;
+		/** Array of data entities to display */
+		data?: Entity[];
+		/** Whether data is currently loading */
+		loading?: boolean;
 	}
 
-	let { data = undefined, options, tableItem, label, loading = false }: Props = $props();
+	let { options, tableItem, label, loading = false, data = undefined }: Props = $props();
 
 	const updateGlobalFilter: FormEventHandler<HTMLInputElement> = (event) => {
 		if (event.target && 'value' in event.target) {
@@ -28,12 +28,16 @@
 		}
 	};
 
+	const updateFilter = <TFilterData,>(column: Column<Entity, unknown>, value?: TFilterData[]) => {
+		column.setFilterValue(value);
+	};
+
 	let table = $derived(createSvelteTable(options));
 	let columns = $derived(table.getAllColumns());
 </script>
 
 <div class="flex h-full min-h-0 flex-col space-y-4 sm:space-y-8">
-	<div class="z-10 flex w-full flex-row flex-wrap gap-4 sm:gap-8 xl:flex-nowrap">
+	<div class="z-10 flex w-full flex-row flex-wrap items-center gap-4 sm:gap-8 xl:flex-nowrap">
 		<Textbox
 			name={label}
 			type="search"
@@ -54,7 +58,10 @@
 						class="md:w-xs h-10 w-full"
 						multiple={filterConfig.multiple}
 						enableSearch
-						placeholder={filterConfig.placeholder}></Combobox>
+						placeholder={filterConfig.placeholder}
+						onselect={(value) => {
+							updateFilter(column, value);
+						}}></Combobox>
 				{/if}
 			{/each}
 		</div>

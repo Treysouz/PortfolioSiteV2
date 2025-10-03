@@ -23,10 +23,10 @@ export const POST = async ({ request }) => {
 		query = query.ilike('name', `%${value}%`);
 	}
 
-	if (types) {
+	if (types?.length) {
 		let orQuery = '';
-		types.forEach((type) => {
-			orQuery += `type.eq.${type}`;
+		types.forEach((type, index) => {
+			orQuery += `type.eq.${type}${index < types.length - 1 ? ',' : ''}`;
 		});
 		query = query.or(orQuery);
 	}
@@ -38,7 +38,10 @@ export const POST = async ({ request }) => {
 	const response = await query;
 
 	if (response.error) {
+		console.log(response.error);
 		const { status, message } = getErrorData('Failed to load Tech Stack data', response.error);
+
+		console.log(status, message);
 
 		error(status, message);
 	}
