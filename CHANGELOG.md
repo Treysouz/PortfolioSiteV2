@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.5.0...v1.6.0) (2025-10-03)
+
+
+### Features
+
+* [TSPS-36] - Added Tech Type filtering to table ([f1631a1](https://github.com/Treysouz/PortfolioSiteV2/commit/f1631a17eb75dd70958b980cbbbeaf3df572540e))
+
 # [1.5.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.4.0...v1.5.0) (2025-10-02)
 
 
