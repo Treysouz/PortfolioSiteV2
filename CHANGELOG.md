@@ -1,3 +1,15 @@
+# [1.8.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.7.0...v1.8.0) (2025-10-06)
+
+
+### Bug Fixes
+
+* [TSPS-39] - Removed reference to /settings route in e2e tests ([03ad9f1](https://github.com/Treysouz/PortfolioSiteV2/commit/03ad9f1ad80e1968f0dccba6f67c59951151e73d))
+
+
+### Features
+
+* [TSPS-39] random change to bump version ([81a7876](https://github.com/Treysouz/PortfolioSiteV2/commit/81a7876d21bdd21b1f3f072b48f38cfa9f05b065))
+
 # [1.7.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.6.0...v1.7.0) (2025-10-06)
 
 
