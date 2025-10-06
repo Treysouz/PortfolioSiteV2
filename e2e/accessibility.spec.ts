@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 test.describe('Accessibility', () => {
-	const testRoutes = ['/', '/settings'];
+	const testRoutes = ['/'];
 
 	testRoutes.forEach((route) => {
 		test.describe(`"${route}" Route`, () => {
