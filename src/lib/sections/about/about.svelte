@@ -1,4 +1,5 @@
 <script lang="ts">
+	/** Section detailing developer's professional experience */
 	import { Card, Timeline, NavItem, Section } from '$lib/components';
 </script>
 
