@@ -38,7 +38,7 @@
 		: ''}">
 	<div class="flex flex-col items-center justify-start space-y-2 sm:space-y-4">
 		<IconWrapper class="text-primary">
-			<Icon {svg} class="size-8 sm:size-10"></Icon>
+			<Icon {svg} class="size-6 sm:size-10"></Icon>
 		</IconWrapper>
 		<span class="whitespace-nowrap text-center text-xs sm:text-base">{text}</span>
 	</div>
