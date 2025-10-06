@@ -1,6 +1,5 @@
 <script lang="ts" generics="Entity">
 	import { Dropdown, Textbox, Icon, Card } from '$lib/components';
-	import type { ClickEvent } from '@tsparticles/engine';
 	import Fuse from 'fuse.js';
 	import type { Snippet } from 'svelte';
 
