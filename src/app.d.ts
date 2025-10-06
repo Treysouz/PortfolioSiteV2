@@ -15,7 +15,7 @@ declare module '@tanstack/table-core' {
 		filterType: 'select' | 'multi-select';
 		label: string;
 		data: T[];
-		searchkey: keyof T;
+		nameKey: keyof T;
 		idKey: keyof T;
 		multiple?: boolean;
 		placeholder?: string;

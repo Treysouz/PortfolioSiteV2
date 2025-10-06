@@ -1,9 +1,10 @@
 <script lang="ts">
+	/** Icon link for navigation bar */
+
 	import { SVGS, Icon, IconWrapper } from '$lib/components';
-	import type { NavItemOrientation } from '../../nav.types';
+	import type { NavItemOrientation } from '../nav.types';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 
-	/** Icon link for navigation bar */
 	interface Props {
 		/** Text to render inside the link */
 		text?: string;
@@ -41,11 +42,14 @@
 	<div
 		class="flex items-center {orientation === 'vertical'
 			? 'flex-col items-center space-y-2'
-			: ' w-40 flex-row items-center justify-start space-x-4'}">
+			: 'w-40 flex-row items-center justify-start space-x-4'}">
 		<IconWrapper class="text-primary ">
-			<Icon {svg} class="md:size-8 {orientation === 'vertical' ? 'size-6 lg:size-10' : 'size-8'}"
+			<Icon
+				{svg}
+				class="md:size-8 {orientation === 'vertical' ? 'size-4 sm:size-6 lg:size-10' : 'size-8'}"
 			></Icon>
 		</IconWrapper>
-		<span class="whitespace-nowrap {orientation === 'vertical' ? '' : 'pt-1'}}">{text}</span>
+		<span class="whitespace-nowrap text-xs sm:text-sm {orientation === 'vertical' ? '' : 'pt-1'}}"
+			>{text}</span>
 	</div>
 </a>

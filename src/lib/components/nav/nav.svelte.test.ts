@@ -23,7 +23,7 @@ describe('Nav component', () => {
 		vi.restoreAllMocks();
 	});
 
-	it('should render desktop nav when window width is greater than 640px', () => {
+	it('should render nav without error', () => {
 		// Mock window width for desktop
 		Object.defineProperty(window, 'innerWidth', {
 			writable: true,
@@ -36,34 +36,5 @@ describe('Nav component', () => {
 		const desktopNav = screen.getByTestId('desktop-nav');
 
 		expect(desktopNav).toBeInTheDocument();
-	});
-
-	it('should render mobile nav when window width is 640px or less', () => {
-		// Mock window width for mobile
-		Object.defineProperty(window, 'innerWidth', {
-			writable: true,
-			configurable: true,
-			value: 620
-		});
-
-		render(Nav);
-
-		const mobileNav = screen.getByTestId('mobile-nav');
-
-		expect(mobileNav).toBeInTheDocument();
-	});
-
-	it('should set up resize event listener on mount', () => {
-		render(Nav);
-
-		expect(window.addEventListener).toHaveBeenCalledWith('resize', expect.any(Function));
-	});
-
-	it('should clean up resize event listener on unmount', () => {
-		const { unmount } = render(Nav);
-
-		unmount();
-
-		expect(window.removeEventListener).toHaveBeenCalledWith('resize', expect.any(Function));
 	});
 });

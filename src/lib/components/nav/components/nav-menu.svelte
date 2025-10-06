@@ -1,10 +1,11 @@
 <script lang="ts">
+	/** Group of nav item components. */
+
 	import NavItem from './nav-item.svelte';
 	import { page } from '$app/state';
-	import type { NavItemConfig, NavVarient, NavItemOrientation } from '../../nav.types';
 	import { onMount } from 'svelte';
+	import type { NavItemConfig, NavVarient, NavItemOrientation } from '../nav.types';
 
-	/** Group of nav item components. */
 	interface Props {
 		/** Handler for menu item click */
 		onItemClick?: (event: MouseEvent) => unknown;
@@ -117,7 +118,7 @@
 	{#each linkConfigs as config (config.sectionId)}
 		<li role="menuitem" class="w-full">
 			<NavItem
-				class="w-full p-4 text-sm md:text-lg"
+				class="w-full p-2 text-sm sm:p-4 md:text-lg"
 				onclick={onItemClick}
 				svg={config.svg}
 				text={config.text}
