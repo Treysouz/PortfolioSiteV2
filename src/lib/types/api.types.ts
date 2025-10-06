@@ -12,11 +12,11 @@ export interface ApiError {
 }
 
 /**
- * Options for TanStack Query caching in API requests.
+ * Options for Tanstack Query caching in API requests.
  * Pass these options to enable client-side caching via QueryClient.
  */
 export interface QueryOptions {
-	/** TanStack QueryClient instance for managing cache */
+	/** Tanstack QueryClient instance for managing cache */
 	queryClient?: QueryClient;
 	/** Unique cache key array (e.g., ['tech', { filter: 'React' }]) */
 	cacheKey?: unknown[];

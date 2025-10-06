@@ -27,7 +27,7 @@
 			{/each}
 		</div>
 		<span
-			class="badge badge-outline h-full py-1 text-center text-xs font-bold tracking-tighter sm:text-nowrap"
+			class="badge badge-outline h-full py-1 text-center text-xs font-bold tracking-tighter sm:text-nowrap sm:tracking-normal"
 			>{type}</span>
 	</div>
 </Card>

@@ -1,4 +1,4 @@
-/** Svelte 5 adapter code provided by KevinVanday: https://github.com/TanStack/table/pull/5403/files with some adjustments to remove deprecated logic*/
+/** Svelte 5 adapter code provided by KevinVanday: https://github.com/Tanstack/table/pull/5403/files with some adjustments to remove deprecated logic*/
 
 import {
 	createTable,
@@ -10,7 +10,7 @@ import {
 import type { Component } from 'svelte';
 
 /**
- * Creates a reactive TanStack table object for Svelte.
+ * Creates a reactive Tanstack table object for Svelte.
  * @param options Table options to create the table with.
  * @returns A reactive table object.
  * @example

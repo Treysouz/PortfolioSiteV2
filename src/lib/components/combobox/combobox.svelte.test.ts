@@ -73,7 +73,7 @@ describe('Combobox component', () => {
 				value: [mockOptions[0]]
 			});
 
-			const clearButton = screen.getByLabelText('Clear selection');
+			const clearButton = screen.getByLabelText('Clear Test Selection');
 			expect(clearButton).toBeDefined();
 		});
 		it('should render listbox with options when open', () => {
@@ -120,7 +120,7 @@ describe('Combobox component', () => {
 				value: [mockOptions[0]]
 			});
 
-			const clearButton = screen.getByLabelText('Clear selection');
+			const clearButton = screen.getByLabelText('Clear Test Selection');
 			await fireEvent.click(clearButton);
 
 			expect(clearButton).not.toBeVisible();

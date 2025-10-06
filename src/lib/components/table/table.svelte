@@ -97,13 +97,17 @@
 	 * @param {SortingState} state - Current sorting state from the table
 	 */
 	const sortingStateToSelectedOption = (state: SortingState) => {
-		const sortingOptionId = state[0].id;
+		if (state.length) {
+			const sortingOptionId = state[0].id;
 
-		const sortingOrder = sortingOptions.find((option) => {
-			return option.columnId === sortingOptionId;
-		});
+			const sortingOrder = sortingOptions.find((option) => {
+				return option.columnId === sortingOptionId;
+			});
 
-		selectedSortingOrder = sortingOrder ? [sortingOrder] : [];
+			selectedSortingOrder = sortingOrder ? [sortingOrder] : [];
+		} else {
+			selectedSortingOrder = [];
+		}
 	};
 
 	/**
@@ -168,7 +172,7 @@
 			{/each}
 
 			<Combobox
-				label="Sort table"
+				label="Sort Table"
 				options={sortingOptions}
 				idKey="id"
 				nameKey="header"
@@ -192,7 +196,7 @@
 	{:else if table && data?.length}
 		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 		<div
-			class="flex w-full flex-row flex-wrap items-start justify-center gap-4 overflow-auto border-t pt-4 sm:gap-8 sm:pt-8 xl:justify-start"
+			class="flex w-full flex-row flex-wrap items-start justify-center gap-2 overflow-auto border-t pt-4 sm:gap-8 sm:pt-8 xl:justify-start"
 			role="list"
 			aria-label={label}
 			tabindex="0">

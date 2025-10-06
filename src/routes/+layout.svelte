@@ -47,7 +47,7 @@
 			<NavBar></NavBar>
 
 			<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-			<main tabindex="0" class="mt-18 z-10 h-full w-full grow overflow-auto text-white sm:mt-0">
+			<main tabindex="0" class="z-10 h-full w-full grow overflow-auto text-white">
 				{@render children?.()}
 			</main>
 		{/if}

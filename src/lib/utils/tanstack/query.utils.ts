@@ -1,7 +1,7 @@
 import { QueryClient } from '@tanstack/svelte-query';
 
 /**
- * Creates a QueryClient instance for TanStack Query.
+ * Creates a QueryClient instance for Tanstack Query.
  * @returns {QueryClient} Configured QueryClient instance
  */
 export const createQueryClient = (): QueryClient => {
