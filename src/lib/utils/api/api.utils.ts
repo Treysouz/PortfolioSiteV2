@@ -42,7 +42,7 @@ export const getErrorData = (message: string, pgError: PostgrestError): ApiError
 
 /**
  * Makes a POST request to the specified URL with the given payload
- * Supports optional TanStack Query caching that persists during navigation but clears on page refresh
+ * Supports optional Tanstack Query caching that persists during navigation but clears on page refresh
  * @param {string} url - The endpoint URL to POST to
  * @param {unknown} payload - The data to send in the request body
  * @param {PostOptions} options - Optional configuration including QueryClient and cache key

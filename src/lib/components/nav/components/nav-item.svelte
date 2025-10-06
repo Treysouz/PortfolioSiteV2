@@ -2,7 +2,6 @@
 	/** Icon link for navigation bar */
 
 	import { SVGS, Icon, IconWrapper } from '$lib/components';
-	import type { NavItemOrientation } from '../nav.types';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 
 	interface Props {
@@ -16,8 +15,7 @@
 		isActive?: boolean;
 		/** Handler for item click */
 		onclick?: (event: MouseEvent) => unknown;
-		/** Whether to render the icon and text vertically or horizontally */
-		orientation?: NavItemOrientation;
+
 		/** Additional CSS classes to apply to the component */
 		class?: string;
 	}
@@ -28,7 +26,6 @@
 		anchorProps = undefined,
 		isActive = false,
 		onclick = undefined,
-		orientation = 'vertical',
 		class: className = ''
 	}: Props = $props();
 </script>
@@ -39,17 +36,10 @@
 	class="hover:bg-secondary/25 flex items-center justify-center font-bold text-white {className} {isActive
 		? 'bg-secondary/50'
 		: ''}">
-	<div
-		class="flex items-center {orientation === 'vertical'
-			? 'flex-col items-center space-y-2'
-			: 'w-40 flex-row items-center justify-start space-x-4'}">
-		<IconWrapper class="text-primary ">
-			<Icon
-				{svg}
-				class="md:size-8 {orientation === 'vertical' ? 'size-4 sm:size-6 lg:size-10' : 'size-8'}"
-			></Icon>
+	<div class="flex flex-col items-center justify-start space-y-2 sm:space-y-4">
+		<IconWrapper class="text-primary">
+			<Icon {svg} class="size-8 sm:size-10"></Icon>
 		</IconWrapper>
-		<span class="whitespace-nowrap text-xs sm:text-sm {orientation === 'vertical' ? '' : 'pt-1'}}"
-			>{text}</span>
+		<span class="whitespace-nowrap text-center text-xs sm:text-base">{text}</span>
 	</div>
 </a>

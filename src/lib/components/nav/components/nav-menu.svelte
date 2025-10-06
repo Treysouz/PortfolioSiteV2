@@ -4,23 +4,19 @@
 	import NavItem from './nav-item.svelte';
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
-	import type { NavItemConfig, NavVarient, NavItemOrientation } from '../nav.types';
+	import type { NavItemConfig } from '../nav.types';
 
 	interface Props {
 		/** Handler for menu item click */
 		onItemClick?: (event: MouseEvent) => unknown;
 		/** Classes for menu */
 		class?: string;
-		varient?: NavVarient;
 	}
 
-	let { onItemClick = undefined, class: className = '', varient = 'desktop' }: Props = $props();
+	let { onItemClick = undefined, class: className = '' }: Props = $props();
 
 	/** The section of the page currently in view. */
 	let activeSection: string = $state('');
-
-	/** Whether to render the icon and text vertically or horizontally */
-	let orientation: NavItemOrientation = $derived(varient === 'desktop' ? 'vertical' : 'horizontal');
 
 	/** Details for each nav item for rendering */
 	const linkConfigs: NavItemConfig[] = [
@@ -38,7 +34,7 @@
 		},
 		{
 			svg: 'code-bracket',
-			text: 'Tech Stack',
+			text: 'Tech',
 			href: '/#tech',
 			sectionId: 'tech'
 		},
@@ -114,17 +110,16 @@
 	});
 </script>
 
-<ul class={className} role="menu">
+<ul class="overflow-auto {className}" role="menu">
 	{#each linkConfigs as config (config.sectionId)}
 		<li role="menuitem" class="w-full">
 			<NavItem
-				class="w-full p-2 text-sm sm:p-4 md:text-lg"
+				class="lg:size-30 w-full p-2 text-sm sm:p-4 md:text-lg"
 				onclick={onItemClick}
 				svg={config.svg}
 				text={config.text}
 				anchorProps={{ href: config.href }}
-				isActive={activeSection === config.sectionId}
-				{orientation}></NavItem>
+				isActive={activeSection === config.sectionId}></NavItem>
 		</li>
 	{/each}
 </ul>

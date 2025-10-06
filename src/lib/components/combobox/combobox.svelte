@@ -56,7 +56,6 @@
 		onselect = undefined
 	}: Props<Entity> = $props();
 
-	// Component references and state
 	/** Reference to the Textbox component for programmatic focus management */
 	let textboxComponent: ReturnType<typeof Textbox>;
 
@@ -66,11 +65,8 @@
 	/** Index of the currently highlighted option for keyboard navigation */
 	let highlightedIndex: number = $state(-1);
 
-	// Derived state
 	/**
 	 * Fuse.js instance for fuzzy search functionality.
-	 * Automatically updates when options or nameKey changes.
-	 * Threshold of 0.1 provides strict matching.
 	 */
 	let fuse = $derived(
 		new Fuse(options, {
@@ -78,14 +74,12 @@
 			threshold: 0.1
 		})
 	);
-
-	/**
-	 * Set of selected IDs for efficient lookup.
-	 * Handles both array and single value cases.
-	 */
+	/** Set of selected IDs for efficient lookup.*/
 	let selectedIds = $derived(
 		new Set(Array.isArray(value) ? value.map((option) => option[idKey]) : [value?.[idKey]])
 	);
+	/** Label for clear button*/
+	let clearButtonLabel = $derived(`Clear ${label} Selection`);
 
 	/** Clears all selected values from the combobox.
 	 * @param {Event} event - Event from clicking clear button.
@@ -262,9 +256,9 @@
 					</div>
 					<div class="flex w-full flex-row justify-end px-4">
 						<button
-							aria-label="Clear selection"
+							aria-label={clearButtonLabel}
 							onclick={clearValue}
-							title="Clear selection"
+							title={clearButtonLabel}
 							disabled={!value?.length}
 							class="text-info cursor-pointer p-0 text-xs hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50">
 							clear selection

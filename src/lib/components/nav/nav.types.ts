@@ -1,11 +1,5 @@
 import { SVGS } from '$lib/components';
 
-/** Orientation of nav item */
-export type NavItemOrientation = 'horizontal' | 'vertical';
-
-/** What varient of nav to render */
-export type NavVarient = 'mobile' | 'desktop';
-
 /** Details for a nav item */
 export interface NavItemConfig {
 	/**Icon to render  */

@@ -16,7 +16,7 @@ test.describe('Navigation', () => {
 			href: '/#about'
 		},
 		{
-			text: 'Tech Stack',
+			text: 'Tech',
 			href: '/#tech'
 		},
 		{
