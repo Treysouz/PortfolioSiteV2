@@ -18,7 +18,7 @@ export type Tech = {
 /** Configuration for sorting tech data */
 export interface SortConfig {
 	/** Tech property to sort by */
-	column: keyof Tech;
+	column: string;
 	/** Sort order: true for ascending, false for descending */
 	ascending?: boolean;
 }

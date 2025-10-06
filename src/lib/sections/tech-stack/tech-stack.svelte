@@ -1,4 +1,6 @@
 <script lang="ts">
+	/** Section to show tech experience */
+
 	import { Section, Table } from '$lib/components';
 	import { useQueryClient } from '@tanstack/svelte-query';
 	import { queryTechData } from '$lib/utils/tech';
@@ -9,18 +11,33 @@
 		type FilterConfig,
 		type OnChangeFn,
 		type TableOptions,
-		type ColumnFiltersState
+		type ColumnFiltersState,
+		type SortingState
 	} from '@tanstack/table-core';
 	import type { TechTypeOption } from './tech-stack.types';
-	import type { Tech, TechType } from '$lib/types/tech.types';
+	import type { SortConfig, Tech, TechType } from '$lib/types/tech.types';
 
-	/** Section to show tech experience */
-
+	/** Array of tech data fetched from the API */
 	let data: Tech[] = $state([]);
+
+	/** Current global filter/search value */
 	let globalFilterValue: string = $state('');
+
+	/** Current column filter state (e.g., tech type filters) */
 	let columnFilterState: ColumnFiltersState = $state([]);
+
+	/** Current sorting state - defaults to proficiency descending */
+	let sortingState: SortingState = $state([
+		{
+			id: 'proficiency',
+			desc: true
+		}
+	]);
+
+	/** Loading state indicator for data fetching */
 	let loading: boolean = $state(true);
 
+	/** Tech type options for filtering */
 	const TECH_TYPE_OPTIONS: TechTypeOption[] = [
 		{
 			type: 'Hosting & Infrastructure'
@@ -48,24 +65,43 @@
 		}
 	];
 
+	/** Tanstack Query client instance for data fetching and caching */
 	const queryClient = useQueryClient();
 
-	const queryData = async (searchValue?: string, columnFilters?: ColumnFiltersState) => {
+	/**
+	 * Gets tech data from the API based on current filters and sorting.
+	 * @param searchValue - Global search/filter string
+	 * @param columnFilters - Column filters
+	 * @param sorting - Current sorting order
+	 */
+	const queryData = async (
+		searchValue?: string,
+		columnFilters?: ColumnFiltersState,
+		sorting?: SortingState
+	) => {
 		loading = true;
 		try {
 			const techTypeFilterState = columnFilters?.find((f) => f.id === 'type');
-
 			const filterValue = techTypeFilterState?.value;
 
+			let selectedTechTypes: TechType[] = [];
 			if (Array.isArray(filterValue)) {
-				const selectedTechTypes: TechType[] = filterValue?.map((option: TechTypeOption) => {
+				selectedTechTypes = filterValue?.map((option: TechTypeOption) => {
 					return option.type;
 				});
-
-				const response = await queryTechData(queryClient, searchValue, selectedTechTypes);
-
-				data = response;
 			}
+
+			let sortConfig: SortConfig | undefined = undefined;
+			if (sorting?.length) {
+				const sortingOption = sorting[0];
+				sortConfig = {
+					column: sortingOption.id,
+					ascending: !sortingOption.desc
+				};
+			}
+
+			const response = await queryTechData(queryClient, searchValue, selectedTechTypes, sortConfig);
+			data = response;
 		} catch (e) {
 			console.error(e);
 		} finally {
@@ -73,39 +109,74 @@
 		}
 	};
 
+	/**
+	 * Handler for Tanstack table state changes.
+	 * @template T - Type of the state being updated
+	 * @param updater - Either a new state value or function that transforms old state
+	 * @param state - Current state value
+	 * @returns Updated state value
+	 */
+	const handleTableStateChange = <T,>(updater: ((old: T) => T) | T, state: T) => {
+		return updater instanceof Function ? updater(state) : updater;
+	};
+
+	/**
+	 * Handles changes to the global filter value.
+	 * @param updater - New global filter value or updater function
+	 */
 	const handleGlobalFilterChange: OnChangeFn<string> = (updater) => {
-		if (typeof updater === 'function') {
-			globalFilterValue = updater(globalFilterValue);
-		} else {
-			globalFilterValue = updater;
-		}
+		globalFilterValue = handleTableStateChange(updater, globalFilterValue);
 	};
 
+	/**
+	 * Handles changes to column filters.
+	 * @param updater - New column filter state or updater function
+	 */
 	const handleColumnFilterChange: OnChangeFn<ColumnFiltersState> = (updater) => {
-		if (typeof updater === 'function') {
-			columnFilterState = updater(columnFilterState);
-		} else {
-			columnFilterState = updater;
-		}
+		columnFilterState = handleTableStateChange(updater, columnFilterState);
 	};
 
+	/**
+	 * Handles changes to sorting state.
+	 * @param updater - New sorting state or updater function
+	 */
+	const handleSortingChange: OnChangeFn<SortingState> = (updater) => {
+		sortingState = handleTableStateChange(updater, sortingState);
+	};
+
+	/**
+	 * Creates Tanstack table configuration options.
+	 * @param data - Data to display in the table
+	 * @returns Table configuration
+	 */
 	const createTableOptions = (data: Tech[]): TableOptions<Tech> => {
 		const typeFilterConfig: FilterConfig<TechTypeOption> = {
 			filterType: 'multi-select',
 			data: TECH_TYPE_OPTIONS,
 			multiple: true,
 			idKey: 'type',
-			searchkey: 'type',
+			nameKey: 'type',
 			label: 'Tech Type',
 			placeholder: 'Select a Tech Type'
 		};
 
 		const columns: ColumnDef<Tech>[] = [
-			{ accessorKey: 'name' },
-			{ accessorKey: 'imgUrl', enableGlobalFilter: false, enableColumnFilter: false },
-			{ accessorKey: 'proficiency', enableGlobalFilter: false, enableColumnFilter: false },
+			{ accessorKey: 'name', header: 'Name' },
+			{
+				accessorKey: 'imgUrl',
+				enableGlobalFilter: false,
+				enableColumnFilter: false,
+				enableSorting: false
+			},
+			{
+				accessorKey: 'proficiency',
+				enableGlobalFilter: false,
+				enableColumnFilter: false,
+				header: 'Proficiency'
+			},
 			{
 				accessorKey: 'type',
+				header: 'Tech Type',
 				enableGlobalFilter: false,
 				meta: {
 					filterConfig: typeFilterConfig
@@ -118,19 +189,25 @@
 			columns,
 			state: {
 				globalFilter: globalFilterValue,
-				columnFilters: columnFilterState
+				columnFilters: columnFilterState,
+				sorting: sortingState
 			},
 			getCoreRowModel: getCoreRowModel(),
 			manualFiltering: true,
 			onGlobalFilterChange: handleGlobalFilterChange,
-			onColumnFiltersChange: handleColumnFilterChange
+			onColumnFiltersChange: handleColumnFilterChange,
+			onSortingChange: handleSortingChange
 		};
 	};
 
+	/** Table options  */
 	let options: TableOptions<Tech> = $derived(createTableOptions(data));
 
+	/**
+	 * Gets new data if filter state or sorting state for the table change.
+	 */
 	$effect(() => {
-		queryData(globalFilterValue, columnFilterState);
+		queryData(globalFilterValue, columnFilterState, sortingState);
 	});
 </script>
 

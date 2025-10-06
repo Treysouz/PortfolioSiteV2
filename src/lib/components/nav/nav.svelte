@@ -1,36 +1,14 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
-	import { DesktopNav, MobileNav } from './components';
-
 	/** Navigation component. */
 
-	/** Whether to render the mobile nav component. */
-	let renderMobileNav: boolean = $state(false);
-
-	/**
-	 * Checks whether to render the mobile nav component based on if window width is less than or equal to 640px.
-	 */
-	const handleResize = () => {
-		renderMobileNav = window.innerWidth <= 640;
-	};
-
-	onMount(() => {
-		// Call handleResize() on mount to handle the current window width.
-		handleResize();
-
-		// Call handleResize() on each resize event.
-		window.addEventListener('resize', handleResize);
-
-		return () => {
-			// Stop listening for resize event if component unmounts.
-			window.removeEventListener('resize', handleResize);
-		};
-	});
+	import NavMenu from './components/nav-menu.svelte';
+	import { Card } from '$lib/components';
 </script>
 
-{#if renderMobileNav}
-	<MobileNav></MobileNav>
-{:else}
-	<DesktopNav></DesktopNav>
-{/if}
+<nav data-testid="desktop-nav" class="z-50 w-full lg:w-min">
+	<Card
+		class="animate-slide-up lg:animate-slide-right flex overflow-hidden rounded-none lg:rounded-r-lg">
+		<NavMenu class="flex w-full items-center justify-around lg:w-min  lg:flex-col lg:justify-center"
+		></NavMenu>
+	</Card>
+</nav>

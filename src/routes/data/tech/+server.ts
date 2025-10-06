@@ -38,10 +38,7 @@ export const POST = async ({ request }) => {
 	const response = await query;
 
 	if (response.error) {
-		console.log(response.error);
 		const { status, message } = getErrorData('Failed to load Tech Stack data', response.error);
-
-		console.log(status, message);
 
 		error(status, message);
 	}

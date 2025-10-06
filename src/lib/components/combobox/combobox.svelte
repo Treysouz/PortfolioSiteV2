@@ -1,15 +1,20 @@
 <script lang="ts" generics="Entity">
 	import { Dropdown, Textbox, Icon, Card } from '$lib/components';
 	import Fuse from 'fuse.js';
+	import type { Snippet } from 'svelte';
 
-	// Combobox component
+	/**
+	 * Combobox component with search and filtering capabilities.
+	 * Supports both single and multiple selection modes.
+	 * Uses Fuse.js for fuzzy search and includes full keyboard navigation.
+	 */
 	interface Props<T> {
 		/** Display label for the combobox component */
 		label: string;
 		/** Array of selectable options */
 		options: T[];
 		/** Key within Entity to use for displaying and searching options */
-		searchKey: keyof T;
+		nameKey: keyof T;
 		/** Key within Entity to use as the unique identifier */
 		idKey: keyof T;
 		/** Whether the combobox dropdown is open */
@@ -18,24 +23,30 @@
 		class?: string;
 		/** Text size for the search input field */
 		inputTextSize?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl';
-		/**Whether search box is enabled */
+		/** Whether search box is enabled */
 		enableSearch?: boolean;
-		/**Placeholder text to show if no selection is made */
+		/** Placeholder text to show if no selection is made */
 		placeholder?: string;
-		/** Select handler */
+		/** Select handler callback fired when selection changes */
 		onselect?: (entity?: T[]) => unknown;
 		/** Whether we're in multiple selection mode */
 		multiple?: boolean;
 		/** Array of currently selected entities */
 		value?: T[];
+		/** Snippet to render as list item */
+		listItemComponent?: Snippet<[T]>;
+		/** Snippet to render as selected item */
+		selectedItemComponent?: Snippet<[T[]]>;
 	}
 
 	let {
 		open = $bindable(false),
 		label,
 		options,
-		searchKey,
+		nameKey,
 		idKey,
+		listItemComponent = undefined,
+		selectedItemComponent = undefined,
 		enableSearch = false,
 		value = $bindable(undefined),
 		class: className = '',
@@ -45,31 +56,46 @@
 		onselect = undefined
 	}: Props<Entity> = $props();
 
-	/** Reference to the Textbox component*/
+	// Component references and state
+	/** Reference to the Textbox component for programmatic focus management */
 	let textboxComponent: ReturnType<typeof Textbox>;
+
 	/** Current filtered options based on search box input */
 	let filteredOptions: Entity[] = $state(options);
 
-	/**
-	 * Fuse.js instance for fuzzy search functionality.
-	 * Automatically updates when options or searchKey changes.
-	 */
-	let fuse = $derived(
-		new Fuse(options, {
-			keys: [String(searchKey)],
-			threshold: 0.1
-		})
-	);
-	/** Set of selected IDs  */
-	let selectedIds = $derived(
-		new Set(Array.isArray(value) ? value.map((option) => option[idKey]) : [value?.[idKey]])
-	);
 	/** Index of the currently highlighted option for keyboard navigation */
 	let highlightedIndex: number = $state(-1);
 
-	/** Clears all selected values from the combobox.*/
-	const clearValue = () => {
+	// Derived state
+	/**
+	 * Fuse.js instance for fuzzy search functionality.
+	 * Automatically updates when options or nameKey changes.
+	 * Threshold of 0.1 provides strict matching.
+	 */
+	let fuse = $derived(
+		new Fuse(options, {
+			keys: [String(nameKey)],
+			threshold: 0.1
+		})
+	);
+
+	/**
+	 * Set of selected IDs for efficient lookup.
+	 * Handles both array and single value cases.
+	 */
+	let selectedIds = $derived(
+		new Set(Array.isArray(value) ? value.map((option) => option[idKey]) : [value?.[idKey]])
+	);
+
+	/** Clears all selected values from the combobox.
+	 * @param {Event} event - Event from clicking clear button.
+	 *
+	 */
+	const clearValue = (event: Event) => {
+		event.preventDefault();
 		value = undefined;
+		onselect?.(undefined);
+		open = false;
 	};
 
 	/**
@@ -89,20 +115,27 @@
 
 	/**
 	 * Handles option selection/deselection.
-	 * In multiple mode, adds/removes items from the value array.
-	 * In single mode, sets or clears the single value and closes the dropdown.
+	 * In single mode, closes the dropdown on select.
 	 * @param {boolean} checked - Whether the option should be selected or deselected
 	 * @param {Entity} option - The entity to select/deselect
 	 */
 	const handleChange = (checked: boolean, option: Entity) => {
 		if (checked) {
-			value = value ? [...value, option] : [option];
+			if (multiple) {
+				value = value ? [...value, option] : [option];
+			} else {
+				value = [option];
+			}
 		} else {
 			value = value
 				? value.filter((entity) => {
 						return entity[idKey] !== option[idKey];
 					})
 				: undefined;
+		}
+
+		if (!multiple) {
+			open = false;
 		}
 
 		onselect?.(value);
@@ -185,35 +218,32 @@
 			<div
 				data-testid="selected-options"
 				class="flex h-full w-full flex-row items-center justify-between">
-				{#if multiple && value}
-					<span class="text-white">
-						{label} ({value.length})
-					</span>
-				{:else if !multiple && value}
-					<span class="text-white">
-						{value[0][searchKey]}
-					</span>
+				{#if value?.length}
+					{#if selectedItemComponent}
+						{@render selectedItemComponent(value)}
+					{:else if multiple}
+						<span class="text-white">
+							{label} ({value.length})
+						</span>
+					{:else}
+						<span class="text-white">
+							{value[0][nameKey]}
+						</span>
+					{/if}
 				{:else}
-					<span class="text-gray-400">{placeholder}</span>
+					<span class="text-gray-400">--{placeholder}--</span>
 				{/if}
 
 				<div class="flex h-full items-center justify-center space-x-2 pl-2">
-					{#if Array.isArray(value) ? value.length : value}
-						<button
-							aria-label="Clear selection"
-							onclick={clearValue}
-							class="flex h-min w-min cursor-pointer items-center justify-center opacity-50 hover:opacity-100">
-							<Icon svg="x-mark" class="size-5"></Icon>
-						</button>
-					{/if}
 					<Icon svg={open ? 'chevron-up' : 'chevron-down'} class="size-5"></Icon>
 				</div>
 			</div>
 		{/snippet}
 		{#snippet menu()}
 			<div class="relative flex h-0 justify-center">
-				<Card class="absolute top-4 z-10 w-full overflow-hidden bg-black/50 text-white shadow-lg">
-					<div class="p-4" class:hidden={!enableSearch}>
+				<Card
+					class="absolute top-4 z-10 w-full space-y-4 overflow-hidden bg-black/50 pt-4 text-white shadow-lg">
+					<div class="px-4" class:hidden={!enableSearch}>
 						<Textbox
 							name={label}
 							aria-label={`Search ${label}`}
@@ -230,13 +260,23 @@
 								: undefined}>
 						</Textbox>
 					</div>
+					<div class="flex w-full flex-row justify-end px-4">
+						<button
+							aria-label="Clear selection"
+							onclick={clearValue}
+							title="Clear selection"
+							disabled={!value?.length}
+							class="text-info cursor-pointer p-0 text-xs hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50">
+							clear selection
+						</button>
+					</div>
 					<ul
 						id="combobox-menu"
 						class="max-h-50 w-full overflow-auto"
 						role="listbox"
 						aria-multiselectable={multiple}>
 						{#each filteredOptions as option, index (index)}
-							{@const optionName = `${option[searchKey]}`}
+							{@const optionName = `${option[nameKey]}`}
 							{@const checked = selectedIds.has(option[idKey])}
 							{@const highlighted = index === highlightedIndex}
 
@@ -256,7 +296,11 @@
 										class="peer-checked:bg-secondary/75 w-full cursor-pointer border-l-4 border-transparent px-4 py-2 text-sm outline-none peer-checked:border-white {highlighted
 											? 'bg-secondary/25!'
 											: 'hover:bg-secondary/25'}">
-										{optionName}
+										{#if listItemComponent}
+											{@render listItemComponent(option)}
+										{:else}
+											{optionName}
+										{/if}
 									</div></label>
 							</li>
 						{/each}

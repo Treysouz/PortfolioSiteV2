@@ -25,7 +25,7 @@ describe('Combobox component', () => {
 			render(Combobox<TestOption>, {
 				label: 'Test',
 				options: mockOptions,
-				searchKey: 'name',
+				nameKey: 'name',
 				idKey: 'id',
 				placeholder: 'Select an option'
 			});
@@ -39,7 +39,7 @@ describe('Combobox component', () => {
 			render(Combobox<TestOption>, {
 				label: 'Test',
 				options: mockOptions,
-				searchKey: 'name',
+				nameKey: 'name',
 				idKey: 'id',
 				value: [mockOptions[0]]
 			});
@@ -53,7 +53,7 @@ describe('Combobox component', () => {
 			render(Combobox<TestOption>, {
 				label: 'Test',
 				options: mockOptions,
-				searchKey: 'name',
+				nameKey: 'name',
 				idKey: 'id',
 				multiple: true,
 				value: [mockOptions[0], mockOptions[1]]
@@ -68,7 +68,7 @@ describe('Combobox component', () => {
 			render(Combobox<TestOption>, {
 				label: 'Test',
 				options: mockOptions,
-				searchKey: 'name',
+				nameKey: 'name',
 				idKey: 'id',
 				value: [mockOptions[0]]
 			});
@@ -80,7 +80,7 @@ describe('Combobox component', () => {
 			render(Combobox<TestOption>, {
 				label: 'Test',
 				options: mockOptions,
-				searchKey: 'name',
+				nameKey: 'name',
 				idKey: 'id',
 				open: true
 			});
@@ -98,7 +98,7 @@ describe('Combobox component', () => {
 			render(Combobox<TestOption>, {
 				label: 'Test',
 				options: mockOptions,
-				searchKey: 'name',
+				nameKey: 'name',
 				idKey: 'id',
 				multiple: true,
 				value: [mockOptions[0], mockOptions[2]],
@@ -115,7 +115,7 @@ describe('Combobox component', () => {
 			render(Combobox<TestOption>, {
 				label: 'Test',
 				options: mockOptions,
-				searchKey: 'name',
+				nameKey: 'name',
 				idKey: 'id',
 				value: [mockOptions[0]]
 			});
@@ -132,7 +132,7 @@ describe('Combobox component', () => {
 			render(Combobox<TestOption>, {
 				label: 'Test',
 				options: mockOptions,
-				searchKey: 'name',
+				nameKey: 'name',
 				idKey: 'id',
 				enableSearch: true,
 				open: true
@@ -152,7 +152,7 @@ describe('Combobox component', () => {
 			render(Combobox<TestOption>, {
 				label: 'Test',
 				options: mockOptions,
-				searchKey: 'name',
+				nameKey: 'name',
 				idKey: 'id',
 				open: true,
 				enableSearch: true
@@ -170,7 +170,7 @@ describe('Combobox component', () => {
 			render(Combobox<TestOption>, {
 				label: 'Test',
 				options: mockOptions,
-				searchKey: 'name',
+				nameKey: 'name',
 				idKey: 'id',
 				open: true
 			});
@@ -186,7 +186,7 @@ describe('Combobox component', () => {
 			render(Combobox<TestOption>, {
 				label: 'Test',
 				options: mockOptions,
-				searchKey: 'name',
+				nameKey: 'name',
 				idKey: 'id',
 				open: true
 			});
@@ -202,7 +202,7 @@ describe('Combobox component', () => {
 			render(Combobox<TestOption>, {
 				label: 'Test',
 				options: mockOptions,
-				searchKey: 'name',
+				nameKey: 'name',
 				idKey: 'id',
 				open: true
 			});

@@ -42,7 +42,7 @@
 
 <QueryClientProvider client={queryClient}>
 	<div
-		class="bg-theme flex h-screen min-h-[420px] w-full flex-col items-center font-mono sm:flex-col-reverse lg:flex-row">
+		class="bg-theme flex h-screen min-h-[420px] w-full flex-col-reverse items-center font-mono lg:flex-row">
 		{#if particlesLoaded}
 			<NavBar></NavBar>
 
