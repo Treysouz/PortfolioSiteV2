@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.8.0...v1.8.1) (2025-10-06)
+
+
+### Bug Fixes
+
+* [TSPS-39] switch to using h-dvh to make sure mobile browsers render the layout correctly ([449f04b](https://github.com/Treysouz/PortfolioSiteV2/commit/449f04b5cd034fc499a35353aeec000175289dd3))
+
 # [1.8.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.7.0...v1.8.0) (2025-10-06)
 
 
