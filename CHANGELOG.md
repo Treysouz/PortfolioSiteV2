@@ -1,3 +1,11 @@
+# [1.7.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.6.0...v1.7.0) (2025-10-06)
+
+
+### Features
+
+* [TSPS-37] - completed order combobox ([ea0aa84](https://github.com/Treysouz/PortfolioSiteV2/commit/ea0aa844ff1cb0c64153cb1a7b668b1021d5fcc6))
+* [TSPS-37] - completed order combobox ([bbb16e4](https://github.com/Treysouz/PortfolioSiteV2/commit/bbb16e48bc249121a5cdaa9557cb4811ea033b30))
+
 # [1.6.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.5.0...v1.6.0) (2025-10-03)
 
 
