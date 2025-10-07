@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/svelte';
+import { render, screen, fireEvent } from '@testing-library/svelte';
 import Layout from './+layout.svelte';
 import { createRawSnippet } from 'svelte';
 
@@ -61,5 +61,29 @@ describe('+layout.svelte', () => {
 
 		expect(screen.queryByTestId('mobile-nav')).not.toBeInTheDocument();
 		expect(screen.queryByRole('main')).not.toBeInTheDocument();
+	});
+
+	it('should open settings drawer when Settings nav item is clicked', async () => {
+		const { container } = render(Layout, {
+			props: {
+				children: mockSnippet
+			}
+		});
+
+		// Wait for particles to load
+		await vi.waitFor(async () => {
+			expect(mockLoad).toHaveBeenCalled();
+		});
+
+		// Find and click the Settings nav item
+		const settingsButton = screen.getByText('Settings');
+		expect(settingsButton).toBeInTheDocument();
+
+		await fireEvent.click(settingsButton);
+
+		// Check that the drawer checkbox is now checked
+		const drawerCheckbox = container.querySelector('#drawer-toggle') as HTMLInputElement;
+		expect(drawerCheckbox).toBeInTheDocument();
+		expect(drawerCheckbox.checked).toBe(true);
 	});
 });

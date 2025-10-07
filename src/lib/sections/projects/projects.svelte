@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Section, Icon, Card, IconWrapper } from '$lib/components';
+	import { Icon, Card, IconWrapper } from '$lib/components';
+	import { Section } from '../section-wrapper';
 </script>
 
 <Section id="projects" header="Projects" class="h-full">

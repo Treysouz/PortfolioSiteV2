@@ -15,8 +15,6 @@
 		boxSuffix?: Snippet;
 		/** Additional CSS classes to apply to the component */
 		class?: string;
-		/** Text size*/
-		textSize?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl';
 		/** Debounce delay in milliseconds for oninput event */
 		debounce?: number;
 	}
@@ -28,7 +26,6 @@
 		boxPrefix = undefined,
 		boxSuffix = undefined,
 		class: className = '',
-		textSize = 'sm',
 		debounce = 0,
 		oninput,
 		...props
@@ -65,10 +62,10 @@
 </script>
 
 <label
-	class="input focus-within:outline-accent h-10 bg-black/25 shadow-lg backdrop-blur-lg focus-within:outline-offset-0 {className}">
+	class="input focus-within:outline-accent h-8 bg-black/25 shadow-lg backdrop-blur-lg focus-within:outline-offset-0 sm:h-10 {className}">
 	{#if type === 'search'}
 		<div class="&>*]:rounded-l-lg flex h-full items-center justify-center">
-			<Icon svg="magnifying-glass" class="-mt-0.5 size-5"></Icon>
+			<Icon svg="magnifying-glass" class="-mt-0.5 size-4 sm:size-5"></Icon>
 		</div>
 	{/if}
 	{#if boxPrefix}
@@ -81,7 +78,7 @@
 		{...props}
 		bind:value
 		oninput={handleInput}
-		class="w-full bg-transparent placeholder-gray-400 ring-0 text-{textSize}"
+		class="w-full bg-transparent px-1 text-sm placeholder-gray-400 ring-0 sm:text-base"
 		bind:this={inputElement} />
 	{#if boxSuffix}
 		<div class="h-full [&>*]:rounded-r-lg">

@@ -33,7 +33,7 @@
 <a
 	{onclick}
 	{...anchorProps}
-	class="hover:bg-secondary/25 flex items-center justify-center font-bold text-white {className} {isActive
+	class="sm:hover:bg-secondary/25 flex items-center justify-center font-bold text-white {className} {isActive
 		? 'bg-secondary/50'
 		: ''}">
 	<div class="flex flex-col items-center justify-start space-y-2 sm:space-y-4">

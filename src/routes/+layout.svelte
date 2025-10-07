@@ -7,18 +7,28 @@
 	import { loadSlim } from '@tsparticles/slim';
 	import { onMount } from 'svelte';
 	import { particlesConfig } from '$lib/assets';
-	import { NavBar } from '$lib/components';
+	import { NavBar, NavItem, SettingsDrawer } from '$lib/components';
 	import { QueryClientProvider } from '@tanstack/svelte-query';
 	import { createQueryClient } from '$lib/utils/tanstack';
+	import { SettingsStore } from '$lib/stores/settings.svelte.js';
 
 	let { children } = $props();
-
-	const queryClient = createQueryClient();
 
 	/** Whether the animated background has loaded. */
 	let particlesLoaded: boolean = $state(false);
 
-	onMount(async () => {
+	/** Whether to open the settings drawer. */
+	let openSettings: boolean = $state(false);
+
+	/** Tanstack query client for caching API responses*/
+	const queryClient = createQueryClient();
+
+	/** Open settings drawer*/
+	const openSettingsDrawer = () => {
+		openSettings = true;
+	};
+
+	const loadParticlesBackground = async () => {
 		try {
 			// Initialize the tsParticles engine with slim bundle
 			await loadSlim(tsParticles);
@@ -31,6 +41,10 @@
 		} catch (e) {
 			console.error(e);
 		}
+	};
+
+	onMount(async () => {
+		await loadParticlesBackground();
 	});
 </script>
 
@@ -38,12 +52,34 @@
 	<title>Tremayne Souza | Front-End Developer</title>
 	<link rel="icon" type="image/png" sizes="32x32" href={favicon} />
 </svelte:head>
-<div id="particles"></div>
 
 <QueryClientProvider client={queryClient}>
-	<div class="bg-theme flex h-dvh w-full flex-col-reverse items-center font-mono lg:flex-row">
+	<div
+		class="bg-theme flex h-dvh w-full flex-col-reverse items-center font-mono lg:flex-row"
+		data-animated-gradient={SettingsStore.animatedGradient}
+		data-animated-bg={SettingsStore.animatedBg}
+		data-transitions={SettingsStore.transitions}
+		data-opacity-effect={SettingsStore.opacityEffect}
+		data-jonah-mode={SettingsStore.jonahMode}>
+		<SettingsDrawer bind:open={openSettings}></SettingsDrawer>
+
+		<div
+			id="particles"
+			class="animate-fade-in fixed h-dvh w-full"
+			class:hidden={!SettingsStore.animatedBg}>
+		</div>
 		{#if particlesLoaded}
-			<NavBar></NavBar>
+			<NavBar>
+				{#snippet additionalItems()}
+					<li role="menuitem" class="w-full">
+						<NavItem
+							onclick={openSettingsDrawer}
+							class="lg:size-30 w-full cursor-pointer p-2 text-sm sm:p-4 md:text-lg"
+							svg="cog"
+							text="Settings"></NavItem>
+					</li>
+				{/snippet}
+			</NavBar>
 
 			<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 			<main tabindex="0" class="z-10 h-full w-full grow overflow-auto text-white">

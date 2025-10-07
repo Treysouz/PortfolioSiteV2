@@ -161,7 +161,7 @@
 						idKey={filterConfig.idKey}
 						nameKey={filterConfig.nameKey}
 						value={Array.isArray(filterValue) ? filterValue : undefined}
-						class="md:w-xs h-10 w-full"
+						class="md:w-xs w-full"
 						multiple={filterConfig.multiple}
 						enableSearch
 						placeholder={filterConfig.placeholder}
@@ -176,7 +176,7 @@
 				options={sortingOptions}
 				idKey="id"
 				nameKey="header"
-				class="md:w-xs h-10 w-full"
+				class="md:w-xs w-full"
 				placeholder="--Sort table--"
 				value={selectedSortingOrder}
 				onselect={updateSorting}>
@@ -196,7 +196,7 @@
 	{:else if table && data?.length}
 		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 		<div
-			class="flex w-full flex-row flex-wrap items-start justify-center gap-2 overflow-auto border-t pt-4 sm:gap-8 sm:pt-8 xl:justify-start"
+			class="flex w-full flex-row flex-wrap items-start justify-center gap-4 overflow-auto border-t pt-4 sm:gap-8 sm:pt-8 xl:justify-start"
 			role="list"
 			aria-label={label}
 			tabindex="0">

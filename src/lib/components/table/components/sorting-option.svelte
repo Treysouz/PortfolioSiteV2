@@ -16,5 +16,5 @@
 	aria-label={option.label}
 	title={option.label}>
 	<span>{option.header}</span>
-	<Icon class="mb-0.5 size-4" svg={option.desc ? 'arrow-down' : 'arrow-up'}></Icon>
+	<Icon class="mb-0.5 size-3 sm:size-4" svg={option.desc ? 'arrow-down' : 'arrow-up'}></Icon>
 </div>
