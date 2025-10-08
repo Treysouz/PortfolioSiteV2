@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.9.0...v1.10.0) (2025-10-08)
+
+
+### Features
+
+* [TSPS-12] - Added Alert and Alert Center components to gracefully handle thrown errors ([8cda438](https://github.com/Treysouz/PortfolioSiteV2/commit/8cda43868f7969ccafbe020fd819facc57c986d9))
+
 # [1.9.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.8.1...v1.9.0) (2025-10-08)
 
 
