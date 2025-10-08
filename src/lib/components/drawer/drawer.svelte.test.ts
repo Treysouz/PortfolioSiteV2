@@ -21,7 +21,7 @@ describe('Drawer component', () => {
 		});
 	});
 
-	describe('Open/Close behavior', () => {
+	describe('Toggle behavior', () => {
 		it('should close when overlay is clicked', async () => {
 			render(Drawer, {
 				content: mockContent,
@@ -32,7 +32,7 @@ describe('Drawer component', () => {
 			const overlay = screen.getByLabelText('Close Drawer');
 			await fireEvent.click(overlay);
 
-			const checkbox = screen.getByRole('checkbox');
+			const checkbox = screen.getByRole('checkbox', { hidden: true });
 			expect(checkbox).not.toBeChecked();
 		});
 
@@ -42,7 +42,7 @@ describe('Drawer component', () => {
 				open: false
 			});
 
-			const checkbox = screen.getByRole('checkbox');
+			const checkbox = screen.getByRole('checkbox', { hidden: true });
 			expect(checkbox).not.toBeChecked();
 
 			//Toggle on drawer

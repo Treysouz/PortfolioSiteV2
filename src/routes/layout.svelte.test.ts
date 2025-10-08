@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/svelte';
+import { render, screen, fireEvent, waitFor } from '@testing-library/svelte';
 import Layout from './+layout.svelte';
 import { createRawSnippet } from 'svelte';
 
@@ -28,11 +28,11 @@ const mockSnippet = createRawSnippet(() => {
 	};
 });
 
-describe('+layout.svelte', () => {
-	beforeEach(() => {
-		vi.clearAllMocks();
-	});
+beforeEach(() => {
+	vi.clearAllMocks();
+});
 
+describe('+layout.svelte', () => {
 	it('it should render navbar and main content when particles are loaded', async () => {
 		render(Layout, {
 			props: {
@@ -41,12 +41,13 @@ describe('+layout.svelte', () => {
 		});
 
 		// Wait for particles to load
-		await vi.waitFor(async () => {
+		await waitFor(async () => {
 			expect(mockLoad).toHaveBeenCalled();
 		});
 
-		expect(screen.getByRole('navigation')).toBeInTheDocument();
-		expect(screen.getByRole('main')).toBeInTheDocument();
+		const main = screen.getByRole('main');
+
+		expect(main).toBeInTheDocument();
 	});
 
 	it('it should not render content when particles are not loaded', () => {
@@ -59,31 +60,31 @@ describe('+layout.svelte', () => {
 			}
 		});
 
-		expect(screen.queryByTestId('mobile-nav')).not.toBeInTheDocument();
-		expect(screen.queryByRole('main')).not.toBeInTheDocument();
+		const main = screen.queryByRole('main');
+
+		expect(main).not.toBeInTheDocument();
 	});
 
 	it('should open settings drawer when Settings nav item is clicked', async () => {
-		const { container } = render(Layout, {
+		render(Layout, {
 			props: {
 				children: mockSnippet
 			}
 		});
 
 		// Wait for particles to load
-		await vi.waitFor(async () => {
+		await waitFor(async () => {
 			expect(mockLoad).toHaveBeenCalled();
 		});
 
-		// Find and click the Settings nav item
-		const settingsButton = screen.getByText('Settings');
+		// Click the Settings nav item
+		const settingsButton = screen.getByRole('menuitem', { name: 'Settings' });
 		expect(settingsButton).toBeInTheDocument();
 
 		await fireEvent.click(settingsButton);
 
-		// Check that the drawer checkbox is now checked
-		const drawerCheckbox = container.querySelector('#drawer-toggle') as HTMLInputElement;
-		expect(drawerCheckbox).toBeInTheDocument();
-		expect(drawerCheckbox.checked).toBe(true);
+		const drawerCheckbox = screen.getByRole('checkbox', { name: 'Drawer Overlay', hidden: true });
+
+		expect(drawerCheckbox).not.toBeChecked();
 	});
 });

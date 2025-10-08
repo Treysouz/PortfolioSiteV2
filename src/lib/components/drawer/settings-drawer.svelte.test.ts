@@ -1,5 +1,5 @@
 import { describe, expect, it, test, beforeEach } from 'vitest';
-import { fireEvent, render, screen, waitFor } from '@testing-library/svelte';
+import { fireEvent, render, screen } from '@testing-library/svelte';
 import SettingsDrawer from './settings-drawer.svelte';
 import { SettingsStore, DEFAULT_SETTINGS } from '$lib/stores/settings.svelte';
 
@@ -16,10 +16,15 @@ describe('Settings Drawer component', () => {
 		it('should close drawer when close button is clicked', async () => {
 			render(SettingsDrawer, { open: true });
 
-			const closeButton = screen.getByRole('button', { name: 'Close Drawer' });
+			//Click close button
+			const closeButton = screen.getByRole('button', {
+				name: 'Close Drawer',
+				hidden: true
+			});
 			await fireEvent.click(closeButton);
 
-			const checkbox = screen.getByRole('checkbox', { name: 'Close Drawer' });
+			const checkbox = screen.getByRole('checkbox', { name: 'Drawer Overlay', hidden: true });
+
 			expect(checkbox).not.toBeChecked();
 		});
 	});
