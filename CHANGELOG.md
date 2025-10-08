@@ -1,3 +1,18 @@
+# [1.9.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.8.1...v1.9.0) (2025-10-08)
+
+
+### Bug Fixes
+
+* [TSPS-40] - Fixed flaky E2E tests ([7eb7174](https://github.com/Treysouz/PortfolioSiteV2/commit/7eb717407d2fc47e0f018ba1941b64933b703531))
+
+
+### Features
+
+* [TSPS-40] - Added drawer component.  Started resolving testing ([9d3921a](https://github.com/Treysouz/PortfolioSiteV2/commit/9d3921aa82b7ec6a5aaa2bb65cf0fb3e88867fc1))
+* [TSPS-40] - Disabled resume button ([481b2af](https://github.com/Treysouz/PortfolioSiteV2/commit/481b2afd1d1dcec8a387e7c0271c20eb2da54d3d))
+* [TSPS-40] - Disabled resume button ([2c514d5](https://github.com/Treysouz/PortfolioSiteV2/commit/2c514d572b805cc2bf94e1ebbcc3d1042496059d))
+* [TSPS-40] - Finished unit and e2e tests ([29fe0fb](https://github.com/Treysouz/PortfolioSiteV2/commit/29fe0fb77aeb034c8c0d6732f55629028f28cd28))
+
 ## [1.8.1](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.8.0...v1.8.1) (2025-10-06)
 
 
