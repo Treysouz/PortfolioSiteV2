@@ -10,7 +10,7 @@ test.describe('Accessibility', () => {
 				page
 			}) => {
 				//Go to route
-				await page.goto(route);
+				await page.goto(route, { waitUntil: 'networkidle' });
 
 				//wait for particles background to load
 				await page.waitForSelector('#particles');
