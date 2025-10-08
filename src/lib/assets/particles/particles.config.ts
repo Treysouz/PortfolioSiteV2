@@ -29,7 +29,7 @@ export const particlesConfig: IOptions = {
 	defaultThemes: {},
 	delay: 0,
 	fullScreen: {
-		enable: true,
+		enable: false,
 		zIndex: 0
 	},
 	detectRetina: true,
@@ -59,7 +59,7 @@ export const particlesConfig: IOptions = {
 			},
 			resize: {
 				delay: 0.5,
-				enable: true
+				enable: false
 			}
 		},
 		modes: {

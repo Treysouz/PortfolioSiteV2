@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Card, Greeting, Icon, Section, IconWrapper } from '$lib/components';
+	import { Card, Greeting, Icon, IconWrapper } from '$lib/components';
+	import { Section } from '../section-wrapper';
 
 	/** Section to welcome users to the site introducing name and title of developer. */
 </script>

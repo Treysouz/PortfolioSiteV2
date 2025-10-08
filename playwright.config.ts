@@ -4,7 +4,8 @@ export default defineConfig({
 	webServer: {
 		command: 'npm run build && npm run preview',
 		port: 4173,
-		reuseExistingServer: false
+		reuseExistingServer: true
 	},
-	testDir: 'e2e'
+	testDir: 'e2e',
+	timeout: 10000
 });

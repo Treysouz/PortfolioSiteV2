@@ -1,7 +1,8 @@
 <script lang="ts">
+	/** Section Wrapper Component */
+
 	import type { Snippet } from 'svelte';
 
-	/** Card Component */
 	interface Props {
 		/**ID for section element*/
 		id: string;
@@ -20,7 +21,9 @@
 	<div class="flex h-full w-full flex-col">
 		{#if header}
 			<div class="flex max-w-xl flex-row items-center space-x-4 pb-4 sm:pb-8">
-				<h2 class="whitespace-nowrap text-3xl font-bold text-white">{header}</h2>
+				<h2 class="whitespace-nowrap text-lg font-bold text-white lg:text-xl 2xl:text-3xl">
+					{header}
+				</h2>
 				<div class="h-0.5 w-full bg-white"></div>
 			</div>
 		{/if}

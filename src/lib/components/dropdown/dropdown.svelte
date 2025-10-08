@@ -69,7 +69,7 @@
 	});
 </script>
 
-<details class="cursor-pointer {className}" bind:open bind:this={detailsElement}>
+<details class="cursor-pointer after:content-none {className}" bind:open bind:this={detailsElement}>
 	<summary
 		aria-expanded={open}
 		aria-label={toggleLabel}
@@ -80,12 +80,3 @@
 	</summary>
 	{@render menu()}
 </details>
-
-<style>
-	details > summary {
-		list-style: none;
-	}
-	details > summary::-webkit-details-marker {
-		display: none;
-	}
-</style>

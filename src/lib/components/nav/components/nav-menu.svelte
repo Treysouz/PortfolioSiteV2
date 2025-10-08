@@ -5,15 +5,16 @@
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
 	import type { NavItemConfig } from '../nav.types';
+	import type { Snippet } from 'svelte';
 
 	interface Props {
-		/** Handler for menu item click */
-		onItemClick?: (event: MouseEvent) => unknown;
 		/** Classes for menu */
 		class?: string;
+		/** Additional items to render in nav menu*/
+		additional?: Snippet;
 	}
 
-	let { onItemClick = undefined, class: className = '' }: Props = $props();
+	let { class: className = '', additional = undefined }: Props = $props();
 
 	/** The section of the page currently in view. */
 	let activeSection: string = $state('');
@@ -43,13 +44,13 @@
 			text: 'Projects',
 			href: '/#projects',
 			sectionId: 'projects'
-		},
-		{
-			svg: 'cog',
-			text: 'Settings',
-			href: '/settings',
-			sectionId: 'settings'
 		}
+		// {
+		// 	svg: 'cog',
+		// 	text: 'Settings',
+		// 	href: '/settings',
+		// 	sectionId: 'settings'
+		// }
 	];
 
 	/**
@@ -110,16 +111,18 @@
 	});
 </script>
 
-<ul class="overflow-auto {className}" role="menu">
+<ul class="sm:overflow-auto {className}" role="menu">
 	{#each linkConfigs as config (config.sectionId)}
 		<li role="menuitem" class="w-full">
 			<NavItem
 				class="lg:size-30 w-full p-2 text-sm sm:p-4 md:text-lg"
-				onclick={onItemClick}
 				svg={config.svg}
 				text={config.text}
 				anchorProps={{ href: config.href }}
 				isActive={activeSection === config.sectionId}></NavItem>
 		</li>
 	{/each}
+	{#if additional}
+		{@render additional()}
+	{/if}
 </ul>

@@ -21,8 +21,6 @@
 		open?: boolean;
 		/** Additional CSS classes to apply to the component */
 		class?: string;
-		/** Text size for the search input field */
-		inputTextSize?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl';
 		/** Whether search box is enabled */
 		enableSearch?: boolean;
 		/** Placeholder text to show if no selection is made */
@@ -50,7 +48,6 @@
 		enableSearch = false,
 		value = $bindable(undefined),
 		class: className = '',
-		inputTextSize = undefined,
 		multiple = false,
 		placeholder = '',
 		onselect = undefined
@@ -199,13 +196,13 @@
 	aria-controls="combobox-menu"
 	aria-haspopup="listbox"
 	aria-label={label}
-	class={className}>
+	class="h-8 sm:h-10 {className}">
 	<Dropdown
 		{label}
 		bind:open
 		class="h-full w-full"
 		onkeydown={handleKeydown}
-		toggleClass="input bg-black/25 shadow-lg backdrop-blur-lg focus-within:outline-accent  focus-within:outline-offset-0 h-10 focus-within:outline-1 {open
+		toggleClass="input bg-black/25 shadow-lg backdrop-blur-lg focus-within:outline-accent  focus-within:outline-offset-0 h-full focus-within:outline-1 {open
 			? 'outline-accent outline-1'
 			: ''}">
 		{#snippet toggle()}
@@ -229,7 +226,7 @@
 				{/if}
 
 				<div class="flex h-full items-center justify-center space-x-2 pl-2">
-					<Icon svg={open ? 'chevron-up' : 'chevron-down'} class="size-5"></Icon>
+					<Icon svg={open ? 'chevron-up' : 'chevron-down'} class="size-4 sm:size-6"></Icon>
 				</div>
 			</div>
 		{/snippet}
@@ -243,7 +240,6 @@
 							aria-label={`Search ${label}`}
 							type="search"
 							bind:this={textboxComponent}
-							textSize={inputTextSize}
 							placeholder="Search"
 							oninput={(event) => {
 								filterOptions(event.currentTarget.value);
@@ -260,7 +256,7 @@
 							onclick={clearValue}
 							title={clearButtonLabel}
 							disabled={!value?.length}
-							class="text-info cursor-pointer p-0 text-xs hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50">
+							class="text-info cursor-pointer p-0 text-sm hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50">
 							clear selection
 						</button>
 					</div>

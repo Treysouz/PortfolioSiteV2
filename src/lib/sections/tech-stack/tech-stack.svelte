@@ -1,10 +1,12 @@
 <script lang="ts">
 	/** Section to show tech experience */
 
-	import { Section, Table } from '$lib/components';
+	import { Table } from '$lib/components';
 	import { useQueryClient } from '@tanstack/svelte-query';
 	import { queryTechData } from '$lib/utils/tech';
 	import TechCard from './components/tech-card.svelte';
+	import { Section } from '../section-wrapper';
+
 	import {
 		getCoreRowModel,
 		type ColumnDef,
@@ -213,7 +215,7 @@
 
 <Section id="tech" header="Tech Stack" class="h-full">
 	<div class="flex h-full min-h-0 flex-col space-y-4 sm:space-y-8">
-		<p class="text-shadow-lg text-sm md:text-base">
+		<p class="text-shadow-lg text-xs sm:text-base">
 			A collection of technologies and services I've worked with, with stars showing my level of
 			proficiency.
 		</p>

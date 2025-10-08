@@ -9,7 +9,11 @@ test.describe('Accessibility', () => {
 			test('should not have any automatically detectable accessibility issues', async ({
 				page
 			}) => {
-				await page.goto(route);
+				//Go to route
+				await page.goto(route, { waitUntil: 'networkidle' });
+
+				//wait for particles background to load
+				await page.waitForSelector('#particles');
 
 				const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
 
