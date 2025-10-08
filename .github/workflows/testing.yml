@@ -127,19 +127,3 @@ jobs:
       - name: Mark tests as failed
         if: failure()
         run: echo "success=false" >> $GITHUB_OUTPUT
-
-      - name: Test Summary
-        if: always()
-        run: |
-          if [ "${{ job.status }}" == "success" ]; then
-            echo "✅ All tests passed successfully!"
-            echo "---------------------------------"
-            echo "🔍 Linting: ✅"
-            echo "🧪 Unit tests: ✅"
-            echo "🖥️ E2E tests: ✅"
-          else
-            echo "❌ Tests failed!"
-            echo "----------------"
-            echo "🔍 Check the logs above for details"
-            echo "⚠️ Deployment will be skipped"
-          fi
