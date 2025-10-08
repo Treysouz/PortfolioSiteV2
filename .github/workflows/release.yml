@@ -1,8 +1,8 @@
 name: 🏷️ Release
 
 permissions:
-  contents: write # Push commits and create tags
-  issues: read # Read issues for release notes
+  contents: write
+  issues: read
 
 on:
   workflow_call:
