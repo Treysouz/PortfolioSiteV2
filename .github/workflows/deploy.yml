@@ -79,10 +79,9 @@ jobs:
         run: |
           PROJECT_NAME="portfolio-site"
           if [ "${{ inputs.production }}" = "true" ]; then
-            echo "deployment-url=https://${PROJECT_NAME}.pages.dev" >> $GITHUB_OUTPUT
+            echo "deployment-url=https://treysouzcodes.dev" >> $GITHUB_OUTPUT
           else
             # For preview deployments, construct the URL with the commit hash
             COMMIT_HASH="${{ github.sha }}"
-            SHORT_HASH="${COMMIT_HASH:0:8}"
-            echo "deployment-url=https://${SHORT_HASH}.${PROJECT_NAME}.pages.dev" >> $GITHUB_OUTPUT
+            echo "deployment-url=https://head.portfolio-site-1r3.pages.dev" >> $GITHUB_OUTPUT
           fi
