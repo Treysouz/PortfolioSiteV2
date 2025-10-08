@@ -1,94 +1,159 @@
-A Front-End Developer Portfolio Site.
+# Portfolio Site v2
 
-# sv
+A portfolio site highlighting my development experience, tech stack, and the projects I’ve built.
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+**Production URL:** https://www.treysouzcodes.dev
 
-## Creating a project
+## Tech Stack
 
-If you're seeing this, you've probably already done this step. Congrats!
+### Framework & Language
+
+- **[SvelteKit](https://svelte.dev/docs/kit/introduction)** - Framework built on Svelte
+- **[TypeScript](https://www.typescriptlang.org/)** - Type safety
+- **[Vite](https://vite.dev/)** - Build tool
+
+### Styling
+
+- **[Tailwind CSS](https://tailwindcss.com/)** - CSS framework
+- **[DaisyUI](https://daisyui.com/)** - Tailwind component library
+- **[tsParticles](https://particles.js.org/)** - Used for animated bubbles background
+
+### Data & State Management
+
+- **[TanStack Query](https://tanstack.com/query/latest)** - Used to cache API responses
+- **[Supabase](https://supabase.com/)** - Backend provider for database and API
+
+### Misc. Libraries
+
+- **[TanStack Table](https://tanstack.com/table/latest)** - Headless table library
+- **[Fuse.js](https://www.fusejs.io/)** - Fuzzy search for comboboxes
+- **[UUID](https://github.com/uuidjs/uuid#readme)** - Generating unique IDs (leveraged for handling user-facing error dismissals)
+
+### Testing
+
+- **[Vitest](https://vitest.dev/)** - Unit testing
+- **[Playwright](https://playwright.dev/)** - E2E testing
+- **[Testing Library](https://testing-library.com/docs/svelte-testing-library/intro/)** - Utility functions for unit testing
+- **[@axe-core/playwright](https://www.npmjs.com/package/axe-playwright)** - Accessibility testing
+
+### Code Quality & Tooling
+
+- **[ESLint](https://eslint.org/)** - Linter
+- **[Prettier](https://prettier.io/)** - Code formatter
+- **[Husky](https://typicode.github.io/husky/)** - Git hooks for pre-commit checks
+- **[Commitlint](https://commitlint.js.org/)** - Conventional commit enforcement
+- **[Semantic Release](https://semantic-release.gitbook.io/semantic-release/)** - Automated versioning and changelog
+
+## Getting Started
+
+### Prerequisites
+
+- **Node.js 24.x**
+- **npm**
+
+### Installation
+
+#### 1) Clone the repository
 
 ```sh
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+git clone https://github.com/Treysouz/PortfolioSiteV2.git
 ```
 
-## Developing
+#### 2) Navigate to project directory
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```sh
+cd PortfolioSiteV2
+```
+
+#### 3) Install dependencies
+
+```sh
+npm install
+```
+
+### Development
+
+#### - Start development server
 
 ```sh
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+### Building
 
-To create a production version of your app:
+#### 1) Create production build
 
 ```sh
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+#### 2) Preview production build locally
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```sh
+npm run preview
+```
 
-## Things to consider for proper README
+### Code Quality
 
-### Why Node 22?
+#### - Format code
 
-- At the time of development, Vercel only supports up to Node 22.
+```sh
+npm run format
+```
 
-## 🔍 Workflow Details
+#### - Lint code
 
-### Testing Workflow (Reusable)
+```sh
+npm run lint
+```
 
-**Purpose**: Shared testing logic used by all deployment workflows
+#### - Type check
 
-**What it does**:
+```sh
+npm run check
+```
 
-- Runs linting, unit tests, and e2e tests concurrently
-- Generates test coverage reports
-- Only callable by other workflows (no manual trigger)
+## Testing
 
-### Deploy Workflow (Reusable)
+### Unit Tests
 
-**Purpose**: Shared deployment logic for both preview and production
+#### - Run unit tests
 
-**What it does**:
+```sh
+npm run test:unit
+```
 
-- Calls testing.yml workflow first
-- Deploys to Vercel (preview or production based on parameters)
-- Only deploys if tests pass
-- Returns deployment URL for use by calling workflows
+#### - Run unit tests with coverage
 
-### Deploy Preview Workflow
+```sh
+npm run test:unit-coverage
+```
 
-**Triggers**:
+### E2E Tests
 
-- PR opened, updated, or reopened on `main` branch (automatic)
-- Manual trigger via workflow_dispatch (manual)
+#### - Run E2E tests
 
-**Flow**:
+```sh
+npm run test:e2e
+```
 
-1. **deploy**: Calls deploy.yml workflow (which calls testing.yml first)
-2. **ai-code-review**: Provides AI review (only on PR creation)
-3. **comment-results**: Posts summary on PR
+#### - Run E2E tests with Playwright UI
 
-### Deploy Production Workflow
+```sh
+npm run test:e2e-ui
+```
 
-**Triggers**:
+### Running All Tests
 
-- Push to `main` branch (automatic)
-- Manual trigger via workflow_dispatch (manual)
+```sh
+npm test
+```
 
-**Flow**:
+## CI/CD
 
-1. **deploy**: Calls deploy.yml workflow (which calls testing.yml first)
-2. **notify-completion**: Sends success/failure notifications
+-- Coming Soon --
+
+## Acknowledgments
+
+- Deployed using [Wrangler/Cloudflare](https://developers.cloudflare.com/workers/wrangler/)
+- As of 10/08/2025 (when this portion of the README was last updated), Tanstack Table is not compatible with Svelte 5. Code for an adapter to get everything working was leveraged from this [PR](https://github.com/Tanstack/table/pull/5403/files) by [KevinVanday](https://github.com/KevinVandy)

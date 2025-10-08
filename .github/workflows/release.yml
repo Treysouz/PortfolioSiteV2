@@ -1,8 +1,8 @@
 name: 🏷️ Release
 
 permissions:
-  contents: write # Push commits and create tags
-  issues: read # Read issues for release notes
+  contents: write
+  issues: read
 
 on:
   workflow_call:
@@ -42,7 +42,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: 'npm'
 
       - name: Cache node_modules
