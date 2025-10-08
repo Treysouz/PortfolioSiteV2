@@ -63,7 +63,7 @@
 				</div>
 			</div>
 			<div class="mx-4 border-b pb-4 sm:mx-8 sm:pb-8">
-				<p class="text-shadow-lg text-xs sm:text-base">Customize your site experience.</p>
+				<p class="text-shadow-lg text-xs sm:text-base">Customize the site's UI.</p>
 			</div>
 			<ul class="pt-4 sm:px-4 2xl:text-lg">
 				<li>
@@ -92,7 +92,7 @@
 							<SettingsToggle
 								id="animated-bg-toggle"
 								title="Animated Background"
-								tooltip="Animated particles background."
+								tooltip="Animated bubble particles background."
 								bind:checked={SettingsStore.animatedBg}></SettingsToggle>
 							<SettingsToggle
 								id="transitions-toggle"

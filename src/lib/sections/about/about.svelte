@@ -33,13 +33,14 @@
 				</p>
 			</Card>
 			<Card class="max-w-full p-0 sm:w-min sm:p-4">
-				<div class="flex flex-row items-center space-x-4">
+				<div
+					class="grid w-full grid-cols-2 flex-row items-center justify-between sm:flex sm:space-x-4">
 					<NavItem
 						svg="document-text"
 						text="Resume"
 						class={navItemClass}
 						anchorProps={{
-							href: '',
+							href: 'https://kfppfwgizztmqwhyymqq.supabase.co/storage/v1/object/public/Documents/Draft.pdf',
 							target: '_blank',
 							rel: 'noopener'
 						}}></NavItem>
