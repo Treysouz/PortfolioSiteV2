@@ -1,3 +1,25 @@
+# [1.11.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.10.0...v1.11.0) (2025-10-08)
+
+
+### Bug Fixes
+
+* [TSPS-31] - Added pages_build_output_dir to wrangler.json ([f46ac7b](https://github.com/Treysouz/PortfolioSiteV2/commit/f46ac7b7d54118c6b2e588fbcc691026b1bc5459))
+* [TSPS-31] - Added pages_build_output_dir to wrangler.json ([b826409](https://github.com/Treysouz/PortfolioSiteV2/commit/b826409f33243c0ba3669c2a5f3b671ea6e0104d))
+* [TSPS-31] - Added project name to wrangler action ([4394646](https://github.com/Treysouz/PortfolioSiteV2/commit/4394646545ea1b6a805c8427d96e0a7902dd8655))
+* [TSPS-31] - Another potential fix for workflow ([f17aeec](https://github.com/Treysouz/PortfolioSiteV2/commit/f17aeec9e96a91e183263d7c44917bf95cfbb435))
+* [TSPS-31] - Changed URL in workflow summaries ([b0472fa](https://github.com/Treysouz/PortfolioSiteV2/commit/b0472fa5db144372d5f0b03a7f2e5dc869e08d41))
+* [TSPS-31] - Potential dependency conflict fix ([207819d](https://github.com/Treysouz/PortfolioSiteV2/commit/207819d848e7e240a67ebc494a940d835db9e222))
+* [TSPS-31] - Potential push fix ([676f9d6](https://github.com/Treysouz/PortfolioSiteV2/commit/676f9d60d886eda4c588f33f0b6c7cecbff9cea4))
+* [TSPS-31] - Potential workflow fix ([9cf6b8a](https://github.com/Treysouz/PortfolioSiteV2/commit/9cf6b8a1dc26cf040b9aed5e47be7c8ff2f09e7a))
+* [TSPS-31] - Removed pages_build_output_dir to wrangler.json ([76380d5](https://github.com/Treysouz/PortfolioSiteV2/commit/76380d54949a84dd3d75e186f764cca44f8b2c1d))
+* [TSPS-31] - Reverted env varaible name change in workflow ([35728e3](https://github.com/Treysouz/PortfolioSiteV2/commit/35728e3bfa44c630104602b559b02456a7680c9e))
+* [TSPS-31] - Workflow fixes hopefully ([c336451](https://github.com/Treysouz/PortfolioSiteV2/commit/c3364515a9b6c45957a0ef0d21e50caf2f9ca524))
+
+
+### Features
+
+* [TSPS-31] - Added footer component.  Switched to Cloudflare from Vercel.  Updated README ([5ce543d](https://github.com/Treysouz/PortfolioSiteV2/commit/5ce543ddd32cfc93e6e59e80987a7234b06fbb9e))
+
 # [1.10.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.9.0...v1.10.0) (2025-10-08)
 
 
