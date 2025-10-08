@@ -6,6 +6,7 @@
 	import { queryTechData } from '$lib/utils/tech';
 	import TechCard from './components/tech-card.svelte';
 	import { Section } from '../section-wrapper';
+	import { addErrorToStore } from '$lib/stores/alert';
 
 	import {
 		getCoreRowModel,
@@ -25,10 +26,10 @@
 	/** Current global filter/search value */
 	let globalFilterValue: string = $state('');
 
-	/** Current column filter state (e.g., tech type filters) */
+	/** Current column filter state  */
 	let columnFilterState: ColumnFiltersState = $state([]);
 
-	/** Current sorting state - defaults to proficiency descending */
+	/** Current sorting state */
 	let sortingState: SortingState = $state([
 		{
 			id: 'proficiency',
@@ -104,16 +105,15 @@
 
 			const response = await queryTechData(queryClient, searchValue, selectedTechTypes, sortConfig);
 			data = response;
-		} catch (e) {
-			console.error(e);
+		} catch (error) {
+			addErrorToStore('Failed to Query Tech Data', error);
 		} finally {
 			loading = false;
 		}
 	};
 
 	/**
-	 * Handler for Tanstack table state changes.
-	 * @template T - Type of the state being updated
+	 * Handler for table state changes.
 	 * @param updater - Either a new state value or function that transforms old state
 	 * @param state - Current state value
 	 * @returns Updated state value

@@ -4,15 +4,15 @@
 	import { Section } from '../section-wrapper';
 
 	/** Class for Nav Items*/
-	const navItemClass = 'grow md:size-30 rounded-lg p-4';
+	const navItemClass = 'md:size-30 p-2 sm:p-4';
 </script>
 
 <Section id="about" header="About Me">
 	<div
 		class="flex h-full w-full grow flex-col justify-between space-x-4 space-y-4 tracking-wide sm:space-x-8 sm:space-y-8 xl:flex-row xl:space-y-0">
 		<div class="flex w-full flex-col justify-between space-y-4 sm:space-y-8">
-			<Card class="w-full space-y-4 p-4 text-sm sm:p-8">
-				<p class="md:text-base">
+			<Card class="w-full space-y-4 p-4 sm:p-8">
+				<p class="text-sm md:text-base">
 					I've been coding in one way or another for over 13 years — from tinkering with Myspace
 					HTML templates and small school projects to building internal tooling for fast-growing
 					companies. For the past 7 years, I've worked as a professional Front-End Developer pushing
@@ -32,9 +32,9 @@
 					problems and improve the user experience.
 				</p>
 			</Card>
-			<Card class="max-w-full p-0 sm:w-min sm:p-4">
+			<Card class="max-w-full p-0 sm:w-min">
 				<div
-					class="grid w-full grid-cols-2 flex-row items-center justify-between sm:flex sm:space-x-4">
+					class="flex w-full flex-row flex-wrap items-center justify-around overflow-hidden rounded-lg sm:flex-nowrap sm:space-x-4">
 					<!-- <NavItem
 						svg="document-text"
 						text="Resume"

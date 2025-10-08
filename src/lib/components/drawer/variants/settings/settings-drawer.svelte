@@ -1,10 +1,9 @@
 <script lang="ts">
 	/** Drawer component for adjusting settings */
 
-	import Drawer from './drawer.svelte';
-	import Icon from '../icon/icon.svelte';
-	import SettingsToggle from './components/settings-toggle.svelte';
-	import { SettingsStore, SETTINGS_STORAGE_KEY } from '$lib/stores/settings.svelte.js';
+	import { Drawer, Icon, CloseButton } from '$lib/components';
+	import SettingsToggle from '../settings/components/settings-toggle.svelte';
+	import { SettingsStore, SETTINGS_STORAGE_KEY } from '$lib/stores/settings';
 	import type { ChangeEventHandler } from 'svelte/elements';
 
 	interface Props {
@@ -53,13 +52,8 @@
 						<h3 class="text-lg font-bold lg:text-2xl 2xl:text-3xl">Settings</h3>
 						<div class="max-w-46 h-0.5 w-full bg-white"></div>
 					</div>
-					<button
-						class="btn btn-ghost hover:bg-secondary/25 mb-1 flex size-8 items-center justify-center border-none p-0 shadow-none hover:text-white/50"
-						onclick={closeDrawer}
-						title="Close Drawer"
-						aria-label="Close Drawer">
-						<Icon svg="x-mark" class="size-6"></Icon>
-					</button>
+					<CloseButton onclick={closeDrawer} title="Close Drawer" aria-label="Close Drawer">
+					</CloseButton>
 				</div>
 			</div>
 			<div class="mx-4 border-b pb-4 sm:mx-8 sm:pb-8">

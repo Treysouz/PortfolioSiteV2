@@ -2,6 +2,7 @@ import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor, fireEvent } from '@testing-library/svelte';
 import TechStack from './tech-stack.svelte';
 import { queryTechData } from '$lib/utils/tech';
+import * as alertStore from '$lib/stores/alert';
 import type { Tech } from '$lib/types/tech.types';
 
 // Mock the tech query utility
@@ -12,6 +13,11 @@ vi.mock('$lib/utils/tech', () => ({
 // Mock Tanstack Query
 vi.mock('@tanstack/svelte-query', () => ({
 	useQueryClient: vi.fn(() => ({}))
+}));
+
+// Mock alert store
+vi.mock('$lib/stores/alert', () => ({
+	addErrorToStore: vi.fn()
 }));
 
 const mockTechData: Tech[] = [
@@ -36,7 +42,7 @@ const mockTechData: Tech[] = [
 ];
 
 beforeEach(() => {
-	vi.clearAllMocks();
+	vi.resetAllMocks();
 	vi.mocked(queryTechData).mockResolvedValue(mockTechData);
 });
 
@@ -97,6 +103,19 @@ describe('Tech Stack Section', () => {
 					column: 'proficiency',
 					ascending: false
 				});
+			});
+		});
+
+		it('should call addErrorToStore() when querying data fails', async () => {
+			const mockError = new Error('Failed to fetch data');
+			vi.mocked(queryTechData).mockRejectedValueOnce(mockError);
+
+			const mockAddError = vi.mocked(alertStore.addErrorToStore);
+
+			render(TechStack);
+
+			await waitFor(() => {
+				expect(mockAddError).toHaveBeenCalledWith('Failed to Query Tech Data', mockError);
 			});
 		});
 	});

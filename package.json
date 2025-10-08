@@ -69,6 +69,7 @@
 		"@tanstack/table-core": "^8.21.3",
 		"@tsparticles/engine": "^3.9.1",
 		"@tsparticles/slim": "^3.9.1",
-		"fuse.js": "^7.1.0"
+		"fuse.js": "^7.1.0",
+		"uuid": "^13.0.0"
 	}
 }

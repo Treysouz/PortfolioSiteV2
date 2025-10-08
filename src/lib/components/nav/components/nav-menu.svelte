@@ -122,7 +122,5 @@
 				isActive={activeSection === config.sectionId}></NavItem>
 		</li>
 	{/each}
-	{#if additional}
-		{@render additional()}
-	{/if}
+	{@render additional?.()}
 </ul>

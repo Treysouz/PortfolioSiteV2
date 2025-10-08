@@ -55,7 +55,7 @@ vi.mock('@supabase/supabase-js', () => ({
 
 beforeEach(() => {
 	// Reset the mock before each test
-	vi.clearAllMocks();
+	vi.resetAllMocks();
 });
 
 describe('POST /data/tech', () => {
