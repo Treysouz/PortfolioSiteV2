@@ -35,7 +35,7 @@
 			<Card class="max-w-full p-0 sm:w-min sm:p-4">
 				<div
 					class="grid w-full grid-cols-2 flex-row items-center justify-between sm:flex sm:space-x-4">
-					<NavItem
+					<!-- <NavItem
 						svg="document-text"
 						text="Resume"
 						class="pointer-events-none opacity-50 {navItemClass}"
@@ -43,7 +43,7 @@
 							href: '',
 							target: '_blank',
 							rel: 'noopener'
-						}}></NavItem>
+						}}></NavItem> -->
 					<NavItem
 						svg="linkedin"
 						text="Linkedin"
