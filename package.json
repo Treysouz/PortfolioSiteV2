@@ -21,7 +21,6 @@
 	},
 	"devDependencies": {
 		"@axe-core/playwright": "^4.10.2",
-		"@cloudflare/workerd-linux-64": "^1.20251008.0",
 		"@commitlint/cli": "^19.8.1",
 		"@commitlint/config-conventional": "^19.8.1",
 		"@eslint/compat": "^1.2.5",
