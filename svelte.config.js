@@ -5,7 +5,12 @@ const config = {
 	preprocess: vitePreprocess(),
 	kit: {
 		adapter: adapter({
-			config: './wranger.json'
+			config: './wranger.json',
+			routes: {
+				include: ['/*'],
+				exclude: ['<all>']
+			},
+			fallback: 'plaintext'
 		})
 	}
 };
