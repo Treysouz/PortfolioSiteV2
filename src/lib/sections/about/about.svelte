@@ -38,9 +38,9 @@
 					<NavItem
 						svg="document-text"
 						text="Resume"
-						class={navItemClass}
+						class="pointer-events-none opacity-50 {navItemClass}"
 						anchorProps={{
-							href: 'https://kfppfwgizztmqwhyymqq.supabase.co/storage/v1/object/public/Documents/Draft.pdf',
+							href: '',
 							target: '_blank',
 							rel: 'noopener'
 						}}></NavItem>
