@@ -1,7 +1,7 @@
 import { describe, expect, it, test, beforeEach } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/svelte';
 import SettingsDrawer from './settings-drawer.svelte';
-import { SettingsStore, DEFAULT_SETTINGS } from '$lib/stores/settings.svelte';
+import { SettingsStore, DEFAULT_SETTINGS } from '$lib/stores/settings';
 
 beforeEach(() => {
 	SettingsStore.animatedBg = DEFAULT_SETTINGS.animatedBg;

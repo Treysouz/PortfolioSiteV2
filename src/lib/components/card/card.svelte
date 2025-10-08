@@ -16,7 +16,5 @@
 	data-testid="card"
 	class="animate-fade-in card bg-black/25 shadow-lg backdrop-blur-lg
  {className}">
-	{#if children}
-		{@render children()}
-	{/if}
+	{@render children?.()}
 </div>

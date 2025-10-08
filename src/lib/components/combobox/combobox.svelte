@@ -77,6 +77,8 @@
 	);
 	/** Label for clear button*/
 	let clearButtonLabel = $derived(`Clear ${label} Selection`);
+	/** Unique ID for combobox*/
+	let comboboxMenuId = $derived(`combobox-menu-${label.toLowerCase().trim()}`);
 
 	/** Clears all selected values from the combobox.
 	 * @param {Event} event - Event from clicking clear button.
@@ -193,7 +195,7 @@
 <div
 	role="combobox"
 	aria-expanded={open}
-	aria-controls="combobox-menu"
+	aria-controls={comboboxMenuId}
 	aria-haspopup="listbox"
 	aria-label={label}
 	class="h-8 sm:h-10 {className}">
@@ -261,7 +263,7 @@
 						</button>
 					</div>
 					<ul
-						id="combobox-menu"
+						id={comboboxMenuId}
 						class="max-h-50 w-full overflow-auto"
 						role="listbox"
 						aria-multiselectable={multiple}>
@@ -283,7 +285,7 @@
 										value={option} />
 									<div
 										data-testid="combobox-option-name"
-										class="peer-checked:bg-secondary/75 w-full cursor-pointer border-l-4 border-transparent px-4 py-2 text-sm outline-none peer-checked:border-white {highlighted
+										class="peer-checked:bg-secondary/50 w-full cursor-pointer border-l-4 border-transparent px-4 py-2 text-sm outline-none peer-checked:border-white {highlighted
 											? 'bg-secondary/25!'
 											: 'hover:bg-secondary/25'}">
 										{#if listItemComponent}

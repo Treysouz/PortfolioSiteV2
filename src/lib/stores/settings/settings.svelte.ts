@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { addErrorToStore } from '../alert';
 import type { Settings } from './settings.types';
 
 /** Default settings */
@@ -24,7 +25,7 @@ const loadFromlocalStorage = () => {
 		}
 		return DEFAULT_SETTINGS;
 	} catch (error) {
-		console.error(error);
+		addErrorToStore('Failed to Load Settings From Cache', error);
 	}
 };
 

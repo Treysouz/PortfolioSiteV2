@@ -2,6 +2,7 @@ import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/svelte';
 import Layout from './+layout.svelte';
 import { createRawSnippet } from 'svelte';
+import { addErrorToStore } from '$lib/stores/alert';
 
 // Mock tsParticles
 const mockLoadSlim = vi.fn().mockResolvedValue(undefined);
@@ -9,16 +10,18 @@ const mockLoad = vi.fn().mockResolvedValue(undefined);
 
 vi.mock('@tsparticles/engine', () => ({
 	tsParticles: {
-		load: () => {
-			mockLoad();
-		}
+		load: () => mockLoad()
 	}
 }));
 
 vi.mock('@tsparticles/slim', () => ({
-	loadSlim: () => {
-		mockLoadSlim();
-	}
+	loadSlim: () => mockLoadSlim()
+}));
+
+// Mock alert store
+vi.mock('$lib/stores/alert', () => ({
+	alertStore: new Map(),
+	addErrorToStore: vi.fn()
 }));
 
 // Mock content to render
@@ -29,7 +32,7 @@ const mockSnippet = createRawSnippet(() => {
 });
 
 beforeEach(() => {
-	vi.clearAllMocks();
+	vi.resetAllMocks();
 });
 
 describe('+layout.svelte', () => {
@@ -63,6 +66,24 @@ describe('+layout.svelte', () => {
 		const main = screen.queryByRole('main');
 
 		expect(main).not.toBeInTheDocument();
+	});
+
+	it('should call addErrorToStore() when particles background loading fails', async () => {
+		const mockError = new Error('Failed to load particles');
+		mockLoad.mockRejectedValueOnce(mockError);
+
+		render(Layout, {
+			props: {
+				children: mockSnippet
+			}
+		});
+
+		await waitFor(() => {
+			expect(addErrorToStore).toHaveBeenCalledWith(
+				'Failed to Load Animated Particles Background',
+				mockError
+			);
+		});
 	});
 
 	it('should open settings drawer when Settings nav item is clicked', async () => {

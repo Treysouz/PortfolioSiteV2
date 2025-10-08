@@ -21,19 +21,25 @@
 		data?: Entity[];
 		/** Whether data is currently loading */
 		loading?: boolean;
+		/** Whether an error occurerd while getting data */
+		errorThrown?: boolean;
 	}
 
-	let { options, tableItem, label, loading = false, data = undefined }: Props = $props();
+	let {
+		options,
+		tableItem,
+		label,
+		loading = false,
+		data = undefined,
+		errorThrown = false
+	}: Props = $props();
 
 	/** Array of columns that support filtering */
 	let filterableColums: Column<Entity, unknown>[] = $state([]);
-
 	/** Array of columns that support sorting */
 	let sortableColumns: Column<Entity, unknown>[] = $state([]);
-
 	/** Available sorting options generated from sortable columns */
 	let sortingOptions: SortingOptionConfig[] = $state([]);
-
 	/** Currently selected sorting configuration */
 	let selectedSortingOrder: SortingOptionConfig[] = $state([]);
 
@@ -193,7 +199,7 @@
 		<div class="flex h-full w-full items-center justify-center">
 			<span class="loading size-12 sm:size-16 lg:size-32"></span>
 		</div>
-	{:else if table && data?.length}
+	{:else if data?.length}
 		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 		<div
 			class="flex w-full flex-row flex-wrap items-start justify-center gap-4 overflow-auto border-t pt-4 sm:gap-8 sm:pt-8 xl:justify-start"
@@ -207,6 +213,6 @@
 			{/each}
 		</div>
 	{:else}
-		<NoResults isError={!table}></NoResults>
+		<NoResults isError={errorThrown}></NoResults>
 	{/if}
 </div>

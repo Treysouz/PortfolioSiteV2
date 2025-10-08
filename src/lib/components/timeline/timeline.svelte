@@ -27,7 +27,7 @@
 			startYear: 2018,
 			endYear: 2020,
 			description:
-				'Collaborated with executives and creative teams to develop responsive client-facingapplications and marketing tools using tech such as React, Node.js, jQuery, SASS, and Bootstrap.',
+				'Collaborated with executives and creative teams to develop responsive client-facing applications and marketing tools using tech such as React, Node.js, jQuery, SASS, and Bootstrap.',
 			icon: 'brief-case'
 		},
 		{
@@ -45,9 +45,10 @@
 
 <div>
 	{#each history as event (event.header)}
-		<div class="relative border-l-2 border-white pb-8 pl-12 text-sm tracking-normal last:pb-0">
-			<IconWrapper class="absolute -left-6 -top-3">
-				<Icon svg={event.icon} class="text-primary size-8"></Icon>
+		<div
+			class="relative border-l-2 border-white pb-8 pl-12 text-xs tracking-normal last:pb-0 sm:text-sm">
+			<IconWrapper class="absolute -left-4 -top-3 sm:-left-6">
+				<Icon svg={event.icon} class="text-primary size-6 sm:size-8"></Icon>
 			</IconWrapper>
 			<h3 class="font-bold tracking-widest">{event.header}</h3>
 			<h4>{event.subHeader}</h4>

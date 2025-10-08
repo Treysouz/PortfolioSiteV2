@@ -20,12 +20,12 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-	vi.clearAllMocks();
+	vi.resetAllMocks();
 });
 
 describe('api.utils', () => {
 	beforeEach(() => {
-		vi.clearAllMocks();
+		vi.resetAllMocks();
 	});
 
 	describe('getErrorData()', () => {

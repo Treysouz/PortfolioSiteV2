@@ -46,7 +46,7 @@ const mockQueryClient = {
 } as any;
 
 beforeEach(() => {
-	vi.clearAllMocks();
+	vi.resetAllMocks();
 	vi.mocked(post).mockResolvedValue(mockTechData);
 });
 

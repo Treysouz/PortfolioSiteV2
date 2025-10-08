@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from '../icon/icon.svelte';
+	import { Icon } from '$lib/components';
 	import type { Snippet } from 'svelte';
 	import type { FormEventHandler, HTMLInputAttributes } from 'svelte/elements';
 

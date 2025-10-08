@@ -7,16 +7,16 @@
 	import { loadSlim } from '@tsparticles/slim';
 	import { onMount } from 'svelte';
 	import { particlesConfig } from '$lib/assets';
-	import { NavBar, NavItem, SettingsDrawer } from '$lib/components';
+	import { NavBar, NavItem, SettingsDrawer, AlertCenter } from '$lib/components';
 	import { QueryClientProvider } from '@tanstack/svelte-query';
 	import { createQueryClient } from '$lib/utils/tanstack';
-	import { SettingsStore } from '$lib/stores/settings.svelte.js';
+	import { SettingsStore } from '$lib/stores/settings';
+	import { addErrorToStore } from '$lib/stores/alert';
 
 	let { children } = $props();
 
 	/** Whether the animated background has loaded. */
 	let particlesLoaded: boolean = $state(false);
-
 	/** Whether to open the settings drawer. */
 	let openSettings: boolean = $state(false);
 
@@ -38,8 +38,8 @@
 				options: particlesConfig
 			});
 			particlesLoaded = true;
-		} catch (e) {
-			console.error(e);
+		} catch (error) {
+			addErrorToStore('Failed to Load Animated Particles Background', error);
 		}
 	};
 
@@ -63,11 +63,16 @@
 		data-jonah-mode={SettingsStore.jonahMode}>
 		<SettingsDrawer bind:open={openSettings}></SettingsDrawer>
 
-		<div
-			id="particles"
-			class="animate-fade-in fixed h-dvh w-full"
-			class:hidden={!SettingsStore.animatedBg}>
+		<AlertCenter></AlertCenter>
+
+		<div class="fixed flex h-dvh items-center justify-center overflow-hidden">
+			<div
+				id="particles"
+				class="animate-fade-in fixed h-[2160px] w-[3840px]"
+				class:hidden={!SettingsStore.animatedBg}>
+			</div>
 		</div>
+
 		{#if particlesLoaded}
 			<NavBar>
 				{#snippet additionalItems()}
