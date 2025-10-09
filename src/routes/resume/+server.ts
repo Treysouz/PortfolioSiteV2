@@ -1,10 +1,11 @@
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import resumePdf from '$lib/assets/documents/resume.pdf?url';
 
 export const GET: RequestHandler = async ({ fetch }) => {
 	try {
-		const response = await fetch(resumePdf);
+		const response = await fetch(
+			'https://kfppfwgizztmqwhyymqq.supabase.co/storage/v1/object/public/Documents/Tremayne%20Souza%20-%20Resume%20-%20Front%20End%20Developer.pdf'
+		);
 
 		if (!response.ok) {
 			error(404, 'File not found');
