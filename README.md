@@ -107,12 +107,6 @@ npm run format
 npm run lint
 ```
 
-#### - Type check
-
-```sh
-npm run check
-```
-
 ## Testing
 
 ### Unit Tests
