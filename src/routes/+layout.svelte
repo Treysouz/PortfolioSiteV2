@@ -50,6 +50,9 @@
 
 <svelte:head>
 	<title>Tremayne Souza | Front-End Developer</title>
+	<meta
+		name="description"
+		content="Front-End development portfolio for Tremayne Souza showcasing professional experience, technical skills, and projects." />
 	<link rel="icon" type="image/png" sizes="32x32" href={favicon} />
 </svelte:head>
 
