@@ -1,3 +1,12 @@
+# [1.13.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.12.0...v1.13.0) (2025-10-09)
+
+
+### Features
+
+* [TSPS-41]  - Added link to resume.  Fixed dark/light mode issue causing svgs to seemingly disappear. ([e30df38](https://github.com/Treysouz/PortfolioSiteV2/commit/e30df387b6ec609095b453c5696fc60d5d67aa0e))
+* [TSPS-41] - Added meta description ([8630665](https://github.com/Treysouz/PortfolioSiteV2/commit/863066588199a51489721ef1b419ecd4bd8db78d))
+* [TSPS-41] Uploaded resume to supabase and pulled from there instead. ([189cc7c](https://github.com/Treysouz/PortfolioSiteV2/commit/189cc7cc5eb9150f6f082165c655562a9255de03))
+
 # [1.12.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.11.0...v1.12.0) (2025-10-09)
 
 
