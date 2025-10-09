@@ -1,3 +1,11 @@
+# [1.12.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.11.0...v1.12.0) (2025-10-09)
+
+
+### Features
+
+* [TSPS-0] - Version bump ([8544341](https://github.com/Treysouz/PortfolioSiteV2/commit/85443412df7f45999b4d4ea66048b452f3b4d39a))
+* [TSPS-41] - Hide animation background on smaller screens. ([6cb9c81](https://github.com/Treysouz/PortfolioSiteV2/commit/6cb9c81c2562a1d95bca8be16b584603e4990ec1))
+
 # [1.11.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.10.0...v1.11.0) (2025-10-08)
 
 
