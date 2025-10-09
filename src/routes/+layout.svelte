@@ -65,12 +65,10 @@
 
 		<AlertCenter></AlertCenter>
 
-		<div class="fixed flex h-dvh items-center justify-center overflow-hidden">
-			<div
-				id="particles"
-				class="animate-fade-in fixed h-[2160px] w-[3840px]"
-				class:hidden={!SettingsStore.animatedBg}>
-			</div>
+		<div
+			class="fixed flex h-dvh w-full items-center justify-center overflow-hidden"
+			class:hidden={!SettingsStore.animatedBg}>
+			<div id="particles" class="animate-fade-in fixed hidden h-[2160px] w-[3840px] sm:block"></div>
 		</div>
 
 		{#if particlesLoaded}

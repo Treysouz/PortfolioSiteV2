@@ -28,9 +28,12 @@
 		onclick = undefined,
 		class: className = ''
 	}: Props = $props();
+
+	let parentName = $derived(anchorProps?.href ? 'a' : 'div');
 </script>
 
-<a
+<svelte:element
+	this={parentName}
 	{onclick}
 	{...anchorProps}
 	class="sm:hover:bg-secondary/25 flex items-center justify-center font-bold text-white {className} {isActive
@@ -42,4 +45,4 @@
 		</IconWrapper>
 		<span class="whitespace-nowrap text-center text-xs sm:text-base">{text}</span>
 	</div>
-</a>
+</svelte:element>

@@ -266,7 +266,7 @@ export const particlesConfig: IOptions = {
 		},
 		number: {
 			density: {
-				enable: true,
+				enable: false,
 				width: 1920,
 				height: 1080
 			},
@@ -274,7 +274,7 @@ export const particlesConfig: IOptions = {
 				mode: 'delete',
 				value: 0
 			},
-			value: 8
+			value: 15
 		},
 		opacity: {
 			value: {

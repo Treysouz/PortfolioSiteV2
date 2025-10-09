@@ -1,12 +1,20 @@
 <script lang="ts">
+	// Settings Toggle Component
+
 	import type { ChangeEventHandler } from 'svelte/elements';
 
 	interface Props {
+		/** The label text displayed next to the toggle */
 		title: string;
+		/** ID for the toggle element */
 		id: string;
+		/** Whether toggle is on */
 		checked: boolean;
+		/** Tooltip text shown on hover */
 		tooltip?: string;
+		/** Whether component is intended to be a title for a collapsable section*/
 		isCollapseTitle?: boolean;
+		/** Toggle change event */
 		onchange?: ChangeEventHandler<HTMLInputElement>;
 	}
 
@@ -19,11 +27,12 @@
 		onchange = undefined
 	}: Props = $props();
 
-	let wrapperName = $derived(isCollapseTitle ? 'div' : 'li');
+	/** Tag of parent element*/
+	let parentName = $derived(isCollapseTitle ? 'div' : 'li');
 </script>
 
 <svelte:element
-	this={wrapperName}
+	this={parentName}
 	data-tip={tooltip}
 	class:tooltip={!!tooltip}
 	class="pointer-events-auto flex w-full flex-row items-center justify-between">
