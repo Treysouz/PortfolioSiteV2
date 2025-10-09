@@ -55,7 +55,6 @@ jobs:
           |------|---------|
           | 🔗 **Deployment URL** | [${{ needs.deploy.outputs.deployment-url }}](${{ needs.deploy.outputs.deployment-url }}) |
           | 🏷️ **Version** | \`${{ needs.release.outputs.version }}\` |
-          | 📋 **Release** | [${{ needs.release.outputs.release-url }}](${{ needs.release.outputs.release-url }}) |
           | 🔀 **Branch** | \`${{ github.ref }}\` |
 
           EOF

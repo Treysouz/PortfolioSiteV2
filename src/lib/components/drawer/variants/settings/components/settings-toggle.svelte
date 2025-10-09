@@ -35,7 +35,7 @@
 	this={parentName}
 	data-tip={tooltip}
 	class:tooltip={!!tooltip}
-	class="pointer-events-auto flex w-full flex-row items-center justify-between">
+	class="tooltip-primary pointer-events-auto flex w-full flex-row items-center justify-between">
 	<div
 		class="bg-transparent! flex h-full w-full flex-row rounded-none p-4 {isCollapseTitle
 			? ''

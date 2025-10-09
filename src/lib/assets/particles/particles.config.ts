@@ -274,7 +274,7 @@ export const particlesConfig: IOptions = {
 				mode: 'delete',
 				value: 0
 			},
-			value: 15
+			value: 20
 		},
 		opacity: {
 			value: {
