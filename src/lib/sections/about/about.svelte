@@ -35,15 +35,15 @@
 			<Card class="max-w-full p-0 sm:w-min">
 				<div
 					class="flex w-full flex-row flex-wrap items-center justify-around overflow-hidden rounded-lg sm:flex-nowrap sm:space-x-4">
-					<!-- <NavItem
+					<NavItem
 						svg="document-text"
 						text="Resume"
-						class="pointer-events-none opacity-50 {navItemClass}"
+						class={navItemClass}
 						anchorProps={{
-							href: '',
+							href: '/resume',
 							target: '_blank',
 							rel: 'noopener'
-						}}></NavItem> -->
+						}}></NavItem>
 					<NavItem
 						svg="linkedin"
 						text="Linkedin"

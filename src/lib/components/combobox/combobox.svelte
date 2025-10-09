@@ -56,11 +56,11 @@
 	/** Reference to the Textbox component for programmatic focus management */
 	let textboxComponent: ReturnType<typeof Textbox>;
 
-	/** Current filtered options based on search box input */
-	let filteredOptions: Entity[] = $state(options);
-
 	/** Index of the currently highlighted option for keyboard navigation */
 	let highlightedIndex: number = $state(-1);
+
+	/** Current filtered options based on search box input */
+	let filteredOptions: Entity[] = $derived(options);
 
 	/**
 	 * Fuse.js instance for fuzzy search functionality.
@@ -187,8 +187,9 @@
 	});
 	/** If options updates, reset highlighted index and reset filteredOptions*/
 	$effect(() => {
-		filteredOptions = options;
-		highlightedIndex = -1;
+		if (options) {
+			highlightedIndex = -1;
+		}
 	});
 </script>
 

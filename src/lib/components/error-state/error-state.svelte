@@ -19,7 +19,7 @@
 	<Card class="flex items-center justify-center p-4 sm:p-8">
 		<div class="flex flex-col items-center space-y-4 sm:space-y-8">
 			<IconWrapper class="size-20">
-				<Icon {svg} class="text-primary h-full w-full"></Icon>
+				<Icon {svg} class="text-primary h-full w-full p-2"></Icon>
 			</IconWrapper>
 			<div class="flex flex-col items-center space-y-2 text-center">
 				<span class="font-bold lg:text-xl 2xl:text-3xl">{header}</span>

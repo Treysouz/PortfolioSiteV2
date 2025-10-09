@@ -7,7 +7,6 @@
 	import TechCard from './components/tech-card.svelte';
 	import { Section } from '../section-wrapper';
 	import { addErrorToStore } from '$lib/stores/alert';
-
 	import {
 		getCoreRowModel,
 		type ColumnDef,
@@ -22,13 +21,10 @@
 
 	/** Array of tech data fetched from the API */
 	let data: Tech[] = $state([]);
-
 	/** Current global filter/search value */
 	let globalFilterValue: string = $state('');
-
 	/** Current column filter state  */
 	let columnFilterState: ColumnFiltersState = $state([]);
-
 	/** Current sorting state */
 	let sortingState: SortingState = $state([
 		{
@@ -36,7 +32,6 @@
 			desc: true
 		}
 	]);
-
 	/** Loading state indicator for data fetching */
 	let loading: boolean = $state(true);
 
