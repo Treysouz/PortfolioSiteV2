@@ -1,3 +1,15 @@
+# [1.14.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.13.0...v1.14.0) (2025-11-10)
+
+
+### Bug Fixes
+
+* [TSPS-41] - Downgrade to node 22 ([9bd0f67](https://github.com/Treysouz/PortfolioSiteV2/commit/9bd0f67c7c9be4f867bb5782c7b63111ea15afb3))
+
+
+### Features
+
+* [TSPS-41] - Switched back to using Vercel instead of Cloudflare.  Added gretting logic to server-side instead of client-side ([559e6f2](https://github.com/Treysouz/PortfolioSiteV2/commit/559e6f24179de0c6e2d9464001522c5695da3b3d))
+
 # [1.13.0](https://github.com/Treysouz/PortfolioSiteV2/compare/v1.12.0...v1.13.0) (2025-10-09)
 
 
