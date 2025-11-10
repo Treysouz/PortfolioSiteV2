@@ -1,7 +1,7 @@
+<!--Card Component-->
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
-	/** Card Component */
 	interface Props {
 		/** Content to render inside the card */
 		children?: Snippet;

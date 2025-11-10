@@ -1,7 +1,8 @@
+<!--Dropdown component-->
+
 <script lang="ts">
 	import { onMount, type Snippet } from 'svelte';
 
-	/** Dropdown component. */
 	interface Props {
 		/** Label for dropdown*/
 		label: string;

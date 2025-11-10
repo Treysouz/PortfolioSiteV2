@@ -1,6 +1,6 @@
-<script lang="ts">
-	// Component representing a grouping of alerts
+<!--Component representing a grouping of alerts-->
 
+<script lang="ts">
 	import { Alert } from '$lib/components';
 	import { alertStore } from '$lib/stores/alert';
 

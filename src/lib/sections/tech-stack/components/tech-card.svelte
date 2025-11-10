@@ -1,6 +1,6 @@
-<script lang="ts">
-	/** Tech card component to render inside the tech table*/
+<!--Tech card component to render inside the tech table-->
 
+<script lang="ts">
 	import { Card, Icon } from '$lib/components';
 	import type { Tech } from '$lib/types/tech.types';
 

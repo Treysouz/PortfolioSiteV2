@@ -1,7 +1,7 @@
+<!--Icon component for displaying SVG icons with type safety -->
+
 <script lang="ts">
 	import svgs from './svgs.js';
-
-	/** Icon component for displaying SVG icons with type safety. */
 
 	interface Props {
 		/** The name of the SVG icon to display (must be a valid key from svgs.ts) */

@@ -1,5 +1,6 @@
+<!--Section detailing developer's professional experience-->
+
 <script lang="ts">
-	/** Section detailing developer's professional experience */
 	import { Card, Timeline, NavItem } from '$lib/components';
 	import { Section } from '../section-wrapper';
 

@@ -1,6 +1,6 @@
-<script lang="ts">
-	// Error state component to render when something blows up.
+<!-- Error state component to render when something blows up -->
 
+<script lang="ts">
 	import { Icon, IconWrapper, Card, SVGS } from '$lib/components';
 
 	interface Props {

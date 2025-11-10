@@ -1,6 +1,6 @@
-<script lang="ts" generics="Entity">
-	/** Table Component */
+<!--Table Component-->
 
+<script lang="ts" generics="Entity">
 	import { createSvelteTable } from '$lib/utils/tanstack/table.utils.svelte';
 	import { Textbox, Combobox } from '$lib/components';
 	import NoResults from './components/no-results.svelte';

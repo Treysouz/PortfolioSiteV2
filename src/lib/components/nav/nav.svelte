@@ -1,6 +1,6 @@
-<script lang="ts">
-	/** Navigation component. */
+<!--Navigation component -->
 
+<script lang="ts">
 	import NavMenu from './components/nav-menu.svelte';
 	import { Card } from '$lib/components';
 	import type { Snippet } from 'svelte';

@@ -1,5 +1,6 @@
+<!--Component to render as a sorting option in the sorting combobox-->
+
 <script lang="ts">
-	/** Component to render as a sorting option in the sorting combobox*/
 	import { Icon } from '$lib/components';
 	import type { SortingOptionConfig } from '../table.types';
 

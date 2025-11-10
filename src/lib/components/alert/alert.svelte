@@ -1,6 +1,6 @@
-<script lang="ts">
-	// Alert message component to render when something blows up
+<!--Alert message component to render when something blows up-->
 
+<script lang="ts">
 	import { Icon, CloseButton } from '$lib/components';
 	import { removeErrorFromStore } from '$lib/stores/alert';
 
