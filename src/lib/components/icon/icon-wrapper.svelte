@@ -1,7 +1,8 @@
+<!--White background wrapper for Icon Component-->
+
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
-	/** White background wrapper for Icon Component */
 	interface Props {
 		/** Content to render inside the wrapper */
 		children?: Snippet;

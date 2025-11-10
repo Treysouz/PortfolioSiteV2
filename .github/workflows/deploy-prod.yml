@@ -23,16 +23,13 @@ jobs:
   release:
     name: Create Release
     needs: test
-    if: needs.test.result == 'success'
     uses: ./.github/workflows/release.yml
     secrets: inherit
 
   deploy:
     name: Deploy Production
     needs: [test, release]
-    if: |
-      needs.test.result == 'success' &&
-      needs.release.outputs.released == 'true'
+    if: needs.release.outputs.released == 'true'
     uses: ./.github/workflows/deploy.yml
     with:
       environment: 'Production'

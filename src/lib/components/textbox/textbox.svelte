@@ -1,9 +1,10 @@
+<!--Text Box component -->
+
 <script lang="ts">
 	import { Icon } from '$lib/components';
 	import type { Snippet } from 'svelte';
 	import type { FormEventHandler, HTMLInputAttributes } from 'svelte/elements';
 
-	/** Text Box component. */
 	interface Props extends HTMLInputAttributes {
 		/** Name of input*/
 		name: string;

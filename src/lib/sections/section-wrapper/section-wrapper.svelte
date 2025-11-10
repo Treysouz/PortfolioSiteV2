@@ -1,6 +1,6 @@
-<script lang="ts">
-	/** Section Wrapper Component */
+<!--Section Wrapper Component-->
 
+<script lang="ts">
 	import type { Snippet } from 'svelte';
 
 	interface Props {

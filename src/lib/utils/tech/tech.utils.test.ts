@@ -59,7 +59,7 @@ describe('tech.utils', () => {
 			});
 
 			expect(post).toHaveBeenCalledWith(
-				'/data/tech',
+				'/tech',
 				{
 					value: 'React',
 					types: ['Frameworks & Libraries'],

@@ -1,15 +1,21 @@
+<!-- Section to welcome users to the site introducing name and title of developer. -->
 <script lang="ts">
-	import { Card, Greeting, Icon, IconWrapper } from '$lib/components';
+	import { Card, Icon, IconWrapper } from '$lib/components';
 	import { Section } from '../section-wrapper';
 
-	/** Section to welcome users to the site introducing name and title of developer. */
+	interface Props {
+		/** Greeting text to render. */
+		greeting: string;
+	}
+
+	let { greeting }: Props = $props();
 </script>
 
 <Section id="welcome">
 	<div class="flex h-full w-full items-center justify-center">
 		<Card class="p-4 sm:p-8 lg:max-w-2xl 2xl:max-w-5xl">
 			<h1 class="break-keep text-lg md:text-xl lg:text-3xl 2xl:text-5xl">
-				<span class="whitespace-nowrap"><Greeting></Greeting></span><br /><br /> My name is
+				<span class="whitespace-nowrap">{greeting}</span><br /><br /> My name is
 				<span class="text-gradient animate-gradient-move whitespace-nowrap font-bold"
 					>Tremayne Souza</span
 				>.

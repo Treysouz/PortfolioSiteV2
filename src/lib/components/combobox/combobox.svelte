@@ -1,13 +1,10 @@
+<!-- Combobox component with search and filtering capabilities. Supports both single and multiple selection modes. Uses Fuse.js for fuzzy search and includes full keyboard navigation -->
+
 <script lang="ts" generics="Entity">
 	import { Dropdown, Textbox, Icon, Card } from '$lib/components';
 	import Fuse from 'fuse.js';
 	import type { Snippet } from 'svelte';
 
-	/**
-	 * Combobox component with search and filtering capabilities.
-	 * Supports both single and multiple selection modes.
-	 * Uses Fuse.js for fuzzy search and includes full keyboard navigation.
-	 */
 	interface Props<T> {
 		/** Display label for the combobox component */
 		label: string;

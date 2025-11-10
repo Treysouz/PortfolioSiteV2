@@ -1,6 +1,6 @@
-<script lang="ts">
-	/** Group of nav item components. */
+<!--Group of nav item components -->
 
+<script lang="ts">
 	import NavItem from './nav-item.svelte';
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';

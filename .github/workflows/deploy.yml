@@ -8,7 +8,7 @@ on:
         required: true
         type: string
       production:
-        description: 'Deploy to production'
+        description: 'Deploy to production (adds --prod flag)'
         required: false
         default: false
         type: boolean
@@ -34,7 +34,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: '22'
           cache: 'npm'
 
       - name: Cache node_modules
@@ -56,32 +56,28 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
 
-      - name: Deploy (Preview)
-        if: inputs.production == false
-        id: deploy-preview
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy .svelte-kit/cloudflare --project-name=portfolio-site
+      - name: Verify build output
+        run: |
+          if [ ! -d ".vercel/output" ]; then
+            echo "❌ .vercel/output directory not found!"
+            exit 1
+          fi
+          echo "✅ Build output verified:"
+          ls -la .vercel/output/
+          echo "📦 Build artifacts ready for deployment"
 
-      - name: Deploy (Production)
-        if: inputs.production == true
-        id: deploy-production
-        uses: cloudflare/wrangler-action@v3
+      - name: Deploy to Vercel
+        id: deploy
+        uses: amondnet/vercel-action@v25
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy .svelte-kit/cloudflare --project-name=portfolio-site --branch=main
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: ${{ inputs.production && '--prod --prebuilt' || '--prebuilt' }}
+          working-directory: ./
 
       - name: Set deployment URL
         id: set-url
         run: |
-          PROJECT_NAME="portfolio-site"
-          if [ "${{ inputs.production }}" = "true" ]; then
-            echo "deployment-url=https://treysouzcodes.dev" >> $GITHUB_OUTPUT
-          else
-            # For preview deployments, construct the URL with the commit hash
-            COMMIT_HASH="${{ github.sha }}"
-            echo "deployment-url=https://head.portfolio-site-1r3.pages.dev" >> $GITHUB_OUTPUT
-          fi
+          # The Vercel action always outputs to preview-url, even for production
+          echo "deployment-url=${{ steps.deploy.outputs.preview-url }}" >> $GITHUB_OUTPUT

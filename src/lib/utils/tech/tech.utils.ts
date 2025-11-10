@@ -4,7 +4,7 @@ import { post } from '../api';
 import type { TechType, SortConfig, PostPayload, Tech } from '../../types/tech.types';
 
 export const queryTechData = async (
-	queryClient: QueryClient,
+	queryClient?: QueryClient,
 	searchValue?: string,
 	types?: TechType[],
 	sortConfig?: SortConfig
@@ -17,7 +17,7 @@ export const queryTechData = async (
 
 	const cacheKey = ['tech', payload];
 
-	const response: Tech[] = await post<Tech[]>('/data/tech', payload, {
+	const response: Tech[] = await post<Tech[]>('/tech', payload, {
 		queryClient,
 		cacheKey
 	});

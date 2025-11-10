@@ -1,14 +1,14 @@
+<!--Section to welcome users to the site introducing name and title of developer -->
+
 <script lang="ts">
 	import { Icon, IconWrapper } from '$lib/components';
 	import type { TimelineEvent } from './timeline.types';
-
-	/** Section to welcome users to the site introducing name and title of developer.*/
 
 	/** Timeline of professional events*/
 	const history: TimelineEvent[] = [
 		{
 			header: 'Fetch Rewards',
-			subHeader: 'Senior Front-End Developer',
+			subHeader: 'Front-End Developer',
 			startYear: 2020,
 			endYear: 2025,
 			description:
@@ -32,7 +32,7 @@
 		},
 		{
 			header: 'Syracuse University',
-			subHeader: 'The College of Arts & Sciences | Bachelors of Arts - Applied Mathematics',
+			subHeader: 'The College of Arts & Sciences | Bachelor of Arts - Applied Mathematics',
 			endYear: 2017,
 			description: [
 				'Concentration - Probability, Statistics & Complex Analysis',

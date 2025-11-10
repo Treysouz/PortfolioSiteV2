@@ -1,6 +1,6 @@
-<script lang="ts">
-	/** Icon link for navigation bar */
+<!--Icon link for navigation bar-->
 
+<script lang="ts">
 	import { SVGS, Icon, IconWrapper } from '$lib/components';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 
