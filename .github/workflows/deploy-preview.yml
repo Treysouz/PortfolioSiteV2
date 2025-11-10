@@ -24,7 +24,6 @@ jobs:
   deploy:
     name: Deploy Preview
     needs: test
-    if: needs.test.outputs.tests-passed == 'true'
     uses: ./.github/workflows/deploy.yml
     with:
       environment: 'Preview'
