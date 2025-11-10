@@ -82,12 +82,3 @@ jobs:
         run: |
           echo "🖥️ Running e2e tests..."
           npm run test:e2e
-
-      - name: Mark tests as successful
-        id: mark-success
-        if: success()
-        run: echo "success=true" >> $GITHUB_OUTPUT
-
-      - name: Mark tests as failed
-        if: failure()
-        run: echo "success=false" >> $GITHUB_OUTPUT
