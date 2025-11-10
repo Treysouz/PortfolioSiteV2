@@ -17,9 +17,6 @@ on:
       tests-passed:
         description: 'Whether all tests passed'
         value: ${{ jobs.test.outputs.success }}
-      coverage-summary:
-        description: 'Test coverage summary'
-        value: ${{ jobs.test.outputs.coverage-summary }}
 
 jobs:
   test:
@@ -30,7 +27,6 @@ jobs:
       SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
     outputs:
       success: ${{ steps.mark-success.outputs.success }}
-      coverage-summary: ${{ steps.coverage.outputs.summary }}
 
     steps:
       - name: Checkout
@@ -86,38 +82,6 @@ jobs:
         run: |
           echo "🖥️ Running e2e tests..."
           npm run test:e2e
-
-      - name: Generate coverage summary
-        id: coverage
-        run: |
-          if [ -f coverage/coverage-summary.json ]; then
-            COVERAGE=$(node -e "
-              const fs = require('fs');
-              const coverage = JSON.parse(fs.readFileSync('coverage/coverage-summary.json', 'utf8'));
-              const total = coverage.total;
-              console.log(\`📊 **Test Coverage Report**
-
-              | Metric | Percentage | Covered/Total |
-              |--------|------------|---------------|
-              | Lines | \${total.lines.pct}% | \${total.lines.covered}/\${total.lines.total} |
-              | Functions | \${total.functions.pct}% | \${total.functions.covered}/\${total.functions.total} |
-              | Branches | \${total.branches.pct}% | \${total.branches.covered}/\${total.branches.total} |
-              | Statements | \${total.statements.pct}% | \${total.statements.covered}/\${total.statements.total} |\`);
-            ")
-            echo "summary<<EOF" >> $GITHUB_OUTPUT
-            echo "$COVERAGE" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
-          else
-            echo "summary=No coverage data available" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Upload coverage reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report-${{ github.run_id }}-${{ github.run_attempt }}
-          path: coverage/
-          retention-days: 7
 
       - name: Mark tests as successful
         id: mark-success

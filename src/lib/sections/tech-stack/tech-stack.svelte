@@ -1,6 +1,5 @@
+<!--Section to show tech experience  -->
 <script lang="ts">
-	/** Section to show tech experience */
-
 	import { Table } from '$lib/components';
 	import { useQueryClient } from '@tanstack/svelte-query';
 	import { queryTechData } from '$lib/utils/tech';

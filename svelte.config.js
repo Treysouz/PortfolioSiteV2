@@ -1,17 +1,10 @@
-import adapter from '@sveltejs/adapter-cloudflare';
+import adapter from '@sveltejs/adapter-vercel';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 const config = {
 	preprocess: vitePreprocess(),
 	kit: {
-		adapter: adapter({
-			config: './wranger.json',
-			routes: {
-				include: ['/*'],
-				exclude: ['<all>']
-			},
-			fallback: 'plaintext'
-		})
+		adapter: adapter()
 	}
 };
 

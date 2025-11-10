@@ -143,11 +143,51 @@ npm run test:e2e-ui
 npm test
 ```
 
+## Deployment
+
+The project is deployed to **[Vercel](https://vercel.com/)** via GitHub Actions for full deployment control.
+
+### Deployment Configuration
+
+- **Platform**: Vercel
+- **Deployment Method**: Manual via GitHub Actions (not Vercel's automatic git integration)
+- **Adapter**: `@sveltejs/adapter-vercel`
+
+### Required GitHub Secrets
+
+To deploy via GitHub Actions, configure these secrets in your repository:
+
+- **`VERCEL_TOKEN`** - Generate at https://vercel.com/account/tokens
+- **`VERCEL_ORG_ID`** - Found in `.vercel/project.json` after running `vercel link`
+- **`VERCEL_PROJECT_ID`** - Found in `.vercel/project.json` after running `vercel link`
+
+#### Getting Vercel Credentials
+
+```bash
+npm install -g vercel
+vercel login
+vercel link
+cat .vercel/project.json
+```
+
+Add these secrets at: **GitHub Repository → Settings → Secrets and variables → Actions**
+
 ## CI/CD
 
--- Coming Soon --
+The project uses **GitHub Actions** for continuous integration and deployment:
+
+- **Automated Workflows** - Testing, building, and deployment managed through GitHub Actions
+- **Preview Deployments** - Automatic preview deployments for non-production branches
+- **Production Deployments** - Production deploys when `production` input is `true`
+- **Quality Checks** - Automated testing, linting, and formatting checks
+
+### Workflow Overview
+
+1. **Testing** (`.github/workflows/testing.yml`) - Runs unit and E2E tests with coverage reports
+2. **Release** (`.github/workflows/release.yml`) - Handles versioning and changelog generation using Semantic Release
+3. **Deploy** (`.github/workflows/deploy.yml`) - Builds and deploys to Vercel (Preview or Production)
 
 ## Acknowledgments
 
-- Deployed using [Wrangler/Cloudflare](https://developers.cloudflare.com/workers/wrangler/)
+- Deployed on [Vercel](https://vercel.com/) via GitHub Actions
 - As of 10/08/2025 (when this portion of the README was last updated), Tanstack Table is not compatible with Svelte 5. Code for an adapter to get everything working was leveraged from this [PR](https://github.com/Tanstack/table/pull/5403/files) by [KevinVanday](https://github.com/KevinVandy)

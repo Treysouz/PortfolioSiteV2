@@ -1,10 +1,13 @@
 <script lang="ts">
 	import Card from '$lib/components/card/card.svelte';
 	import { WelcomeSection, AboutSection, TechStackSection, ProjectSection } from '$lib/sections';
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
 </script>
 
 <header class="h-full">
-	<WelcomeSection></WelcomeSection>
+	<WelcomeSection greeting={data.greeting}></WelcomeSection>
 </header>
 
 <AboutSection></AboutSection>
