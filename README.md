@@ -48,7 +48,7 @@ A portfolio site highlighting my development experience, tech stack, and the pro
 
 ### Prerequisites
 
-- **Node.js 24.x**
+- **Node.js 22.x**
 - **npm**
 
 ### Installation
